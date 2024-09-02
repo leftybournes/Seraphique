@@ -12,9 +12,9 @@
 	</head>
 
 	<body>
-		<header class="bg-seraphique w-full py-8">
+		<header class="bg-seraphique w-full pt-4 pb-2 font-poppins">
 			<div class="container mx-auto flex flex-row flex-nowrap
-						items-center me-auto">
+						items-center">
 				<h1 class="text-3xl text-white">
 					<a href="/">
 						Seraphique
@@ -38,7 +38,7 @@
 					<ul class="flex flex-row flex-nowrap text-2xl gap-x-4">
 						<li>
 							<a href="/">
-								<%= heroicon :heart,
+								<%= heroicon "heart",
 											 variant: :outline,
 											 aria: { label: "favorites" },
 											 class: "w-6 text-white" %>
@@ -54,7 +54,7 @@
 						</li>
 						<li>
 							<a href="/">
-								<%= heroicon :user,
+								<%= heroicon "user",
 											 variant: :outline,
 											 aria: { label: "user options" },
 											 class: "w-6 text-white" %>
