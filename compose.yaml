@@ -20,7 +20,7 @@ services:
         image: postgres:16.4
         restart: unless-stopped
         volumes:
-            - data:/var/lib/postresql/data
+            - data:/var/lib/postgresql/data
         ports:
             - 5432:5432
         environment:
