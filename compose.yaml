@@ -1,0 +1,33 @@
+services:
+    web:
+        build: .
+        command: ./bin/dev
+        tty: true
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+        depends_on:
+            - database
+        volumes:
+            - .:/app
+        environment:
+            DATABASE_USER: seraphique
+            DATABASE_PASSWORD: seraphique
+            DATABASE_PORT: 5432
+            DATABASE_NAME: seraphique_development
+            DATABASE_HOST: database
+    database:
+        image: postgres:16.4
+        restart: unless-stopped
+        volumes:
+            - data:/var/lib/postresql/data
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: seraphique
+            POSTGRES_PASSWORD: seraphique
+            POSTGRES_PORT: 5432
+            POSTGRES_DATABASE: seraphique_development
+
+volumes:
+    data:
