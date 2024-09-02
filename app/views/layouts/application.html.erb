@@ -1,21 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Seraphique</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+	<head>
+		<title>Seraphique</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+		<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+		<%= javascript_importmap_tags %>
+	</head>
 
-  <body>
-	  <p class="notice"><%= notice %></p>
-	  <p class="alert"><%= alert %></p>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+	<body>
+		<header class="bg-seraphique w-full py-8">
+			<div class="container mx-auto flex flex-row flex-nowrap
+						items-center me-auto">
+				<h1 class="text-3xl text-white">
+					<a href="/">
+						Seraphique
+					</a>
+				</h1>
+
+				<nav aria-label="primary" class="mx-auto">
+					<ul class="flex flex-row flex-nowrap gap-x-4
+							   text-white items-center text-2xl">
+						<li><a href="/">Home</a></li>
+						<!-- TODO: Add About route -->
+						<li><a href="#">About</a></li>
+						<!-- TODO: Add Products route -->
+						<li><a href="#">Products</a></li>
+						<!-- TODO: Add Contacts route -->
+						<l1><a href="#">Contact</a></l1>
+					</ul>
+				</nav>
+
+				<nav aria-label="secondary">
+					<ul class="flex flex-row flex-nowrap text-2xl gap-x-4">
+						<li>
+							<a href="/">
+								<%= heroicon :heart,
+											 variant: :outline,
+											 aria: { label: "favorites" },
+											 class: "w-6 text-white" %>
+							</a>
+						</li>
+						<li>
+							<a href="/">
+								<%= heroicon "shopping-cart",
+											 variant: "outline",
+											 aria: { label: "shopping cart" },
+											 class: "w-6 text-white" %>
+							</a>
+						</li>
+						<li>
+							<a href="/">
+								<%= heroicon :user,
+											 variant: :outline,
+											 aria: { label: "user options" },
+											 class: "w-6 text-white" %>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+		<main class="container mx-auto mt-28 px-5 flex">
+			<%= yield %>
+		</main>
+	</body>
 </html>
