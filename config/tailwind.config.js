@@ -11,6 +11,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+				poppins: ['Poppins', ...defaultTheme.fontFamily.sans]
 			},
 			colors: {
 				seraphique: '#3A5033'
