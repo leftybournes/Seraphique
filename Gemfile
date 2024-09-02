@@ -29,6 +29,8 @@ gem "jbuilder"
 gem "tailwindcss-rails", "~> 2.7"
 
 gem "devise", "~> 4.9"
+
+gem "rails_heroicon", "~> 2.3"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
