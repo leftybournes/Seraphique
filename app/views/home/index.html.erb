@@ -1,0 +1,66 @@
+<div class="bg-[#FFFFFF1A] w-full h-full border p-10 text-white
+			border-[#FFFFFF73] rounded-2xl font-poppins flex flex-col">
+	<header class="flex flex-nowrap">
+		<div>
+			<h1 class="text-3xl text">
+				<a href="/">
+					Seraphique
+				</a>
+			</h1>
+		</div>
+		<nav aria-label="primary" class="mx-auto">
+			<ul class="flex flex-row flex-nowrap gap-x-20
+					   text-white items-center text-2xl">
+				<li><a href="/">Home</a></li>
+				<!-- TODO: Add About route -->
+				<li><a href="#">About</a></li>
+				<!-- TODO: Add Products route -->
+				<li><a href="#">Products</a></li>
+				<!-- TODO: Add Contacts route -->
+				<l1><a href="#">Contact</a></l1>
+			</ul>
+		</nav>
+		<nav aria-label="secondary">
+			<ul class="flex flex-row flex-nowrap text-2xl gap-x-4">
+				<li>
+					<a href="/">
+						<%= heroicon "heart",
+									 variant: :outline,
+									 aria: { label: "favorites" },
+									 class: "w-6 text-white" %>
+					</a>
+				</li>
+				<li>
+					<a href="/">
+						<%= heroicon "shopping-cart",
+									 variant: "outline",
+									 aria: { label: "shopping cart" },
+									 class: "w-6 text-white" %>
+					</a>
+				</li>
+				<li>
+					<a href="/">
+						<%= heroicon "user",
+									 variant: :outline,
+									 aria: { label: "user options" },
+									 class: "w-6 text-white" %>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main class="my-auto">
+		<section class="h-full">
+			<h2 class="text-5xl font-semibold mt-auto">Seraphique</h2>
+			<h3 class="text-4xl my-8">Indulge in Pure Luxury</h3>
+			<p class="text-2xl w-2/3">
+				Discover a luxurious collection crafted to bring out your natural
+				radiance, transforming everyday routines into moments of indulgence
+				and self-care.
+			</p>
+			<button class="bg-white text-black px-12 py-2 text-2xl rounded-lg mt-12">
+				Shop Now
+			</button>
+		</section>
+	</main>
+</div>
