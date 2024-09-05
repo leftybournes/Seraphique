@@ -5,24 +5,24 @@
 @layer base {
 	@font-face {
 		font-family: "Poppins";
-		src: url("fonts/Poppins-BlackItalic.ttf"),
-			 url("fonts/Poppins-Black.ttf"),
-			 url("fonts/Poppins-BoldItalic.ttf"),
-			 url("fonts/Poppins-Bold.ttf"),
-			 url("fonts/Poppins-ExtraBoldItalic.ttf"),
-			 url("fonts/Poppins-ExtraBold.ttf"),
-			 url("fonts/Poppins-ExtraLightItalic.ttf"),
-			 url("fonts/Poppins-ExtraLight.ttf"),
-			 url("fonts/Poppins-Italic.ttf"),
-			 url("fonts/Poppins-LightItalic.ttf"),
-			 url("fonts/Poppins-Light.ttf"),
-			 url("fonts/Poppins-MediumItalic.ttf"),
-			 url("fonts/Poppins-Medium.ttf"),
-			 url("fonts/Poppins-Regular.ttf"),
-			 url("fonts/Poppins-SemiBoldItalic.ttf"),
-			 url("fonts/Poppins-SemiBold.ttf"),
-			 url("fonts/Poppins-ThinItalic.ttf"),
-			 url("fonts/Poppins-Thin.ttf");
+		src: url("Poppins-Regular.ttf"),
+			 url("Poppins-BlackItalic.ttf"),
+			 url("Poppins-Black.ttf"),
+			 url("Poppins-BoldItalic.ttf"),
+			 url("Poppins-Bold.ttf"),
+			 url("Poppins-ExtraBoldItalic.ttf"),
+			 url("Poppins-ExtraBold.ttf"),
+			 url("Poppins-ExtraLightItalic.ttf"),
+			 url("Poppins-ExtraLight.ttf"),
+			 url("Poppins-Italic.ttf"),
+			 url("Poppins-LightItalic.ttf"),
+			 url("Poppins-Light.ttf"),
+			 url("Poppins-MediumItalic.ttf"),
+			 url("Poppins-Medium.ttf"),
+			 url("Poppins-SemiBoldItalic.ttf"),
+			 url("Poppins-SemiBold.ttf"),
+			 url("Poppins-ThinItalic.ttf"),
+			 url("Poppins-Thin.ttf");
 		font-display: swap;
 	}
 }
