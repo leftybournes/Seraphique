@@ -35,7 +35,7 @@
 
 		<div class="bg-white border border-[#3A5033E5]
 					w-3/5 mx-auto px-14 py-9 min-w-[300px] max-w-[600px]">
-			<h2 class="text-[#4A4A4A] text-2xl">Login</h2>
+			<h2 class="text-[#4A4A4A] text-2xl">Create an Account</h2>
 
 			<div class="bg-[#DDD9D9] h-px my-4"></div>
 
@@ -61,36 +61,74 @@
 			<p class="text-black my-4 text-center">Or</p>
 
 			<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-				<%= render "devise/shared/error_messages", resource: resource %>
+				<%= render "users/shared/error_messages", resource: resource %>
 
 				<div class="flex flex-col">
 					<div class="flex flex-col gap-y-3">
+						<%= f.label :full_name %>
+						<%= f.text_field :full_name,
+							autofocus: true,
+							autocomplete: "name",
+						 required: true %>
+					</div>
+					<div class="flex flex-col gap-y-3 my-8">
 						<%= f.label :email %>
 						<%= f.email_field :email, autocomplete: "email" %>
 					</div>
 
-					<div class="my-8">
-						<div class="mb-3">
-							<%= f.label :password %>
+					<div class="inline-flex flex-row gap-x-6">
+						<div>
+							<div class="mb-3">
+								<%= f.label :password %>
+							</div>
+							<%= f.password_field :password,
+							 autocomplete: "new-password",
+							 class: "w-full" %>
 						</div>
-						<%= f.password_field :password,
-							autocomplete: "current-password",
-							class: "w-full" %>
+
+						<div>
+							<div class="mb-3">
+								<%= f.label :password_confirmation,
+									"Confirm Password" %>
+							</div>
+							<%= f.password_field :password_confirmation,
+							 autocomplete: "new-password",
+							 class: "w-full" %>
+						</div>
 					</div>
 
-					<% if devise_mapping.rememberable? %>
-						<div>
-							<%= f.check_box :remember_me,
-							 class: "size-5 appearance-none peer-hover:bg-none
-                                     focus:ring-0 checked:text-seraphique
-                                     checked:ring-0 checked:bg-seraphique" %>
-							<%= f.label :remember_me, "Keep me signed in" %>
-						</div>
-					<% end %>
+					<div class="mt-8">
+						<input type="checkbox"
+							   class="size-5 appearance-none peer-hover:bg-none
+									 checked:text-seraphique focus:ring-0
+									 checked:ring-0 checked:bg-seraphique"
+							   name="remember_me"
+							   id="remember_me">
+						<label for="remember_me"
+							   class="ms-2 peer">
+							Keep me signed in
+						</label>
+					</div>
+					<div>
+						<input type="checkbox"
+							   class="size-5 appearance-none peer-hover:bg-none
+									 checked:text-seraphique focus:ring-0
+									 checked:ring-0 checked:bg-seraphique"
+							   name="subscribe"
+							   id="subscribe">
+						<label for="subscribe"
+							   class="text-xs ms-2 peer text-[#000000B2]">
+							Subscribe now to receive exclusive promotions via
+							email, SMS, and messaging apps from Seraphique! By
+							subscribing, you agree to our use of your
+							information for marketing communications and
+							analytics, in accordance with our privacy policies.
+						</label>
+					</div>
 
 					<div class="actions">
 						<%= f.submit "Confirm and Continue",
-							class: "bg-seraphique text-base text-white w-full text-center py-2 mt-10" %>
+						 class: "bg-seraphique text-base text-white w-full text-center py-2 mt-10" %>
 					</div>
 					<p class="text-center text-xs text-[#000000B2] font-light mt-2">
 						By creating your account or signing in, you agree to

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :administrators
-  devise_for :users
+  devise_for :administrators, controllers: {
+               sessions: "administrators/sessions",
+               registrations: "administrators/registrations"
+             }
+  devise_for :users, controllers: {
+               sessions: "users/sessions"
+             }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
