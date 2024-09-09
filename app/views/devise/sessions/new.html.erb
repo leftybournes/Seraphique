@@ -1,26 +1,103 @@
-<h2>Log in</h2>
+<main class="py-16 bg-[#F4F4F4]">
+	<div class="container mx-auto">
+		<section class="flex flex-row flex-nowrap justify-between text-[#6B6866]">
+			<div class="flex flex-row flex-nowrap items-center">
+				<%= heroicon "truck", size: 32 %>
+				<div class="ms-4">
+					<h3 class="text-2xl m-0">Free Shipping</h3>
+					<p class="text-base m-0 font-light">Nationwide</p>
+				</div>
+			</div>
+			<div class="flex flex-row flex-nowrap items-center">
+				<%= heroicon "currency-dollar", size: 32 %>
+				<div class="ms-4">
+					<h3 class="text-2xl m-0">7 Day Returns</h3>
+					<p class="text-base m-0 font-light">Moneyback Guarantee</p>
+				</div>
+			</div>
+			<div class="flex flex-row flex-nowrap items-center">
+				<%= heroicon "gift", size: 32 %>
+				<div class="ms-4">
+					<h3 class="text-2xl m-0">Discount/Vouchers</h3>
+					<p class="text-base m-0 font-light">Selected Items Only</p>
+				</div>
+			</div>
+			<div class="flex flex-row flex-nowrap items-center">
+				<%= heroicon "credit-card", size: 32 %>
+				<div class="ms-4">
+					<h3 class="text-2xl m-0">Secure Payment</h3>
+					<p class="text-base m-0 font-light">Powered by Stripe</p>
+				</div>
+			</div>
+		</section>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+		<div class="h-px bg-[#6B686659] w-full mt-4 mb-14"></div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+		<div class="bg-white border border-[#3A5033E5]
+					w-3/5 mx-auto px-14 py-9 min-w-[300px] max-w-[600px]">
+			<h2 class="text-[#4A4A4A] text-2xl">Login</h2>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+			<div class="bg-[#DDD9D9] h-px my-4"></div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+			<div class="flex flex-col gap-y-2">
+				<button class="border border-[#3A5033E5] flex ps-24
+							   py-2 w-full items-center gap-8">
+					<%= image_tag "brands/Facebook/Logo/Primary/Facebook_Logo_Primary.png",
+								  class: "w-8" %>
+					Continue with Facebook
+				</button>
+				<button class="border border-[#3A5033E5] flex ps-24
+							   py-2 w-full items-center gap-8">
+					<%= image_tag "brands/Google/Search_GSA.original.png",
+								  class: "w-8" %>
+					Continue with Google
+				</button>
+				<p class="text-[#000000B2] text-xs">
+					We will never post or share any of your
+					information without your permission
+				</p>
+			</div>
 
-<%= render "devise/shared/links" %>
+			<p class="text-black my-4 text-center">Or</p>
+
+			<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+				<%= render "devise/shared/error_messages", resource: resource %>
+
+				<div class="flex flex-col">
+					<div class="flex flex-col gap-y-3">
+						<%= f.label :email %>
+						<%= f.email_field :email, autocomplete: "email" %>
+					</div>
+
+					<div class="my-8">
+						<div class="mb-3">
+							<%= f.label :password %>
+						</div>
+						<%= f.password_field :password,
+							autocomplete: "current-password",
+							class: "w-full" %>
+					</div>
+
+					<% if devise_mapping.rememberable? %>
+						<div>
+							<%= f.check_box :remember_me,
+							 class: "size-5 appearance-none peer-hover:bg-none
+                                     focus:ring-0 checked:text-seraphique
+                                     checked:ring-0 checked:bg-seraphique" %>
+							<%= f.label :remember_me, "Keep me signed in" %>
+						</div>
+					<% end %>
+
+					<div class="actions">
+						<%= f.submit "Confirm and Continue",
+							class: "bg-seraphique text-base text-white w-full text-center py-2 mt-10" %>
+					</div>
+					<p class="text-center text-xs text-[#000000B2] font-light mt-2">
+						By creating your account or signing in, you agree to
+						our terms and condition & privacy policy.
+					</p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</main>
