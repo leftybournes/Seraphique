@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 	<head>
-		<title>Seraphique</title>
+		<title>
+			<% if content_for? :title %>
+				<%= yield :title %> -
+			<% end %>
+			Seraphique
+		</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
@@ -26,8 +31,7 @@
 							   text-white items-center text-2xl">
 						<li><%= link_to "Home", root_path %></li>
 						<li><%= link_to "About", about_path %></li>
-						<!-- TODO: Add Products route -->
-						<li><a href="#">Products</a></li>
+						<li><%= link_to "Products", products_path %></li>
 						<!-- TODO: Add Contacts route -->
 						<l1><a href="#">Contact</a></l1>
 					</ul>
