@@ -1,37 +1,6 @@
 <main class="py-16 bg-[#F4F4F4]">
 	<div class="container mx-auto">
-		<section class="flex flex-row flex-nowrap justify-between text-[#6B6866]">
-			<div class="flex flex-row flex-nowrap items-center">
-				<%= heroicon "truck", size: 32 %>
-				<div class="ms-4">
-					<h3 class="text-2xl m-0">Free Shipping</h3>
-					<p class="text-base m-0 font-light">Nationwide</p>
-				</div>
-			</div>
-			<div class="flex flex-row flex-nowrap items-center">
-				<%= heroicon "currency-dollar", size: 32 %>
-				<div class="ms-4">
-					<h3 class="text-2xl m-0">7 Day Returns</h3>
-					<p class="text-base m-0 font-light">Moneyback Guarantee</p>
-				</div>
-			</div>
-			<div class="flex flex-row flex-nowrap items-center">
-				<%= heroicon "gift", size: 32 %>
-				<div class="ms-4">
-					<h3 class="text-2xl m-0">Discount/Vouchers</h3>
-					<p class="text-base m-0 font-light">Selected Items Only</p>
-				</div>
-			</div>
-			<div class="flex flex-row flex-nowrap items-center">
-				<%= heroicon "credit-card", size: 32 %>
-				<div class="ms-4">
-					<h3 class="text-2xl m-0">Secure Payment</h3>
-					<p class="text-base m-0 font-light">Powered by Stripe</p>
-				</div>
-			</div>
-		</section>
-
-		<div class="h-px bg-[#6B686659] w-full mt-4 mb-14"></div>
+		<%= render "shared/banner" %>
 
 		<div class="bg-white border border-[#3A5033E5]
 					w-3/5 mx-auto px-14 py-9 min-w-[300px] max-w-[600px]">
