@@ -25,9 +25,9 @@
 				</ul>
 			</aside>
 			<section>
-				<ul class="flex flex-row flex-wrap gap-4">
+				<ul class="grid grid-cols-4 gap-x-8 gap-y-8 auto-rows-[1fr]">
 					<% @products.each do |product| %>
-						<li class="w-[230px]">
+						<li class="w-[260px]">
 							<div class="w-full">
 								<%= image_tag product.image.variant(:thumb),
 											  class: "border-t border-x
