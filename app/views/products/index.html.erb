@@ -13,33 +13,35 @@
 		<%= render "shared/banner" %>
 		<%= image_tag "products_banner_image.png", class: "w-full mb-24" %>
 
-		<div class="flex flex-row flex-nowrap gap-x-12">
-			<aside>
-				<h2 class="text-3xl font-light text-[#4A4A4A] mb-4">
-					Our Products
-				</h2>
+		<%= turbo_frame_tag "products", data: { turbo_action: :advance } do %>
+			<div class="flex flex-row flex-nowrap gap-x-12">
+				<aside>
+					<h2 class="text-3xl font-light text-[#4A4A4A] mb-4">
+						Our Products
+					</h2>
 
-				<ul class="text-[#4A4A4A]">
-					<% @categories.each do |category| %>
-						<li class="text-2xl py-4 border-[#4A4A4A59]
-								   [&:not(:last-child)]:border-b
-								   <%= if category.id == @selected_category
-									   "text-seraphique font-bold"
-								   else
+					<ul class="text-[#4A4A4A]">
+						<% @categories.each do |category| %>
+							<li class="text-2xl py-4 border-[#4A4A4A59]
+									   [&:not(:last-child)]:border-b
+									   <%= if category.id == @selected_category
+										   "text-seraphique font-bold"
+									   else
 								       "font-light"
-								   end %>">
-							<%= link_to products_path(category: category.id) do %>
-								<%= category.name %>
-							<% end %>
-						</li>
-					<% end %>
-				</ul>
-			</aside>
-			<section class="grid grid-cols-2 gap-8 auto-rows-fr lg:grid-cols-4">
-				<%= render partial: "product_card",
-						   collection: @products,
-						   as: :product %>
-			</section>
-		</div>
+									   end %>">
+								<%= link_to products_path(category: category.id) do %>
+									<%= category.name %>
+								<% end %>
+							</li>
+						<% end %>
+					</ul>
+				</aside>
+				<section class="grid grid-cols-2 gap-8 auto-rows-fr lg:grid-cols-4">
+					<%= render partial: "product_card",
+							   collection: @products,
+							   as: :product %>
+				</section>
+			</div>
+		<% end %>
 	</div>
 </main>
