@@ -11,7 +11,6 @@
 
 	<div class="container mx-auto pt-16">
 		<%= render "shared/banner" %>
-
 		<%= image_tag "products_banner_image.png", class: "w-full mb-8" %>
 
 		<h2 class="text-3xl font-light text-[#4A4A4A] mb-12">
@@ -24,7 +23,9 @@
 					<% @categories.each do |category| %>
 						<li class="text-2xl py-4 border-[#4A4A4A59]
 								   [&:not(:last-child)]:border-b">
-							<%= category.name %>
+							<%= link_to products_path(category: category.id) do %>
+								<%= category.name %>
+							<% end %>
 						</li>
 					<% end %>
 				</ul>
