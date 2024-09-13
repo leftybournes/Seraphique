@@ -18,7 +18,7 @@
 			Our Products
 		</h2>
 
-		<div class="flex flex-row flex-nowrap gap-x-36">
+		<div class="flex flex-row flex-nowrap gap-x-12">
 			<aside>
 				<ul class="text-[#4A4A4A]">
 					<% @categories.each do |category| %>
@@ -30,9 +30,9 @@
 				</ul>
 			</aside>
 			<section>
-				<ul class="grid grid-cols-4 gap-x-8 gap-y-8 auto-rows-fr">
+				<ul class="grid grid-cols-2 gap-8 auto-rows-fr lg:grid-cols-4">
 					<% @products.each do |product| %>
-						<li class="w-[260px]">
+						<li class="w-[300px]">
 							<div class="w-full">
 								<%= image_tag product.image.variant(:thumb),
 											  class: "border-t border-x
