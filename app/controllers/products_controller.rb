@@ -12,6 +12,12 @@ class ProductsController < ApplicationController
             end
 
         @categories = Category.all
+        @selected_category =
+            if params[:category].present?
+                params[:category].to_i
+            else
+                nil
+            end
     end
 
     # GET /products/1 or /products/1.json
