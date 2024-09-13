@@ -1,0 +1,53 @@
+<div id="<%= dom_id product %>" class="w-[300px]">
+	<div class="w-full">
+		<%= image_tag product.image.variant(:thumb),
+					  class: "border-t border-x border-[#B0B0B0]" %>
+		<div class="w-full bg-white border
+					border-[#B0B0B0] p-4">
+			<%= link_to product_path(product) do %>
+				<div class="text-xs flex flex-row">
+					<p>
+						<span class="font-bold">
+							Seraphique
+						</span>
+						<%= product.name %>
+					</p>
+				</div>
+				<div class="text-xs">
+					<%= product.description %>
+				</div>
+				<div class="text-lg font-light flex
+							flex-row flex-nowrap
+							justify-between mt-2">
+					<div class="flex flex-row
+								items-center gap-1">
+						<%= heroicon "currency-dollar",
+									 size: 18,
+									 class: "text-[#4A4A4A]" %>
+						<%= number_with_precision(
+							product.price,
+							precision: 2
+						) %>
+					</div>
+					<div class="flex flex-row
+								items-center gap-1">
+						<%= heroicon "check",
+									 size: 18,
+									 class: "text-[#4A4A4A]" %>
+						1.5k Sold
+					</div>
+				</div>
+				<div class="flex flex-row justify-center
+							items-center gap-2 mt-4">
+					<%= heroicon "truck",
+								 size: 18,
+								 class: "text-[#4A4A4A]"%>
+					<div class="border border-[#B0B0B0]
+								text-[10px] p-1">
+						3 - 5 days guaranteed delivery
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
