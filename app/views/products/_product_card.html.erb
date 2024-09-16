@@ -1,7 +1,20 @@
 <div id="<%= dom_id product %>" class="w-[300px]">
 	<div class="w-full">
-		<%= image_tag product.image.variant(:thumb),
-					  class: "border-t border-x border-[#B0B0B0]" %>
+		<div class="relative group">
+			<a href="#"
+			   class="absolute hidden top-0 left-0
+					 w-full h-full group-hover:inline">
+				<div class="w-full h-full bg-[#00000099] flex
+							flex-col items-center justify-center">
+					<%= heroicon "shopping-cart",
+								 size: 48,
+								 class: "text-gray-100" %>
+					<p class="text-gray-100 font-semibold text-xl">Add to Cart</p>
+				</div>
+			</a>
+			<%= image_tag product.image.variant(:thumb),
+						  class: "border-t border-x border-[#B0B0B0] peer" %>
+		</div>
 		<div class="w-full bg-white border
 					border-[#B0B0B0] p-4">
 			<%= link_to product_path(product) do %>
