@@ -1,94 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-	<head>
-		<title>
-			<% if content_for? :title %>
-				<%= yield :title %> -
-			<% end %>
+  <head>
+	<title>
+	  <% if content_for? :title %>
+		<%= yield :title %> -
+	  <% end %>
+	  Seraphique
+	</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<%= csrf_meta_tags %>
+	<%= csp_meta_tag %>
+	<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+	<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+	<%= javascript_importmap_tags %>
+  </head>
+
+  <body class="antialiased h-full flex flex-col">
+	<header class="bg-seraphique w-full pt-4 pb-2 font-poppins">
+	  <div class="container mx-auto flex flex-row flex-nowrap
+				  items-center">
+		<h1 class="text-3xl text-white">
+		  <a href="/">
 			Seraphique
-		</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<%= csrf_meta_tags %>
-		<%= csp_meta_tag %>
-		<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+		  </a>
+		</h1>
 
-		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-		<%= javascript_importmap_tags %>
-	</head>
+		<nav aria-label="primary" class="mx-auto">
+		  <ul class="flex flex-row flex-nowrap gap-x-20 font-light
+					 text-white items-center text-2xl">
+			<li><%= link_to "Home", root_path %></li>
+			<li><%= link_to "About", about_path %></li>
+			<li><%= link_to "Products", products_path %></li>
+			<!-- TODO: Add Contacts route -->
+			<l1><a href="#">Contact</a></l1>
+		  </ul>
+		</nav>
 
-	<body class="antialiased h-full flex flex-col">
-		<header class="bg-seraphique w-full pt-4 pb-2 font-poppins">
-			<div class="container mx-auto flex flex-row flex-nowrap
-						items-center">
-				<h1 class="text-3xl text-white">
-					<a href="/">
-						Seraphique
-					</a>
-				</h1>
-
-				<nav aria-label="primary" class="mx-auto">
-					<ul class="flex flex-row flex-nowrap gap-x-20 font-light
-							   text-white items-center text-2xl">
-						<li><%= link_to "Home", root_path %></li>
-						<li><%= link_to "About", about_path %></li>
-						<li><%= link_to "Products", products_path %></li>
-						<!-- TODO: Add Contacts route -->
-						<l1><a href="#">Contact</a></l1>
-					</ul>
-				</nav>
-
-				<nav aria-label="secondary">
-					<ul class="flex flex-row flex-nowrap text-2xl gap-x-10">
-						<li>
-							<a href="/">
-								<%= heroicon "heart",
-											 variant: :outline,
-											 aria: { label: "favorites" },
-											 class: "w-6 text-white" %>
-							</a>
-						</li>
-						<li>
-							<a href="/">
-								<%= heroicon "shopping-cart",
-											 variant: "outline",
-											 aria: { label: "shopping cart" },
-											 class: "w-6 text-white" %>
-							</a>
-						</li>
-						<li>
-							<input type="checkbox"
-								   id="nav-user-menu"
-								   class="hidden peer">
-							<label for="nav-user-menu">
-								<%= heroicon "user",
-											 variant: :outline,
-											 aria: { label: "user options" },
-											 class: "w-6 text-white
-                                                     hover:cursor-pointer" %>
-							</label>
-							<div class="relative hidden peer-checked:block">
-								<div class="absolute left-0 top-2">
-									<ul class="text-base bg-gray-100
-											   rounded-md w-fullh-full py-2
-											   px-4 shadow">
-										<li>
-											<%= link_to "Sign in",
-														new_user_session_path %>
-										</li>
-										<li>
-											<%= link_to "Register",
-														new_user_registration_path %>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
-		<%= yield %>
-	</body>
+		<nav aria-label="secondary">
+		  <ul class="flex flex-row flex-nowrap text-2xl gap-x-10">
+			<li>
+			  <a href="/">
+				<%= heroicon "heart",
+							 variant: :outline,
+							 aria: { label: "favorites" },
+							 class: "w-6 text-white" %>
+			  </a>
+			</li>
+			<li>
+			  <a href="/">
+				<%= heroicon "shopping-cart",
+							 variant: "outline",
+							 aria: { label: "shopping cart" },
+							 class: "w-6 text-white" %>
+			  </a>
+			</li>
+			<li>
+			  <input type="checkbox" id="nav-user-menu" class="hidden peer">
+			  <label for="nav-user-menu">
+				<%= heroicon "user",
+							 variant: :outline,
+							 aria: { label: "user options" },
+							 class: "w-6 text-white hover:cursor-pointer" %>
+			  </label>
+			  <div class="relative hidden peer-checked:block">
+				<div class="absolute left-0 top-2">
+				  <ul class="text-base bg-gray-100 rounded-md
+							 w-fit h-full py-2 px-4 shadow">
+					<% if user_signed_in? %>
+					  <li>
+						<%= link_to "Profile", edit_user_registration_path %>
+					  </li>
+					  <li>
+						<%= button_to "Sign out",
+									  destroy_user_session_path,
+									  method: :delete %>
+					  </li>
+					<% else %>
+					  <li><%= link_to "Sign in", new_user_session_path %></li>
+					  <li>
+						<%= link_to "Register", new_user_registration_path %>
+					  </li>
+					<% end %>
+				  </ul>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+		</nav>
+	  </div>
+	</header>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<%= yield %>
+  </body>
 </html>
