@@ -37,12 +37,32 @@
 					</a>
 				</li>
 				<li>
-					<a href="/">
+					<input type="checkbox"
+						   id="nav-user-menu"
+						   class="hidden peer">
+					<label for="nav-user-menu">
 						<%= heroicon "user",
 									 variant: :outline,
 									 aria: { label: "user options" },
-									 class: "w-6 text-white" %>
-					</a>
+									 class: "w-6 text-white
+                                                     hover:cursor-pointer" %>
+					</label>
+					<div class="relative hidden peer-checked:block">
+						<div class="absolute left-0 top-2">
+							<ul class="text-base bg-[#FFFFFF1A] py-2 px-4
+									   border border-[#FFFFFF73] rounded-md
+									   w-full h-full shadow">
+								<li>
+									<%= link_to "Sign in",
+												new_user_session_path %>
+								</li>
+								<li>
+									<%= link_to "Register",
+												new_user_registration_path %>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</nav>
