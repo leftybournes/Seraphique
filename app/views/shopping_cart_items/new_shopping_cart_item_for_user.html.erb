@@ -1,0 +1,12 @@
+<%= turbo_frame_tag dom_id(
+	current_user,
+	:shopping_cart_count
+) do %>
+  <div class="count">
+	<% if @count > 9 %>
+	  9+
+	<% else %>
+	  <%= @count %>
+	<% end %>
+  </div>
+<% end %>

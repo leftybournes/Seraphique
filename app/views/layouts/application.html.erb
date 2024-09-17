@@ -47,13 +47,29 @@
 							 class: "w-6 text-white" %>
 			  </a>
 			</li>
-			<li>
-			  <a href="/">
-				<%= heroicon "shopping-cart",
-							 variant: "outline",
-							 aria: { label: "shopping cart" },
-							 class: "w-6 text-white" %>
-			  </a>
+			<li class="relative">
+			  <%= heroicon "shopping-cart",
+						   variant: "outline",
+						   aria: { label: "shopping cart" },
+						   class: "w-6 text-white" %>
+			  <% if user_signed_in? %>
+				<div class="text-sm absolute -right-4 -top-2
+							bg-red-400 rounded-full px-2">
+				  <%= turbo_frame_tag dom_id(
+					  current_user,
+					  :shopping_cart_count
+				  ) do %>
+					<div class="count">
+					  <% shopping_cart_item_count = current_user.shopping_cart_items.sum(:quantity) %>
+					  <% if shopping_cart_item_count > 9 %>
+						9+
+					  <% else %>
+						<%= shopping_cart_item_count %>
+					  <% end %>
+					</div>
+				  <% end %>
+				</div>
+			  <% end %>
 			</li>
 			<li>
 			  <input type="checkbox" id="nav-user-menu" class="hidden peer">
