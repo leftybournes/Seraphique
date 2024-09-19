@@ -1,89 +1,145 @@
-<div class="bg-[#FFFFFF1A] w-full h-full border p-10 text-white
-			border-[#FFFFFF73] rounded-2xl font-poppins flex flex-col">
-  <header class="flex flex-nowrap">
-	<div>
-	  <h1 class="text-3xl text">
-		<a href="/">
-		  Seraphique
-		</a>
-	  </h1>
-	</div>
-	<nav aria-label="primary" class="mx-auto">
-	  <ul class="flex flex-row flex-nowrap gap-x-20 font-light
-				 text-white items-center text-2xl">
-		<li><%= link_to "Home", root_path %></li>
-		<li><%= link_to "About", about_path %></li>
-		<li><%= link_to "Products", products_path %></li>
-		<!-- TODO: Add Contacts route -->
-		<l1><a href="#">Contact</a></l1>
-	  </ul>
-	</nav>
-	<nav aria-label="secondary">
-	  <ul class="flex flex-row flex-nowrap text-2xl gap-x-10">
-		<li>
+<main>
+  <section class="bg-[url('bg_home.png')] bg-center
+				  bg-cover p-24 home-banner">
+	<div class="bg-[#FFFFFF1A] h-[800px] border p-10 text-white
+				border-[#FFFFFF73] rounded-2xl font-poppins flex flex-col">
+	  <header class="flex flex-nowrap">
+		<div class="text-3xl text">
 		  <a href="/">
-			<%= heroicon "heart",
-						 variant: :outline,
-						 aria: { label: "favorites" },
-						 class: "w-6 text-white" %>
+			Seraphique
 		  </a>
-		</li>
-		<li>
-		  <a href="/">
-			<%= heroicon "shopping-cart",
-						 variant: "outline",
-						 aria: { label: "shopping cart" },
-						 class: "w-6 text-white" %>
-		  </a>
-		</li>
-		<li>
-		  <input type="checkbox" id="nav-user-menu" class="hidden peer">
-		  <label for="nav-user-menu">
-			<%= heroicon "user",
-						 variant: :outline,
-						 aria: { label: "user options" },
-						 class: "w-6 text-white hover:cursor-pointer" %>
-		  </label>
-		  <div class="relative hidden peer-checked:block">
-			<div class="absolute left-0 top-2">
-			  <ul class="text-base bg-[#FFFFFF1A] py-2 px-4
-						 border border-[#FFFFFF73] rounded-md
-						 w-max h-full shadow">
-
-				<% if user_signed_in? %>
-				  <li>
-					<%= link_to "Profile", edit_user_registration_path %>
-				  </li>
-				  <li>
-					<%= button_to "Sign out",
-								  destroy_user_session_path,
-								  method: :delete %>
-				  </li>
-				<% else %>
-				  <li><%= link_to "Sign in", new_user_session_path %></li>
-				  <li>
-					<%= link_to "Register", new_user_registration_path %>
-				  </li>
+		</div>
+		<nav aria-label="primary" class="mx-auto">
+		  <ul class="flex flex-row flex-nowrap gap-x-20 font-light
+					 text-white items-center text-2xl">
+			<li><%= link_to "Home", root_path %></li>
+			<li><%= link_to "About", about_path %></li>
+			<li><%= link_to "Products", products_path %></li>
+			<!-- TODO: Add Contacts route -->
+			<l1><a href="#">Contact</a></l1>
+		  </ul>
+		</nav>
+		<nav aria-label="secondary">
+		  <ul class="flex flex-row flex-nowrap text-2xl gap-x-10">
+			<li>
+			  <a href="/">
+				<%= heroicon "heart",
+							 variant: :outline,
+							 aria: { label: "favorites" },
+							 class: "w-6 text-white" %>
+			  </a>
+			</li>
+			<li class="relative">
+			  <%= heroicon "shopping-cart",
+						   variant: "outline",
+						   aria: { label: "shopping cart" },
+						   class: "w-6 text-white" %>
+			  <% if user_signed_in? %>
+				<% shopping_cart_items =
+				current_user.shopping_cart_items.sum(:quantity) %>
+				<%= turbo_frame_tag dom_id(
+					current_user,
+					:shopping_cart_count
+				) do %>
+				  <div class="<%= class_names(
+							  hidden: shopping_cart_items == 0
+							  ) %> text-sm absolute -right-4 -top-2
+							  bg-red-400 rounded-full px-2 count">
+					<% if shopping_cart_items > 9 %>
+					  9+
+					<% else %>
+					  <%= shopping_cart_items %>
+					<% end %>
+				  </div>
 				<% end %>
-			  </ul>
-			</div>
-		  </div>
-		</li>
-	  </ul>
-	</nav>
-  </header>
-  <main class="my-auto">
-	<section class="h-full">
-	  <h2 class="text-5xl font-semibold mt-auto">Seraphique</h2>
-	  <h3 class="text-4xl my-8">Indulge in Pure Luxury</h3>
-	  <p class="text-2xl w-2/3">
-		Discover a luxurious collection crafted to bring out your natural
-		radiance, transforming everyday routines into moments of indulgence
-		and self-care.
-	  </p>
-	  <button class="bg-white text-black px-12 py-2 text-2xl rounded-lg mt-12">
-		Shop Now
-	  </button>
-	</section>
-  </main>
-</div>
+			  <% end %>
+			</li>
+			<li>
+			  <input type="checkbox" id="nav-user-menu" class="hidden peer">
+			  <label for="nav-user-menu">
+				<%= heroicon "user",
+							 variant: :outline,
+							 aria: { label: "user options" },
+							 class: "w-6 text-white hover:cursor-pointer" %>
+			  </label>
+			  <div class="relative hidden peer-checked:block">
+				<div class="absolute left-0 top-2">
+				  <ul class="text-base bg-[#FFFFFF1A] py-2 px-4
+							 border border-[#FFFFFF73] rounded-md
+							 w-max h-full shadow">
+
+					<% if user_signed_in? %>
+					  <li>
+						<%= link_to "Profile", edit_user_registration_path %>
+					  </li>
+					  <li>
+						<%= button_to "Sign out",
+									  destroy_user_session_path,
+									  method: :delete %>
+					  </li>
+					<% else %>
+					  <li><%= link_to "Sign in", new_user_session_path %></li>
+					  <li>
+						<%= link_to "Register", new_user_registration_path %>
+					  </li>
+					<% end %>
+				  </ul>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+		</nav>
+	  </header>
+	  <div class="mt-44">
+		<h2 class="text-5xl font-semibold mt-auto">Seraphique</h2>
+		<h3 class="text-4xl mt-16 mb-14">Indulge in Pure Luxury</h3>
+		<p class="text-2xl w-2/3">
+		  Discover a luxurious collection crafted to bring out your natural
+		  radiance, transforming everyday routines into moments of indulgence
+		  and self-care.
+		</p>
+		<button class="bg-white text-black px-12 py-2
+					   text-2xl rounded-lg mt-14">
+		  Shop Now
+		</button>
+	  </div>
+	</div>
+  </section>
+  <section>
+	<div class="container mx-auto pt-16">
+	  <%= render "shared/banner" %>
+	  <%= image_tag "products_banner_image.png", class: "w-full mb-24" %>
+
+	  <%= turbo_frame_tag "products", data: { turbo_action: :advance } do %>
+		<div class="flex flex-row flex-nowrap gap-x-12">
+		  <aside>
+			<h2 class="text-3xl font-light text-[#4A4A4A] mb-4">
+			  Our Products
+			</h2>
+
+			<ul class="text-[#4A4A4A]">
+			  <% @categories.each do |category| %>
+				<li class="text-2xl py-4 border-[#4A4A4A59]
+						   [&:not(:last-child)]:border-b
+						   <%= if category.id == @selected_category
+						   "text-seraphique font-bold"
+						   else
+						   "font-light"
+						   end %>">
+				  <%= link_to root_path(category: category.id) do %>
+					<%= category.name %>
+				  <% end %>
+				</li>
+			  <% end %>
+			</ul>
+		  </aside>
+		  <section class="grid grid-cols-2 gap-8 auto-rows-fr lg:grid-cols-4">
+			<%= render partial: "products/card",
+					   collection: @products,
+					   as: :product %>
+		  </section>
+		</div>
+	  <% end %>
+	</div>
+  </section>
+</main>
