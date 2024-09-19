@@ -1,5 +1,6 @@
-<div id="<%= dom_id product %>" class="w-[300px] rounded-lg shadow overflow-hidden">
-  <div <% if user_signed_in? %>class="relative group"<% end %>>
+<div id="<%= dom_id product %>"
+	 class="w-[300px] rounded-lg shadow overflow-hidden">
+  <div <% if user_signed_in? %>class="relative group/image"<% end %>>
 	<% if user_signed_in? %>
 	  <%= link_to new_shopping_cart_item_for_user_path(
 		  user_id: current_user.id,
@@ -9,7 +10,7 @@
 		  turbo_frame: dom_id(current_user, :shopping_cart_count)
 	  }, class: "w-full h-full absolute hidden top-0 left-0 bg-[#00000099]
                    flex flex-col items-center justify-center w-full
-                   h-full group-hover:flex" do %>
+                   h-full group-hover/image:flex" do %>
 		<%= heroicon "shopping-cart", size: 48, class: "text-gray-100" %>
 		<span class="text-gray-100 font-semibold text-xl">
 		  Add to Cart
@@ -19,21 +20,21 @@
 	<%= image_tag product.image.variant(:thumb), class: "peer" %>
   </div>
   <div class="w-full bg-white p-4">
-	<%= link_to product_path(product) do %>
+	<%= link_to product_path(product), class: "group/link" do %>
 	  <div class="flex flex-row gap-x-2 mb-2">
 		<% 5.times do %>
 		  <%= heroicon "star", size: 18 %>
 		<% end %>
 	  </div>
 	  <div class="text-xs flex flex-row">
-		<p>
+		<p class="group-hover/link:underline">
 		  <span class="font-semibold">
 			Seraphique
 		  </span>
 		  <%= product.name %>
 		</p>
 	  </div>
-	  <div class="text-xs">
+	  <div class="text-xs group-hover/link:underline">
 		<%= product.description %>
 	  </div>
 	  <div class="text-lg font-light flex flex-row
@@ -47,9 +48,9 @@
 		  </span>
 		</div>
 	  </div>
-	  <button class="bg-seraphique w-full text-gray-100 py-2 mt-2">
-		Buy Now
-	  </button>
 	<% end %>
+	<button class="bg-seraphique w-full text-gray-100 py-2 mt-2 hover:font-semibold">
+	  Buy Now
+	</button>
   </div>
 </div>
