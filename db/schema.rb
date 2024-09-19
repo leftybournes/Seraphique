@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_102429) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_19_092713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_102429) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "score", limit: 2
+    t.bigint "product_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "shopping_cart_items", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "user_id", null: false
@@ -97,6 +107,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_102429) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
   add_foreign_key "shopping_cart_items", "products"
   add_foreign_key "shopping_cart_items", "users"
 end

@@ -3,5 +3,6 @@ class Product < ApplicationRecord
         attachable.variant :thumb, resize_to_limit: [300, 300], preprocessed: true
     end
 
+    has_many :reviews
     belongs_to :category
 end
