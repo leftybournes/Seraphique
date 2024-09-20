@@ -10,9 +10,21 @@ export default class extends Controller {
 		window.addEventListener("scroll", function() {
 			if (window.scrollY >= productsPosition.y) {
 				header.classList.remove("hidden");
+
+				setTimeout(
+					() => header.classList.remove("-translate-y-16"),
+					100
+				);
 			} else {
+				if (!header.classList.contains("-translate-y-16")) {
+					header.classList.add("-translate-y-16");
+				}
+
 				if (!header.classList.contains("hidden")) {
-					header.classList.add("hidden");
+					setTimeout(
+						() => header.classList.add("hidden"),
+						500
+					);
 				}
 			}
 		});
