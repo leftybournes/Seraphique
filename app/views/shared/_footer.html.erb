@@ -1,0 +1,79 @@
+<footer class="bg-[#F5F5F5] bg-white">
+  <div class="container mx-auto p-24 text-[#4A4A4A] flex
+			  flex-row flex-nowrap justify-center gap-x-16">
+	<div class="w-fit">
+	  <section>
+		<h2 class="font-bold text-lg">Customer Care</h2>
+		<ul class="text-base flex flex-col gap-y-2 mt-3">
+		  <li><a href="#">FAQ</a></li>
+		  <li><a href="#">Return Policy</a></li>
+		  <li><a href="#">Promotion Terms and Condition</a></li>
+		</ul>
+	  </section>
+	  <section class="mt-16">
+		<h2 class="font-bold text-lg">Payment Methods</h2>
+	  </section>
+	</div>
+	<div class="w-fit">
+	  <section>
+		<h2 class="font-bold text-lg">Company</h2>
+		<ul class="text-base flex flex-col gap-y-2 mt-3">
+		  <li><%= link_to "About Us", about_path %></li>
+		  <li><a href="#">Join Us</a></li>
+		</ul>
+	  </section>
+	</div>
+	<div class="w-fit">
+	  <section>
+		<h2 class="text-lg font-bold">Our Commitments</h2>
+		<ul class="text-base flex flex-col gap-y-2 mt-3">
+		  <li><a href="#">Accessibility</a></li>
+		  <li><a href="#">Sustainability</a></li>
+		  <li><a href="#">Nature and Chemicals</a></li>
+		</ul>
+	  </section>
+	  <section class="mt-16">
+		<h2 class="text-lg font-bold">Contact Us</h2>
+		<h2 class="text-lg font-bold">Track Order</h2>
+		<h2 class="text-lg font-bold">
+		  <%= link_to "Create an Account", new_user_registration_path %>
+		</h2>
+		<h2 class="text-lg font-bold">
+		  <%= link_to "Sign in", new_user_session_path %>
+		</h2>
+	  </section>
+	</div>
+	<div class="w-80">
+	  <section>
+		<h2 class="font-bold text-lg">Talk to Us</h2>
+		<form>
+		  <div class="mt-6">
+			<label>Email Address</label>
+			<input type="email" autocomplete="email">
+		  </div>
+		  <p class="text-xs font-light text-[#4A4A4ACC] mt-4">
+			Subscribe now to receive exclusive promotions via email, SMS, and
+			messaging apps from Seraphique! By subscribing, you agree to our
+			use of your information for marketing communications and analytics,
+			in accordance with our Privacy Policies and Terms and Conditions.
+		  </p>
+		</form>
+
+		<div class="flex flex-row gap-x-2 mt-4">
+		  <%= image_tag "brands/facebook_icon_sm.png",
+						alt: "Facebook icon",
+						class: "size-8" %>
+		  <%= image_tag "brands/x_icon_sm.png",
+						alt: "Facebook icon",
+						class: "size-8" %>
+		  <%= image_tag "brands/tiktok_icon_sm.png",
+						alt: "Facebook icon",
+						class: "size-9" %>
+		  <%= image_tag "brands/instagram_icon_sm.png",
+						alt: "Facebook icon",
+						class: "size-9" %>
+		</div>
+	  </section>
+	</div>
+  </div>
+</footer>
