@@ -1,0 +1,14 @@
+<main>
+  <% if notice.present? %>
+	<p class="py-x px-3 bg-green mb-5 text-green-500
+			  font-medium rounded-lg inline-block">
+	  <%= notice %>
+	</p>
+  <% end %>
+
+  <% content_for :title, "Shopping Cart" %>
+  
+  <div class="container mx-auto pt-24">
+	<%= render partial: "shared/banner" %>
+  </div>
+</main>
