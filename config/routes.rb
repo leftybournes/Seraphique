@@ -22,8 +22,7 @@ Rails.application.routes.draw do
 
     get "/about", to: "about#index"
     resources :products
-    resources :shopping_cart_items
-    resources :shopping_cart
+    resources :shopping_cart_items, path: :shopping_cart
 
     post "/shopping_cart_items/:user_id/:product_id",
          to: "shopping_cart_items#new_shopping_cart_item_for_user",
