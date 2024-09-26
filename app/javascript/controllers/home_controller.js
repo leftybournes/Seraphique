@@ -12,12 +12,12 @@ export default class extends Controller {
 				header.classList.remove("hidden");
 
 				setTimeout(
-					() => header.classList.remove("-translate-y-16"),
+					() => header.classList.remove("-translate-y-32"),
 					100
 				);
 			} else {
-				if (!header.classList.contains("-translate-y-16")) {
-					header.classList.add("-translate-y-16");
+				if (!header.classList.contains("-translate-y-32")) {
+					header.classList.add("-translate-y-32");
 				}
 
 				if (!header.classList.contains("hidden")) {

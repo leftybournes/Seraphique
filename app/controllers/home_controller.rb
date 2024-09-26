@@ -9,10 +9,9 @@ class HomeController < ApplicationController
                 Product.all
             end
 
-        @categories = Category.all
         @selected_category =
             if params[:category].present?
-                params[:category].to_i
+                Category.find(params[:category].to_i)
             else
                 nil
             end
