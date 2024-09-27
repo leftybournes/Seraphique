@@ -4,6 +4,7 @@ class Product < ApplicationRecord
         attachable.variant :small, resize_to_limit: [100, 100], preprocessed: true
     end
 
+    has_rich_text :description
     has_many :reviews
     belongs_to :category
 end

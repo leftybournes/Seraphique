@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     # GET /products/new
     def new
         @product = Product.new
-        @categories = Category.all.map do |category|
+        @category_options = Category.all.map do |category|
             [category.name, category.id]
         end
 
