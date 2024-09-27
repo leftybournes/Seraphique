@@ -1,44 +1,46 @@
-<main class="py-16 bg-[#F4F4F4] h-full w-full">
-	<div class="border border-slate-300 p-12
-				rounded-md bg-white w-2/5 mx-auto">
-		<h2 class="text-2xl font-semibold">Create an Administrator Account</h2>
+<main class="pt-40 pb-16 bg-[#F4F4F4] h-full w-full">
+  <div class="border border-slate-300 p-12
+			  rounded-md bg-white w-2/5 mx-auto">
+	<h2 class="text-2xl font-semibold">Create an Administrator Account</h2>
 
-		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-			<%= render "administrators/shared/error_messages", resource: resource %>
+	<%= form_for resource,
+				 as: resource_name,
+				 url: registration_path(resource_name) do |f| %>
+	  <%= render "administrators/shared/error_messages", resource: resource %>
 
-			<div class="flex flex-col my-4">
-				<%= f.label :full_name, class: "text-xl" %>
-				<%= f.text_field :full_name,
-				    class: "rounded-md" %>
-			</div>
-			<div class="flex flex-col">
-				<%= f.label :email, class: "text-xl" %>
-				<%= f.email_field :email,
-					autocomplete: "email",
-				    class: "rounded-md" %>
-			</div>
+	  <div class="flex flex-col my-4">
+		<%= f.label :full_name, class: "text-xl" %>
+		<%= f.text_field :full_name,
+		  class: "rounded-md" %>
+	  </div>
+	  <div class="flex flex-col">
+		<%= f.label :email, class: "text-xl" %>
+		<%= f.email_field :email,
+			autocomplete: "email",
+			class: "rounded-md" %>
+	  </div>
 
-			<div class="mt-4 flex flex-row md:flex-nowrap gap-x-4">
-				<div class="flex flex-col w-full">
-					<%= f.label :password, class: "text-xl" %>
-					<%= f.password_field :password,
-						autocomplete: "new-password",
-                        class: "rounded-md" %>
-				</div>
-				<div class="flex flex-col w-full">
-					<%= f.label :password_confirmation,
-						"Confirm Password", class: "text-xl" %>
-					<%= f.password_field :password_confirmation,
-						autocomplete: "new-password",
-                        class: "rounded-md" %>
-				</div>
-			</div>
+	  <div class="mt-4 flex flex-row md:flex-nowrap gap-x-4">
+		<div class="flex flex-col w-full">
+		  <%= f.label :password, class: "text-xl" %>
+		  <%= f.password_field :password,
+			  autocomplete: "new-password",
+              class: "rounded-md" %>
+		</div>
+		<div class="flex flex-col w-full">
+		  <%= f.label :password_confirmation,
+			  "Confirm Password", class: "text-xl" %>
+		  <%= f.password_field :password_confirmation,
+			  autocomplete: "new-password",
+              class: "rounded-md" %>
+		</div>
+	  </div>
 
-			<div class="flex">
-				<%= f.submit "Register",
-					class: "bg-seraphique py-2 px-4 ms-auto
+	  <div class="flex">
+		<%= f.submit "Register",
+			class: "bg-seraphique py-2 px-4 ms-auto
                              mt-4 text-xl text-white rounded-md" %>
-			</div>
-		<% end %>
-	</div>
+	  </div>
+	<% end %>
+  </div>
 </main>
