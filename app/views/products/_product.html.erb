@@ -1,24 +1,43 @@
 <div id="<%= dom_id product %>">
-	<%= image_tag product.image if product.image.attached? %>
-
-	<p class="my-5">
-		<strong class="block font-medium mb-1">Name:</strong>
+  <div class="grid grid-cols-2 gap-x-24">
+	<div>
+	  <%= image_tag (product.image if product.image.attached?),
+					class: "w-full border border-[#D9D9D9]" %>
+	  <div class="flex flex-row gap-x-8">
+		<% 4.times do %>
+		  <div class="bg-white h-32 w-full mt-4 border border-[#D9D9D9]"></div>
+		<% end %>
+	  </div>
+	</div>
+	<div>
+	  <h2 class="font-light text-2xl text-[#4A4A4A]">
+		<span class="font-bold">Seraphique</span>
 		<%= product.name %>
-	</p>
+	  </h2>
 
-	<p class="my-5">
-		<strong class="block font-medium mb-1">Description:</strong>
-		<%= product.description %>
-	</p>
-
-	<p class="my-5">
-		<strong class="block font-medium mb-1">Quantity:</strong>
-		<%= product.quantity %>
-	</p>
-
-	<p class="my-5">
-		<strong class="block font-medium mb-1">Price:</strong>
-		<%= product.price %>
-	</p>
-
+	  <div class="flex flex-row gap-x-2 my-5">
+		<% 5.times do %>
+		  <%= heroicon "star", size: 24 %>
+		<% end %>
+		<a class="underline text-[#3A5033] text-base ms-7 font-light" href="#">
+		  Write a Review
+		</a>
+	  </div>
+	  <section><%= product.description %></section>
+	  <section class="my-4">
+		<div class="font-light text-4xl text-[#3A5033]">
+		  $<%= number_with_precision(product.price, precision: 2) %>
+		</div>
+	  </section>
+	  <section>
+		<div class="flex flex-row gap-x-5">
+		  <input class="w-16" type="number" aria-label="quantity" value="1">
+		  <button class="bg-seraphique text-white grow">Buy Now</button>
+		  <button class="bg-white border border-[#B0B0B0] grow">
+			Add to Cart
+		  </button>
+		</div>
+	  </section>
+	</div>
+  </div>
 </div>
