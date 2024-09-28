@@ -6,5 +6,5 @@ class Product < ApplicationRecord
 
     has_rich_text :description
     has_many :reviews
-    belongs_to :category
+    has_many :categories, through: :product_categories
 end
