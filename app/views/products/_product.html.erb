@@ -25,13 +25,13 @@
 		  Write a Review
 		</a>
 	  </div>
-	  <section><%= product.description %></section>
-	  <section class="my-4">
+	  <div class="text-[#4A4A4A]"><%= product.description %></div>
+	  <div class="my-4">
 		<div class="font-light text-4xl text-[#3A5033]">
 		  $<%= number_with_precision(product.price, precision: 2) %>
 		</div>
-	  </section>
-	  <section>
+	  </div>
+	  <div>
 		<div class="flex flex-row gap-x-5">
 		  <input class="w-16" type="number" aria-label="quantity" value="1">
 		  <button class="bg-seraphique text-white grow">Buy Now</button>
@@ -39,7 +39,7 @@
 			Add to Cart
 		  </button>
 		</div>
-	  </section>
+	  </div>
 	</div>
   </div>
 </div>
