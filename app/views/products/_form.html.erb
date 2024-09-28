@@ -30,11 +30,17 @@
   </div>
 
   <div class="my-5">
-	<%= form.label :category_id %>
-	<%= form.select :category_id, @category_options, {}, {
-		required: true,
-		class: "block shadow rounded-md border px-3 py-2
-                border-gray-400 outline-none mt-2 w-full"
+	<%= form.label :categories %>
+	<%= form.select :categories,
+	 @category_options,
+	 {
+		 multiple: true,
+		 selected: @selected_categories
+	 },
+	 {
+		 required: true,
+		 class: "block shadow rounded-md border px-3 py-2
+                 border-gray-400 outline-none mt-2 w-full"
 	} %>
   </div>
 

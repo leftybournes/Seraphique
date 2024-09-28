@@ -34,16 +34,23 @@ class ProductsController < ApplicationController
 
     # GET /products/1/edit
     def edit
+        @selected_categories = @product.categories.map do |category|
+            category.id
+        end
+
+        @category_options = Category.all.map do |category|
+            [category.name, category.id]
+        end
     end
 
     # POST /products or /products.json
     def create
         @product = Product.new(product_params)
         @product.image.attach(product_params[:image])
+        @product.categories = Category(where: category_params[:categories])
 
         respond_to do |format|
             if @product.save
-
                 format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
                 format.json { render :show, status: :created, location: @product }
             else
@@ -55,6 +62,8 @@ class ProductsController < ApplicationController
 
     # PATCH/PUT /products/1 or /products/1.json
     def update
+        @product.categories = Category.where(id: category_params[:categories])
+
         respond_to do |format|
             if @product.update(product_params)
                 format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
@@ -85,7 +94,11 @@ class ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
         params.require(:product)
-            .permit(:name, :description, :quantity, :price, :image, :category_id)
+            .permit(:name, :description, :quantity, :price, :image)
+    end
+
+    def category_params
+        params.require(:product).permit(categories: [])
     end
 
     def ensure_authorized!
