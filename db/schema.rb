@@ -86,17 +86,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_28_100502) do
     t.text "description"
     t.integer "quantity"
     t.decimal "price"
-    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "score", limit: 2
+    t.integer "score"
     t.text "comment"
-    t.bigint "product_id"
-    t.bigint "user_id"
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"

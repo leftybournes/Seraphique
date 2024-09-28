@@ -6,6 +6,7 @@ class Product < ApplicationRecord
 
     has_rich_text :description
     has_many :reviews
+    has_many :product_categories
     has_many :categories, through: :product_categories
     has_many :variants
     has_many :usage_directions
