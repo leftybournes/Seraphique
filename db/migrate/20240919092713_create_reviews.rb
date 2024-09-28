@@ -1,11 +1,12 @@
 class CreateReviews < ActiveRecord::Migration[7.1]
-  def change
-    create_table :reviews do |t|
-      t.integer :score, limit: 2
-      t.references :product, null: true, foreign_key: true
-      t.references :user, null: true, foreign_key: true
+    def change
+        create_table :reviews do |t|
+            t.integer :score
+            t.text :comment
+            t.belongs_to :product, null: false, foreign_key: true
+            t.belongs_to :user, null: false, foreign_key: true
 
-      t.timestamps
+            t.timestamps
+        end
     end
-  end
 end
