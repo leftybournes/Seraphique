@@ -26,6 +26,15 @@
 		</a>
 	  </div>
 	  <div class="text-[#4A4A4A]"><%= product.description %></div>
+	  <div class="mt-4 flex flex-row gap-x-5">
+		<% product.variants.each do |variant| %>
+		  <div class="bg-white border border-[#B0B0B0] text-[#4A4A4A]
+					  rounded-lg py-2 px-3 hover:bg-[#4A4A4A] font-light
+					  hover:text-[#F5F5F5] hover:cursor-pointer">
+			<%= variant.name %>
+		  </div>
+		<% end %>
+	  </div>
 	  <div class="my-4">
 		<div class="font-light text-4xl text-[#3A5033]">
 		  $<%= number_with_precision(product.price, precision: 2) %>
