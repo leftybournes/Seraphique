@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_27_063151) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_28_100502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_063151) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "summary"
@@ -85,6 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_063151) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "score", limit: 2
+    t.text "comment"
     t.bigint "product_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -103,6 +113,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_063151) do
     t.index ["user_id"], name: "index_shopping_cart_items_on_user_id"
   end
 
+  create_table "usage_directions", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "order"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_usage_directions_on_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -116,10 +135,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_27_063151) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "variants", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_variants_on_product_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
   add_foreign_key "shopping_cart_items", "products"
   add_foreign_key "shopping_cart_items", "users"
+  add_foreign_key "usage_directions", "products"
+  add_foreign_key "variants", "products"
 end
