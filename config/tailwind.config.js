@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	content: [
@@ -6,6 +6,9 @@ module.exports = {
 		'./app/helpers/**/*.rb',
 		'./app/javascript/**/*.js',
 		'./app/views/**/*.{erb,haml,html,slim}'
+	],
+	safelist: [
+		...[...Array(101).keys()].flatMap(index => `w-[${index}%]`)
 	],
 	theme: {
 		extend: {
@@ -23,4 +26,4 @@ module.exports = {
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/container-queries'),
 	]
-}
+};
