@@ -19,13 +19,15 @@
 	</section>
 
 	<section class="mt-16">
-	  <%= render partial: "reviews",
+	  <%= render partial: "products/reviews",
 				 locals: {
+					 product_id: @product.id,
 					 reviews: @reviews,
 					 review_scores: @review_scores,
 					 average: @average_score,
 					 total: @total_reviews,
-					 pages: @pages
+					 pages: @pages,
+					 offset: @offset
 				 } %>
 	</section>
   </div>

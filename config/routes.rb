@@ -21,7 +21,11 @@ Rails.application.routes.draw do
     root to: "home#index"
 
     get "/about", to: "about#index"
-    resources :products
+
+    resources :products do
+        resources :reviews, only: [ :index ], controller: :product_reviews
+    end
+
     resources :shopping_cart_items, path: :shopping_cart
 
     post "/shopping_cart_items/:user_id/:product_id",

@@ -1,0 +1,94 @@
+<div class="flex flex-col mt-0.5 gap-y-0.5">
+  <% reviews.each do |review| %>
+	<div class="bg-white px-8 py-5 flex flex-col">
+	  <div class="flex flex-row justify-between">
+		<div class="flex flex-row gap-x-1">
+		  <% 5.times do %>
+			<%= heroicon "star", size: 18 %>
+		  <% end %>
+		</div>
+		<p class="text-xs text-[#4A4A4A]">
+		  <%= review.created_at.strftime("%B %d, %Y") %>
+		</p>
+	  </div>
+	  <p class="text-[#00000066] py-3"><%= review.user.email %></p>
+	  <p class="text-xs text-[#4A4A4A]"><%= review.comment %>
+	</div>
+  <% end %>
+</div>
+<div class="bg-white mt-0.5 px-8 py-5 flex
+			flex-row justify-between items-center">
+  <div class="text-[#4A4A4A]">
+	Showing
+	<% if offset > 1 %>
+	  <%= offset + 1 %>
+	<% else %>
+	  1
+	<% end %>
+	-
+	<%= current_page * 5 %>
+	of
+	<%= total %>
+  </div>
+  <div class="text-[#0000004D] flex flex-row
+			  flex-nowrap gap-x-3 items-center">
+	<% if current_page > 1 %>
+	  <%= link_to product_reviews_path(
+		  product_id: product_id,
+		  page: current_page - 1
+	  ), data: { turbo_frame: :product_reviews } do %>
+		<%= heroicon "chevron-left", size: 20, class: "text-seraphique" %>
+	  <% end %>
+	<% else %>
+	  <%= heroicon "chevron-left", size: 16 %>
+	<% end %>
+	
+	<% if current_page > 2 %>
+	  <%= link_to product_reviews_path(
+		  product_id: product_id,
+		  page: 1
+	  ), data: { turbo_frame: :product_reviews } do %>
+		1
+	  <% end %>
+	  <div>...</div>
+	<% end %>
+
+	<% ([pages - 4, current_page].min)
+	.upto([current_page + 4, pages].min)
+	.each do |page| %>
+	  <div class="hover:text-seraphique
+				  <%= class_names(
+					  "text-seraphique" => page == current_page,
+					  "font-bold" => page == current_page
+				  ) %>">
+		<%= link_to product_reviews_path(
+			product_id: product_id,
+			page: page
+		), data: { turbo_frame: :product_reviews } do %>
+		  <%= page %>
+		<% end %>
+	  </div>
+	<% end %>
+	<% if (current_page + 4) < pages %>
+	  <div>...</div>
+	  <%= link_to product_reviews_path(
+		  product_id: product_id,
+		  page: pages,
+	  ), data: { turbo_frame: :product_reviews } do %>
+		<%= pages %>
+	  <% end %>
+	<% end %>
+	<% if (current_page + 4) < pages %>
+	  <%= link_to product_reviews_path(
+		  product_id: product_id,
+		  page: current_page + 1
+	  ) do %>
+		<%= heroicon "chevron-right",
+					 size: 16,
+					 class: "text-seraphique font-bold" %>
+	  <% end %>
+	<% else %>
+	  <%= heroicon "chevron-right", size: 16 %>
+	<% end %>
+  </div>
+</div>

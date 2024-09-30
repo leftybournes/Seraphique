@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
 
     # GET /products/1 or /products/1.json
     def show
+        @page = params[:page] || 1
         @product = Product.includes(:usage_directions)
                        .find(params[:id])
 
@@ -51,7 +52,8 @@ class ProductsController < ApplicationController
                        .order(created_at: :desc)
                        .limit(5)
  
-       @pages = @total_reviews / @reviews.count
+        @pages = @total_reviews / @reviews.count
+        @offset = 0
      end
 
     # GET /products/new

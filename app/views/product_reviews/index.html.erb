@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :product_reviews do %>
+  <%= render partial: "reviews",
+			 locals: {
+				 reviews: @reviews,
+				 product_id: @product_id,
+				 current_page: @page,
+				 pages: @pages,
+				 offset: @offset,
+				 total: @total
+			 } %>
+<% end %>
