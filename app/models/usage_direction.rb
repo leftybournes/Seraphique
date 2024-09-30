@@ -1,3 +1,5 @@
 class UsageDirection < ApplicationRecord
-  belongs_to :product
+    belongs_to :product
+
+    default_scope { order(:order) }
 end
