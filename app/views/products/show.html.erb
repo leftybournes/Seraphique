@@ -1,4 +1,4 @@
-<main class="bg-[#F5F5F5] pt-40">
+<main class="bg-[#F5F5F5] py-40">
   <div class="container mx-auto">
 	<%= render partial: "shared/banner" %>
 
@@ -16,6 +16,17 @@
 
 	<section>
 	  <%= render partial: "more_information", locals: { product: @product } %>
+	</section>
+
+	<section class="mt-16">
+	  <%= render partial: "reviews",
+				 locals: {
+					 reviews: @reviews,
+					 review_scores: @review_scores,
+					 average: @average_score,
+					 total: @total_reviews,
+					 pages: @pages
+				 } %>
 	</section>
   </div>
 </main>

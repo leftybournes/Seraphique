@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: %i[ show edit update destroy ]
+    before_action :set_product, only: %i[ edit update destroy ]
     before_action :ensure_authorized!, only: %i[ new edit create update destroy ]
 
     # GET /products or /products.json
@@ -22,9 +22,37 @@ class ProductsController < ApplicationController
 
     # GET /products/1 or /products/1.json
     def show
-        @product = Product.includes(:usage_directions, :reviews)
+        @product = Product.includes(:usage_directions)
                        .find(params[:id])
-    end
+
+        @total_reviews = @product.reviews.count
+        @average_score = @product.reviews.average(:score)
+
+        @review_scores =
+            @product
+                .reviews
+                .select(:score)
+                .order(score: :desc)
+                .distinct
+                .collect do |review_score|
+
+            score_count =
+                Review
+                    .where(product_id: @product.id, score: review_score.score)
+                    .count
+
+            {
+                score: review_score.score,
+                fragment: score_count.to_d / @total_reviews.to_d * 100.to_d
+            }
+        end
+
+        @reviews = Review.where(product_id: @product.id)
+                       .order(created_at: :desc)
+                       .limit(5)
+ 
+       @pages = @total_reviews / @reviews.count
+     end
 
     # GET /products/new
     def new
