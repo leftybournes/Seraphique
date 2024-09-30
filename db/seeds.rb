@@ -11,3 +11,4 @@
 require_relative "seeds/category_seed" unless Category.count > 0
 require_relative "seeds/product_seed" unless Product.count > 0
 require_relative "seeds/user_seed" unless User.count > 0
+require_relative "seeds/review_seed" unless Review.count > 0
