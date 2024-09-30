@@ -8,6 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-require_relative "seeds/category_seed"
-require_relative "seeds/product_seed"
-require_relative "seeds/user_seed"
+require_relative "seeds/category_seed" unless Category.count > 0
+require_relative "seeds/product_seed" unless Product.count > 0
+require_relative "seeds/user_seed" unless User.count > 0
