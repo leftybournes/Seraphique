@@ -8,7 +8,9 @@ rand(1000..1500).times do
         {
             full_name: Faker::Name.unique.name,
             email: Faker::Internet.unique.email,
-            password: "password"
+            password: "password",
+            created_at: date,
+            updated_at: date
         }
     )
 end
