@@ -4,7 +4,8 @@ class HomeController < ApplicationController
     def index
         @products =
             if params[:category].present?
-                Product.joins(:categories).where(categories: { id: params[:category] })
+                Product.includes(:categories)
+                    .where(categories: { id: params[:category] })
             else
                 Product.all
             end

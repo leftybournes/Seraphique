@@ -6,7 +6,8 @@ class ProductsController < ApplicationController
     def index
         @products =
             if params[:category].present?
-                Product.joins(:categories).where(categories: { id: params[:category] })
+                Product.includes(:categories)
+                    .where(categories: { id: params[:category] })
             else
                 Product.all
             end
@@ -21,6 +22,8 @@ class ProductsController < ApplicationController
 
     # GET /products/1 or /products/1.json
     def show
+        @product = Product.includes(:usage_directions, :reviews)
+                       .find(params[:id])
     end
 
     # GET /products/new
