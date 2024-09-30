@@ -10,6 +10,12 @@
 	  </p>
 	<% end %>
 
-	<%= render @product %>
+	<section>
+	  <%= render @product %>
+	</section>
+
+	<section>
+	  <%= render partial: "more_information", locals: { product: @product } %>
+	</section>
   </div>
 </main>

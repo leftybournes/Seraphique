@@ -1,0 +1,68 @@
+<div class="grid grid-cols-2 gap-x-24 mt-8">
+  <div data-controller="product-tabs">
+	<div>
+	  <div class="flex flex-row flex-nowrap">
+		<div class="text-[#00000066] font-bold pr-7
+					has-[:checked]:text-black border-r border-r-[#00000066]">
+		  <input type="radio"
+				 id="product-tab-directions"
+				 name="product-tab"
+				 class="hidden"
+				 checked>
+		  <label for="product-tab-directions"
+				 id="label-directions"
+				 data-action="click->product-tabs#toggle"
+				 class="cursor-pointer">
+			Usage Directions
+		  </label>
+		</div>
+		<div class="text-[#00000066] font-bold
+					pl-7 has-[:checked]:text-black">
+		  <input type="radio"
+				 id="product-tab-allergens"
+				 name="product-tab"
+				 class="hidden">
+		  <label for="product-tab-allergens"
+				 id="label-allergens"
+				 data-action="click->product-tabs#toggle"
+				 class="cursor-pointer">
+			Allergens
+		  </label>
+		</div>
+	  </div>
+	  <div class="pt-9">
+		<div data-product-tabs-target="directionsContent">
+		  <ul class="relative flex flex-col gap-y-4 before:absolute before:z-0
+					 before:content-[''] before:w-px before:bg-[#00000066]
+					 before:left-3 before:top-3 before:h-[calc(100%-26px)]">
+			<% product.usage_directions.each_with_index do |direction, index| %>
+			  <li class="relative group">
+				<div class="flex flex-row nowrap items-center gap-x-4">
+				  <div class="size-7 rounded-full bg-[#D9D9D9]
+							  group-first:size-fit group-first:p-1
+							  group-first:bg-seraphique
+							  group-first:text-white">
+					<% if index == 0 %>
+					  <%= heroicon "check", size: 18, class: "mx-auto" %>
+					<% end %>
+				  </div>
+				  <div>
+					<div class="font-bold">Step <%= index + 1 %></div>
+					<%= direction.content %>
+				  </div>
+				</div>
+			  </li>
+			<% end %>
+		  </ul>
+		</div>
+		<div data-product-tabs-target="allergensContent" class="hidden">
+		  <div class="h-24 w-full bg-gray-300"></div>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <div>
+	<h2 class="font-bold">Contains</h2>
+	<div class="h-32 w-full bg-gray-300 mt-9"></div>
+  </div>
+</div>
