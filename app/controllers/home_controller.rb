@@ -2,19 +2,14 @@ class HomeController < ApplicationController
     layout "homepage"
 
     def index
-        @products =
-            if params[:category].present?
-                Product.includes(:categories)
-                    .where(categories: { id: params[:category] })
-            else
-                Product.all
-            end
+        @best_sellers =
+            Product.includes(:categories)
+                .where(categories: { name: "Best Seller" })
+                .limit(5)
 
-        @selected_category =
-            if params[:category].present?
-                Category.find(params[:category].to_i)
-            else
-                nil
-            end
+        @new_products =
+            Product.includes(:categories)
+                .where(categories: { name: "New Product" })
+                .limit(5)
     end
 end

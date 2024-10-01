@@ -1,0 +1,35 @@
+<section class="bg-[#F5F5F5]">
+  <div class="container mx-auto pb-32 pt-28">
+	<div class="relative -bottom-4 flex flex-row
+				flex-nowrap justify-center items-center">
+	  <div class="grow"></div>
+	  <h2 class="mx-4 text-nowrap font-bold text-2xl text-[#4A4A4A]">
+		Our Best Sellers
+	  </h2>
+	  <div class="h-px bg-[#3A5033B2] grow"></div>
+	</div>
+	<div class="border-r border-r-[#3A5033B2] flex flex-row
+				flex-nowrap justify-center py-16 gap-x-4">
+	  <% if @best_sellers %>
+		<%= render partial: "products/card",
+				   collection: @best_sellers,
+				   as: :product %>
+	  <% end %>
+	</div>
+	<div class="border border-[#3A5033B2] border-r-0 border-b-0">
+	  <div class="relative -top-4 bg-[#F5F5F5] px-4 w-fit mx-auto">
+		<h2 class="font-bold text-2xl text-[#4A4A4A]">
+		  New Products
+		</h2>
+	  </div>
+	  <div class="flex flex-row flex-nowrap justify-center gap-x-4 py-16">
+		<% if @new_products %>
+		  <%= render partial: "products/card",
+					 collection: @new_products,
+					 as: :product %>
+		<% end %>
+	  </div>
+	</div>
+	<div class="bg-[#3A5033B2] h-px w-1/2"></div>
+  </div>
+</section>
