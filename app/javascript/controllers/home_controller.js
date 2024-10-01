@@ -1,14 +1,16 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-	static targets = [ "header", "products"];
+	static targets = [ "header", "whyUs"];
 
 	connect() {
-		let productsPosition = this.productsTarget.getBoundingClientRect();
+		let whyUsPosition = this.whyUsTarget.getBoundingClientRect();
 		let header = this.headerTarget;
+		let intersection = whyUsPosition.y - 200;
 
 		window.addEventListener("scroll", function() {
-			if (window.scrollY >= productsPosition.y) {
+
+			if (window.scrollY >= intersection) {
 				header.classList.remove("hidden");
 
 				setTimeout(
