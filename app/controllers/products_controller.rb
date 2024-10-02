@@ -4,13 +4,13 @@ class ProductsController < ApplicationController
 
     # GET /products or /products.json
     def index
-        @products =
-            if params[:category].present?
-                Product.includes(:categories)
-                    .where(categories: { id: params[:category] })
-            else
-                Product.all
-            end
+        @products_by_categories =
+            Category
+                .where
+                .not(name: ["Best Seller", "New Product"])
+                .collect do |category|
+            { category: category.name, products: category.products }
+        end
 
         @selected_category =
             if params[:category].present?

@@ -13,23 +13,36 @@
 	<%= render "shared/banner" %>
 	<%= image_tag "products_banner_image.png", class: "w-full mb-24" %>
 
-	<div class="-mb-6 text-center z-10 relative">
-	  <h2 class="text-2xl font-bold text-[#3A5033]
-				 mx-auto bg-[#F5F5F5] py-2 px-4 w-fit">
-		<% if @selected_category %>
-		  <%= @selected_category.name %>
-		<% else %>
-		  All Products
+	<div>
+	  <% @products_by_categories.each_with_index do |group, index| %>
+		<% if index == 0 %>
+		  <div class="h-px w-1/2 bg-[#3A5033B2] ms-auto"></div>
 		<% end %>
-	  </h2>
+		<div class="text-center h-0">
+		  <div class="inline-block relative -top-4 bg-[#F5F5F5] px-4">
+			<h2 class="font-bold text-2xl text-[#4A4A4A]">
+			  <%= group[:category] %>
+			</h2>
+		  </div>
+		</div>
+		<div class="flex flex-row flex-nowrap gap-x-12 py-16
+					<%= class_names(
+						"border-r border-r-[#3A5033B2]" => index % 2 == 0,
+						"border-l border-l-[#3A5033B2]" => index % 2 != 0,
+						"border-t border-t-[#3A5033B2]" => index > 0,
+					) %>">
+		  <div class="mx-auto grid grid-cols-2 gap-8
+					  auto-rows-fr lg:grid-cols-5">
+			<%= render partial: "card",
+					   collection: group[:products][0..4],
+					   as: :product %>
+		  </div>
+		</div>
+		<% if index == @products_by_categories.length - 1 %>
+		  <div class="h-px w-1/2 ms-auto bg-[#3A5033B2]"></div>
+		<% end %>
+	  <% end %>
 	</div>
-	<div class="flex flex-row flex-nowrap gap-x-12
-				border border-[#3A5033B2] py-24">
-	  <section class="mx-auto grid grid-cols-2 gap-8
-					  auto-rows-fr lg:grid-cols-4">
-		<%= render partial: "card",
-				   collection: @products,
-				   as: :product %>
-	  </section>
-	</div>
+  </div>
+
 </main>
