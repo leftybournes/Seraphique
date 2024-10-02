@@ -1,5 +1,3 @@
-require "faker"
-
 users = []
 
 rand(1000..1500).times do
