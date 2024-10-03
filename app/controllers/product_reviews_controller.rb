@@ -28,6 +28,17 @@ class ProductReviewsController < ApplicationController
                 .count
 
         @product_id = params[:product_id]
-        @pages = @total / 5
+        @page_count = @total / 5
+        @pages =
+            if @page < 3
+                1..[5, @page_count].min
+            elsif @page > @page_count - 3
+                first_page = @page_count - 4
+                first_page..[@page_count, 1].max
+            else
+                first_page = @page - 2
+                last_page = @page + 2
+                first_page..last_page
+            end
     end
 end

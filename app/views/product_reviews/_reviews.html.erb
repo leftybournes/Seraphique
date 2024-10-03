@@ -20,13 +20,19 @@
 			flex-row justify-between items-center">
   <div class="text-[#4A4A4A]">
 	Showing
-	<% if offset > 1 %>
+	<% if total == 0 %>
+	  0
+	<% elsif offset > 1 %>
 	  <%= offset + 1 %>
 	<% else %>
 	  1
 	<% end %>
 	-
-	<%= current_page * 5 %>
+	<% if total == 0 %>
+	  0
+	<% else %>
+	  <%= current_page * 5 %>
+	<% end %>
 	of
 	<%= total %>
   </div>
@@ -43,19 +49,19 @@
 	  <%= heroicon "chevron-left", size: 16 %>
 	<% end %>
 	
-	<% if current_page > 2 %>
+	<% if current_page > 3 %>
 	  <%= link_to product_reviews_path(
 		  product_id: product_id,
 		  page: 1
 	  ), data: { turbo_frame: :product_reviews } do %>
 		1
 	  <% end %>
+	<% end %>
+	<% if current_page > 4 %>
 	  <div>...</div>
 	<% end %>
 
-	<% ([pages - 4, current_page].min)
-	.upto([current_page + 4, pages].min)
-	.each do |page| %>
+	<% pages.each do |page| %>
 	  <div class="hover:text-seraphique
 				  <%= class_names(
 					  "text-seraphique" => page == current_page,
@@ -69,22 +75,24 @@
 		<% end %>
 	  </div>
 	<% end %>
-	<% if (current_page + 4) < pages %>
+	<% if current_page < page_count - 3 %>
 	  <div>...</div>
+	<% end %>
+	<% if current_page < page_count - 2 %>
 	  <%= link_to product_reviews_path(
 		  product_id: product_id,
-		  page: pages,
+		  page: page_count,
 	  ), data: { turbo_frame: :product_reviews } do %>
-		<%= pages %>
+		<%= page_count %>
 	  <% end %>
 	<% end %>
-	<% if (current_page + 4) < pages %>
+	<% if current_page < page_count %>
 	  <%= link_to product_reviews_path(
 		  product_id: product_id,
 		  page: current_page + 1
 	  ) do %>
 		<%= heroicon "chevron-right",
-					 size: 16,
+					 size: 20,
 					 class: "text-seraphique font-bold" %>
 	  <% end %>
 	<% else %>

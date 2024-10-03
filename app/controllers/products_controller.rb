@@ -23,11 +23,12 @@ class ProductsController < ApplicationController
     # GET /products/1 or /products/1.json
     def show
         @page = params[:page] || 1
+
         @product = Product.includes(:usage_directions)
                        .find(params[:id])
 
         @total_reviews = @product.reviews.count
-        @average_score = @product.reviews.average(:score)
+        @average_score = @product.reviews.average(:score) || 0
 
         @review_scores =
             @product
@@ -52,7 +53,17 @@ class ProductsController < ApplicationController
                        .order(created_at: :desc)
                        .limit(5)
  
-        @pages = @total_reviews / @reviews.count
+        @page_count = @reviews.count > 1 ? @total_reviews / @reviews.count : 1
+        @pages =
+            if @page < 3
+                1..[5, @page_count].min
+            elsif @page > @page_count - 3
+                [@page_count, 1].max
+            else
+                first_page = @page - 2
+                last_page = @page + 2
+                first_page..last_page
+            end
         @offset = 0
      end
 
