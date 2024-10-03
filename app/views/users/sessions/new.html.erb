@@ -1,14 +1,17 @@
-<main class="bg-[#F4F4F4] py-64">
+<main class="bg-[#F4F4F4] py-64 overflow-hidden">
   <div class="relative">
-	<div class="absolute -bottom-64 left-0 -scale-x-100 w-[900px]">
+	<div class="absolute -bottom-96 left-0 -scale-x-100 w-[800px]">
 	  <%= image_tag "foliage.png" %>
 	</div>
-	<div class="absolute top-0 -right-[156px] -rotate-90 z-20 w-[900px]">
+	<div class="absolute -bottom-96 hidden md:left-[34rem] w-[900px] md:block">
+	  <%= image_tag "foliage.png" %>
+	</div>
+	<div class="absolute -bottom-96 right-0 hidden w-[800px] md:block">
 	  <%= image_tag "foliage.png" %>
 	</div>
 	<div class="container mx-auto relative z-10">
-	  <div class="bg-[#3A503333] w-full mx-auto px-24 py-14
-				  min-w-[300px] max-w-[700px] border
+	  <div class="bg-[#3A503333] w-4/5 mx-auto px-24 py-14
+				  min-w-[300px] max-w-[700px] border md:w-full
 				  border-white rounded-lg backdrop-blur-sm">
 
 		<h2 class="text-seraphique font-bold text-2xl mb-12">Sign in</h2>
@@ -35,7 +38,8 @@
 				  class: "border border-seraphique bg-[#F5F5F5] rounded-md" %>
 			</div>
 
-			<div class="flex flex-row justify-center items-center">
+			<div class="flex flex-row flex-wrap justify-center
+						md:flex-nowrap md:items-center">
 			  <% if devise_mapping.rememberable? %>
 				<div>
 				  <%= f.check_box :remember_me,
@@ -46,7 +50,7 @@
 				</div>
 			  <% end %>
 
-			  <div class="actions ms-auto">
+			  <div class="actions mt-4 md:mt-0 md:ms-auto">
 				<%= f.submit "Sign In",
 				   class: "bg-seraphique text-base text-white
                           rounded-lg text-center px-4 py-2" %>
