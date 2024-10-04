@@ -1,6 +1,11 @@
 <div id="<%= dom_id product %>"
-	 class="w-64 rounded-lg shadow overflow-hidden flex flex-col">
-  <div class="bg-white h-full
+	 class="w-64 rounded-lg shadow overflow-hidden flex flex-col bg-white">
+  <div class="flex flex-row gap-x-2 mb-2 pt-6 px-6">
+	<% 5.times do %>
+	  <%= heroicon "star", size: 18 %>
+	<% end %>
+  </div>
+  <div class="h-full
 			  <%= class_names("relative" => user_signed_in?,
 							  "group/image" => user_signed_in?) %>">
 	<% if user_signed_in? %>
@@ -28,13 +33,8 @@
 	  </div>
 	<% end %>
   </div>
-  <div class="w-full bg-white p-4">
+  <div class="w-full pt-4 pb-8 px-6">
 	<%= link_to product_path(product), class: "group/link" do %>
-	  <div class="flex flex-row gap-x-2 mb-2">
-		<% 5.times do %>
-		  <%= heroicon "star", size: 18 %>
-		<% end %>
-	  </div>
 	  <div class="text-xs flex flex-row">
 		<p class="group-hover/link:underline">
 		  <span class="font-semibold">
@@ -46,20 +46,20 @@
 	  <div class="text-xs group-hover/link:underline">
 		<%= product.summary %>
 	  </div>
-	  <div class="text-lg font-light flex flex-row
-				  flex-nowrap justify-between mt-2">
-		<div class="flex flex-row items-center gap-1">
-		  <%= heroicon "currency-dollar",
-					   size: 18,
-					   class: "text-[#4A4A4A]" %>
-		  <span class="font-light">
-			<%= number_with_precision(product.price, precision: 2) %>
-		  </span>
-		</div>
-	  </div>
 	<% end %>
-	<button class="bg-seraphique w-full text-gray-100 py-2 mt-2 hover:font-semibold">
-	  Buy Now
-	</button>
+	<div class="flex flex-row flex-nowrap text-seraphique
+				justify-between items-center mt-4">
+	  <div class="flex flex-row gap-x-1">
+		<%= heroicon "currency-dollar",
+					 size: 20 %>
+		<span class="font-bold text-[#4A4A4A]">
+		  <%= number_with_precision(product.price, precision: 2) %>
+		</span>
+	  </div>
+	  <button class="bg-seraphique font-bold text-white py-1 px-4
+					 text-xs rounded-full hover:font-semibold">
+		Buy Now
+	  </button>
+	</div>
   </div>
 </div>
