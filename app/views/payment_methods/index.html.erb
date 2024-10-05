@@ -1,0 +1,16 @@
+<main class="py-32">
+  <div class="container mx-auto">
+	<div class="bg-white py-8 px-12">
+	  <div class="flex flex-row justify-between items-center">
+		<h2 class="font-bold">Credit Card / Debit Card</h2>
+		<%= link_to new_payment_method_path,
+					class: "flex flex-row items-center gap-x-2 border
+					        border-[#D9D9D9] rounded-full py-2
+                            px-4 hover:bg-[#D9D9D9]"  do %>
+		<%= heroicon "plus", size: 20, class: "inline-block" %>
+		Add New Card
+		<% end %>
+	  </div>
+	</div>
+  </div>
+</main>
