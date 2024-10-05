@@ -60,7 +60,7 @@ test:
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
   host: <%= ENV["DATABASE_HOST"] %>
-  port: <%= ENV["database_port"] %>
+  port: <%= ENV["DATABASE_PORT"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
