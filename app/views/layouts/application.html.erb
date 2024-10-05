@@ -16,7 +16,7 @@
 	<%= javascript_importmap_tags %>
   </head>
 
-  <body class="antialiased">
+  <body class="antialiased bg-[#F5F5F5]">
 	<header class="font-poppins w-full fixed z-50">
 	  <div class="bg-seraphique py-4">
 		<div class="container mx-auto flex flex-row flex-nowrap items-center">
@@ -84,16 +84,18 @@
 				<div class="relative hidden peer-checked:block">
 				  <div class="absolute left-0 top-2">
 					<ul class="text-base bg-gray-100 rounded-md
-							   w-fit h-full py-2 px-4 shadow">
+							   w-fit h-full py-2 px-4 shadow whitespace-nowrap">
 					  <% if user_signed_in? %>
 						<li>
 						  <%= link_to "Profile", edit_user_registration_path %>
 						</li>
 						<li>
+						  <%= link_to "Payment Methods", payment_methods_path %>
+						</li>
+						<li>
 						  <%= button_to "Sign out",
 										destroy_user_session_path,
-										method: :delete,
-										class: "whitespace-nowrap" %>
+										method: :delete %>
 						</li>
 					  <% else %>
 						<li>
