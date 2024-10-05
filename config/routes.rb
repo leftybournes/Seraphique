@@ -3,13 +3,13 @@ Rails.application.routes.draw do
                controllers: {
                    sessions: "administrators/sessions",
                    registrations: "administrators/registrations"
-    }
+               }
 
     devise_for :users,
                controllers: {
                    sessions: "users/sessions",
                    registrations: "users/registrations"
-    }
+               }
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
     # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         resources :reviews, only: [ :index ], controller: :product_reviews
     end
 
+    resources :payment_methods
     resources :shopping_cart_items, path: :shopping_cart
 
     post "/shopping_cart_items/:user_id/:product_id",
