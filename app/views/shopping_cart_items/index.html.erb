@@ -101,6 +101,11 @@
 			  <div class="w-1/12">
 				<%= button_to shopping_cart_item_path(item),
 							  method: :delete,
+							  form: {
+								  data: {
+									  turbo_confirm: "Are you sure you want to remove this item?"
+								  }
+							  },
 							  data: {
 								  action: "click->shopping-cart#deselectAndCalculate",
 								  turbo_frame: dom_id(current_user, :shopping_cart)
