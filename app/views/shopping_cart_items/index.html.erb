@@ -1,4 +1,4 @@
-<main class="bg-[#F5F5F5] pb-36">
+<main class="bg-[#F5F5F5] pb-36" data-controller="shopping-cart">
   <% if notice.present? %>
 	<p class="py-x px-3 bg-green mb-5 text-green-500
 			  font-medium rounded-lg inline-block">
@@ -22,13 +22,15 @@
 	  </div>
 	  <div class="bg-white mt-4">
 		<% current_user.shopping_cart_items.each_with_index do |item, index| %>
-		  <div class="flex flex-row flex-nowrap items-center py-8">
+		  <div class="flex flex-row flex-nowrap items-center py-8"
+			   data-shopping-cart-target="productRow">
 			<div class="flex flex-row justify-center w-1/12">
 			  <input id="<%= dom_id item, "row-#{index}" %>"
 					 type="checkbox"
 					 class="size-5 checked:bg-seraphique focus:outline-0
 						   focus:ring-seraphique hover:checked:bg-seraphique
-						   checked:focus:bg-seraphique">
+						   checked:focus:bg-seraphique"
+					 data-shopping-cart-target="checkbox">
 			</div>
 			<div class="flex flex-row gap-x-4 items-center w-3/12">
 			  <div class="border border-[#B0B0B0] py-4 px-8">
@@ -58,14 +60,14 @@
 				</div>
 			  </div>
 			</div>
-			<div class="text-center w-1/12">
+			<div class="text-center w-1/12 row-quantity">
 			  <%= item.quantity %>
 			</div>
 			<div class="text-seraphique text-center w-2/12">
 			  <%= heroicon "currency-dollar",
 						   size: 24,
 						   class: "inline-block" %>
-			  <span class="font-light">
+			  <span class="font-light row-price">
 				<%= number_with_precision(
 					item.product.price,
 					precision: 2
@@ -76,7 +78,7 @@
 			  <%= heroicon "currency-dollar",
 						   size: 24,
 						   class: "inline-block" %>
-			  <span class="font-light">
+			  <span class="font-light row-value">
 				<%= number_with_precision(
 					item.product.price * item.quantity,
 					precision: 2
@@ -96,7 +98,8 @@
 			   id="toggle-all-cart-items"
 			   class="size-5 checked:bg-seraphique focus:outline-0
 					 focus:ring-seraphique hover:checked:bg-seraphique
-					 checked:focus:bg-seraphique">
+					 checked:focus:bg-seraphique"
+			   data-action="input->shopping-cart#toggleAll">
 	  </div>
 	  <div class="w-7/12">
 		<label for="toggle-all-cart-items" class="font-bold text-[#4A4A4A]">
@@ -104,17 +107,13 @@
 		</label>
 	  </div>
 	  <div class="w-2/12 flex flex-row gap-x-4 justify-end items-center">
-		<div class="text-[#4A4A4A] font-bold">
-		  Total
-		  (<%= current_user.shopping_cart_items.sum(:quantity) %> items)
+		<div class="text-[#4A4A4A] font-bold"
+			 data-shopping-cart-target="count">
+		  Total (0 items)
 		</div>
-		<div class="text-[#A0C296] text-xl font-bold">
-		  $<%= number_with_precision(
-			  current_user
-			  .shopping_cart_items
-			  .sum { |item| item.quantity * item.product.price },
-			  precision: 2
-		   ) %>
+		<div class="text-[#A0C296] text-xl font-bold"
+			 data-shopping-cart-target="value">
+		  $0.00
 		</div>
 	  </div>
 	  <div class="w-2/12 flex flex-row">
