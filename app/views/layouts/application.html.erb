@@ -52,24 +52,20 @@
 							   variant: "outline",
 							   aria: { label: "shopping cart" },
 							   class: "w-6 text-white" %>
-				  <% if user_signed_in? %>
-					<% shopping_cart_items =
-					current_user.shopping_cart_items.sum(:quantity) %>
-					<%= turbo_frame_tag dom_id(
-						current_user,
-						:shopping_cart_count
-					) do %>
-					  <div class="<%= class_names(
-							      hidden: shopping_cart_items == 0
-								  ) %> text-sm absolute -right-4 -top-2
-								  bg-red-400 rounded-full px-2 count">
-						<% if shopping_cart_items > 9 %>
-						  9+
-						<% else %>
-						  <%= shopping_cart_items %>
-						<% end %>
-					  </div>
-					<% end %>
+				  <%= turbo_frame_tag dom_id(
+					  current_user || User.new,
+					  :shopping_cart_item_count
+				  ) do %>
+					<div class="<%= class_names(
+							    hidden: @shopping_cart_item_count == 0
+								) %> text-sm absolute -right-4 -top-2
+								bg-red-400 rounded-full px-2 count">
+					  <% if @shopping_cart_item_count > 9 %>
+						9+
+					  <% else %>
+						<%= @shopping_cart_item_count %>
+					  <% end %>
+					</div>
 				  <% end %>
 				<% end %>
 			  </li>
