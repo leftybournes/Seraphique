@@ -49,8 +49,8 @@
 							   aria: { label: "shopping cart" },
 							   class: "w-6 text-white" %>
 					<%= turbo_frame_tag dom_id(
-						User.new,
-						:shopping_cart_count
+						current_user || User.new,
+						:shopping_cart_item_count
 					) do %>
 					  <div class="<%= class_names(
 								  hidden: @shopping_cart_item_count == 0

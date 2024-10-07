@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(
 	current_user,
-	:shopping_cart_count
+	:shopping_cart_item_count
 ) do %>
   <div class="<%= class_names(
 			  hidden: @count == 0
