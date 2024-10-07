@@ -12,7 +12,8 @@
 	<%= render partial: "shared/banner" %>
 
 	<div>
-	  <div class="flex flex-row flex-nowrap text-[#4A4A4A] bg-gradient-to-r from-[#3A503333] to-[#84B674] py-4">
+	  <div class="flex flex-row flex-nowrap text-[#4A4A4A] py-4
+				  bg-gradient-to-r from-[#3A503333] to-[#84B674]">
 		<div class="w-1/12"></div>
 		<div class="w-5/12">Shopping Cart</div>
 		<div class="w-1/12 text-center">Quantity</div>
@@ -22,7 +23,7 @@
 	  </div>
 	  <div class="bg-white mt-4">
 		<% current_user.shopping_cart_items.each_with_index do |item, index| %>
-		  <div class="flex flex-row flex-nowrap items-center py-8"
+		  <div class="flex flex-row flex-nowrap items-center py-8 product-row"
 			   data-shopping-cart-target="productRow">
 			<div class="flex flex-row justify-center w-1/12">
 			  <input id="<%= dom_id item, "row-#{index}" %>"
@@ -30,7 +31,8 @@
 					 class="size-5 checked:bg-seraphique focus:outline-0
 						   focus:ring-seraphique hover:checked:bg-seraphique
 						   checked:focus:bg-seraphique"
-					 data-shopping-cart-target="checkbox">
+					 data-shopping-cart-target="checkbox"
+					 data-action="input->shopping-cart#calculate">
 			</div>
 			<div class="flex flex-row gap-x-4 items-center w-3/12">
 			  <div class="border border-[#B0B0B0] py-4 px-8">
@@ -60,8 +62,18 @@
 				</div>
 			  </div>
 			</div>
-			<div class="text-center w-1/12 row-quantity">
-			  <%= item.quantity %>
+			<div class="text-center w-1/12 flex flex-row">
+			  <button type="button"
+					  class="bg-none p-0 me-2"
+					  data-action="click->shopping-cart#decrementRow">
+				<%= heroicon "minus", size: 16 %>
+			  </button>
+			  <span class="row-quantity"><%= item.quantity %></span>
+			  <button type="button"
+					  class="bg-none p-0 ms-2"
+					  data-action="click->shopping-cart#incrementRow">
+				<%= heroicon "plus", size: 16 %>
+			  </button>
 			</div>
 			<div class="text-seraphique text-center w-2/12">
 			  <%= heroicon "currency-dollar",
@@ -98,8 +110,11 @@
 			   id="toggle-all-cart-items"
 			   class="size-5 checked:bg-seraphique focus:outline-0
 					 focus:ring-seraphique hover:checked:bg-seraphique
-					 checked:focus:bg-seraphique"
-			   data-action="input->shopping-cart#toggleAll">
+					 checked:focus:bg-seraphique indeterminate:bg-seraphique
+					 indeterminate:outline-0 hover:indeterminate:bg-seraphique
+					 indeterminate:focus:bg-seraphique"
+			   data-action="input->shopping-cart#toggleAll"
+			   data-shopping-cart-target="toggleAll">
 	  </div>
 	  <div class="w-7/12">
 		<label for="toggle-all-cart-items" class="font-bold text-[#4A4A4A]">
