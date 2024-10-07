@@ -1,5 +1,6 @@
 class ShoppingCartItemsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_item, only: [ :destroy ]
 
     def index
     end
@@ -39,5 +40,21 @@ class ShoppingCartItemsController < ApplicationController
     end
 
     def destroy
+        @item.destroy!
+
+        respond_to do |format|
+            format.html {
+                redirect_to shopping_cart_items_url,
+                            notice: "Item was removed from your shopping cart"
+            }
+
+            format.json { head :no_content }
+        end
+    end
+
+    private
+
+    def set_item
+        @item = ShoppingCartItem.find(params[:id])
     end
 end
