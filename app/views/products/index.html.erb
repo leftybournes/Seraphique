@@ -27,9 +27,9 @@
 		</div>
 		<div class="flex flex-row flex-nowrap gap-x-12 py-16
 					<%= class_names(
-						"border-r border-r-[#3A5033B2]" => index % 2 == 0,
-						"border-l border-l-[#3A5033B2]" => index % 2 != 0,
-						"border-t border-t-[#3A5033B2]" => index > 0,
+						"border-r border-r-[#B0B0B0]" => index % 2 == 0,
+						"border-l border-l-[#B0B0B0]" => index % 2 != 0,
+						"border-t border-t-[#B0B0B0]" => index > 0,
 					) %>">
 		  <div class="mx-auto grid grid-cols-2 gap-8
 					  auto-rows-fr lg:grid-cols-5">
@@ -39,7 +39,10 @@
 		  </div>
 		</div>
 		<% if index == @products_by_categories.length - 1 %>
-		  <div class="h-px w-1/2 ms-auto bg-[#3A5033B2]"></div>
+		  <div class="flex flex-row justify-end items-start">
+			<div class="size-4 rounded-full bg-[#B0B0B0] -translate-y-2"></div>
+			<div class="bg-[#B0B0B0] h-px w-1/2"></div>
+		  </div>
 		<% end %>
 	  <% end %>
 	</div>
