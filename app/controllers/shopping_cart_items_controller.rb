@@ -49,6 +49,7 @@ class ShoppingCartItemsController < ApplicationController
             }
 
             format.json { head :no_content }
+            format.turbo_stream
         end
     end
 

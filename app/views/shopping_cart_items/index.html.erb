@@ -23,86 +23,92 @@
 	  </div>
 	  <div class="bg-white mt-4">
 		<% current_user.shopping_cart_items.each_with_index do |item, index| %>
-		  <div class="flex flex-row flex-nowrap items-center py-8 product-row"
-			   data-shopping-cart-target="productRow">
-			<div class="flex flex-row justify-center w-1/12">
-			  <input id="<%= dom_id item, "row-#{index}" %>"
-					 type="checkbox"
-					 class="size-5 checked:bg-seraphique focus:outline-0
+		  <%= turbo_frame_tag dom_id(item, :shopping_cart_item) do %>
+			<div class="flex flex-row flex-nowrap items-center py-8 product-row"
+				 data-shopping-cart-target="productRow">
+			  <div class="flex flex-row justify-center w-1/12">
+				<input id="<%= dom_id item, "row-#{index}" %>"
+					   type="checkbox"
+					   class="size-5 checked:bg-seraphique focus:outline-0
 						   focus:ring-seraphique hover:checked:bg-seraphique
 						   checked:focus:bg-seraphique"
-					 data-shopping-cart-target="checkbox"
-					 data-action="input->shopping-cart#calculate">
-			</div>
-			<div class="flex flex-row gap-x-4 items-center w-3/12">
-			  <div class="border border-[#B0B0B0] py-4 px-8">
-				<%= image_tag item.product.image, class: "h-12" %>
+					   data-shopping-cart-target="checkbox"
+					   data-action="input->shopping-cart#calculate">
 			  </div>
-			  <div class="text-[#00000066] text-xs mb-4">
-				<label for="<%= dom_id item, "row-#{index}" %>">
-				  <span class="font-bold">Seraphique</span>
-				<%= item.product.name %>
-				</label>
-			  </div>
-			</div>
-			<div class="w-2/12">
-			  <div>
-				<div class="flex flex-col justify-center">
-				  <label class="text-[#4A4A4A]"
-						 for="<%= dom_id item, "variant" %>">
-					Variation
+			  <div class="flex flex-row gap-x-4 items-center w-3/12">
+				<div class="border border-[#B0B0B0] py-4 px-8">
+				  <%= image_tag item.product.image, class: "h-12" %>
+				</div>
+				<div class="text-[#00000066] text-xs mb-4">
+				  <label for="<%= dom_id item, "row-#{index}" %>">
+					<span class="font-bold">Seraphique</span>
+					<%= item.product.name %>
 				  </label>
-				  <select class="text-[#B0B0B0] border-none p-0
-								 pe-8 focus:ring-0 w-fit"
-						  id="<%= dom_id item, "variant" %>">
-					<% item.product.variants.each do |variant| %>
-					  <option><%= variant.name %></option>
-					<% end %>
-				  </select>
 				</div>
 			  </div>
+			  <div class="w-2/12">
+				<div>
+				  <div class="flex flex-col justify-center">
+					<label class="text-[#4A4A4A]"
+						   for="<%= dom_id item, "variant" %>">
+					  Variation
+					</label>
+					<select class="text-[#B0B0B0] border-none p-0
+								   pe-8 focus:ring-0 w-fit"
+								   id="<%= dom_id item, "variant" %>">
+					  <% item.product.variants.each do |variant| %>
+						<option><%= variant.name %></option>
+					  <% end %>
+					</select>
+				  </div>
+				</div>
+			  </div>
+			  <div class="text-center w-1/12 flex flex-row">
+				<button type="button"
+							  class="bg-none p-0 me-2"
+							  data-action="click->shopping-cart#decrementRow">
+				  <%= heroicon "minus", size: 16 %>
+				</button>
+				<span class="row-quantity"><%= item.quantity %></span>
+				<button type="button"
+							  class="bg-none p-0 ms-2"
+							  data-action="click->shopping-cart#incrementRow">
+				  <%= heroicon "plus", size: 16 %>
+				</button>
+			  </div>
+			  <div class="text-seraphique text-center w-2/12">
+				<%= heroicon "currency-dollar",
+							 size: 24,
+							 class: "inline-block" %>
+				<span class="font-light row-price">
+				  <%= number_with_precision(
+					  item.product.price,
+					  precision: 2
+				  ) %>
+				</span>
+			  </div>
+			  <div class="text-seraphique text-center w-2/12">
+				<%= heroicon "currency-dollar",
+							 size: 24,
+							 class: "inline-block" %>
+				<span class="font-light row-value">
+				  <%= number_with_precision(
+					  item.product.price * item.quantity,
+					  precision: 2
+				  ) %>
+				</span>
+			  </div>
+			  <div class="w-1/12">
+				<%= button_to shopping_cart_item_path(item),
+							  method: :delete,
+							  data: {
+								  turbo_frame: dom_id(current_user, :shopping_cart)
+							  } do %>
+				  <%= heroicon "trash", size: 24, class: "mx-auto" %>
+				<% end %>
+			  </div>
 			</div>
-			<div class="text-center w-1/12 flex flex-row">
-			  <button type="button"
-					  class="bg-none p-0 me-2"
-					  data-action="click->shopping-cart#decrementRow">
-				<%= heroicon "minus", size: 16 %>
-			  </button>
-			  <span class="row-quantity"><%= item.quantity %></span>
-			  <button type="button"
-					  class="bg-none p-0 ms-2"
-					  data-action="click->shopping-cart#incrementRow">
-				<%= heroicon "plus", size: 16 %>
-			  </button>
-			</div>
-			<div class="text-seraphique text-center w-2/12">
-			  <%= heroicon "currency-dollar",
-						   size: 24,
-						   class: "inline-block" %>
-			  <span class="font-light row-price">
-				<%= number_with_precision(
-					item.product.price,
-					precision: 2
-				) %>
-			  </span>
-			</div>
-			<div class="text-seraphique text-center w-2/12">
-			  <%= heroicon "currency-dollar",
-						   size: 24,
-						   class: "inline-block" %>
-			  <span class="font-light row-value">
-				<%= number_with_precision(
-					item.product.price * item.quantity,
-					precision: 2
-				) %>
-			  </span>
-			</div>
-			<div class="w-1/12">
-			  <%= button_to shopping_cart_item_path(item), method: :delete do %>
-				<%= heroicon "trash", size: 24, class: "mx-auto" %>
-			  <% end %>
-			</div>
-		  </div>
+		  <% end %>
 		<% end %>
 	  </div>
 	</div>
