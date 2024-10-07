@@ -102,9 +102,13 @@
 				<%= button_to shopping_cart_item_path(item),
 							  method: :delete,
 							  data: {
+								  action: "click->shopping-cart#deselectAndCalculate",
 								  turbo_frame: dom_id(current_user, :shopping_cart)
 							  } do %>
-				  <%= heroicon "trash", size: 24, class: "mx-auto" %>
+				  <%= heroicon "trash",
+							   size: 24,
+							   class: "mx-auto transition-transform
+                                       hover:scale-110" %>
 				<% end %>
 			  </div>
 			</div>

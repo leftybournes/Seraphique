@@ -41,6 +41,7 @@ class ShoppingCartItemsController < ApplicationController
 
     def destroy
         @item.destroy!
+        @count = current_user.shopping_cart_items.sum(:quantity)
 
         respond_to do |format|
             format.html {

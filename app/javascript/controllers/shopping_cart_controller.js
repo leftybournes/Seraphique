@@ -100,4 +100,13 @@ export default class extends Controller {
 
 		this.calculate();
 	}
+
+	deselectAndCalculate(event) {
+		let row = event.target.closest(".product-row");
+		let checkbox = row.querySelector("input[type=\"checkbox\"]");
+
+		checkbox.checked = false;
+
+		this.calculate();
+	}
 }
