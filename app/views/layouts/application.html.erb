@@ -52,10 +52,7 @@
 							   variant: "outline",
 							   aria: { label: "shopping cart" },
 							   class: "w-6 text-white" %>
-				  <%= turbo_frame_tag dom_id(
-					  current_user || User.new,
-					  :shopping_cart_item_count
-				  ) do %>
+				  <%= turbo_frame_tag :shopping_cart_item_count do %>
 					<div class="<%= class_names(
 							    hidden: @shopping_cart_item_count == 0
 								) %> text-sm absolute -right-4 -top-2

@@ -6,12 +6,11 @@
 	<% end %>
   </div>
   <div class="h-full relative group/image">
-	<%= link_to new_shopping_cart_item_path(
+	<%= link_to shopping_cart_items_path(
 		product_id: product.id
 	), data: {
 		turbo_method: user_signed_in? ? :post : nil,
-		turbo_frame: user_signed_in? ?
-		dom_id(current_user, :shopping_cart_item_count) : nil
+		turbo_frame: user_signed_in? ? :shopping_cart_item_count : nil
 	}, class: "w-full h-full absolute hidden top-0 left-0 bg-[#00000099]
                    flex flex-col items-center justify-center w-full
                    h-full group-hover/image:flex" do %>

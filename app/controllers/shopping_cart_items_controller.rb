@@ -16,7 +16,7 @@ class ShoppingCartItemsController < ApplicationController
 
     def create
         product_id = params[:product_id]
-        user_id = current_user.id]
+        user_id = current_user.id
 
         product = ShoppingCartItem.create_with(quantity: 1)
                       .find_or_create_by(
@@ -31,23 +31,28 @@ class ShoppingCartItemsController < ApplicationController
         product.save
 
         @count = current_user.shopping_cart_items.sum(:quantity)
+
+        respond_to do |format|
+            format.turbo_stream
+        end
     end
 
     def update
     end
 
     def destroy
-        @item.destroy!
         @count = current_user.shopping_cart_items.sum(:quantity)
 
-        respond_to do |format|
-            format.html {
-                redirect_to shopping_cart_items_url,
-                            notice: "Item was removed from your shopping cart"
-            }
+        if @item.destroy
+            respond_to do |format|
+                format.html {
+                    redirect_to shopping_cart_items_url,
+                                notice: "Item was removed from your shopping cart"
+                }
 
-            format.json { head :no_content }
-            format.turbo_stream
+                format.json { head :no_content }
+                format.turbo_stream
+            end
         end
     end
 
