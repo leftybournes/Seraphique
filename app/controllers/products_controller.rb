@@ -144,10 +144,4 @@ class ProductsController < ApplicationController
     def category_params
         params.require(:product).permit(categories: [])
     end
-
-    def ensure_authorized!
-        if !administrator_signed_in?
-            render file: "#{Rails.root}/public/404.html", status: 404
-        end
-    end
 end

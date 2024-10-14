@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
             @shopping_cart_item_count = current_user.shopping_cart_items.sum(:quantity)
         end
     end
+
+    private
+    def ensure_authorized!
+        if !administrator_signed_in?
+            render file: "#{Rails.root}/public/404.html", status: 404
+        end
+    end
+
 end
