@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-    layout "homepage"
-
     def index
         @best_sellers =
             Product.includes(:categories)

@@ -29,7 +29,4 @@ Rails.application.routes.draw do
     resources :payment_methods
     resources :shopping_cart_items, path: :shopping_cart
 
-    post "/shopping_cart_items/:user_id/:product_id",
-         to: "shopping_cart_items#new_shopping_cart_item_for_user",
-         as: :new_shopping_cart_item_for_user
 end

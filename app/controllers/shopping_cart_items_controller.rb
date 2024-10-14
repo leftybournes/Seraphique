@@ -15,11 +15,8 @@ class ShoppingCartItemsController < ApplicationController
     end
 
     def create
-    end
-
-    def new_shopping_cart_item_for_user
         product_id = params[:product_id]
-        user_id = params[:user_id]
+        user_id = current_user.id]
 
         product = ShoppingCartItem.create_with(quantity: 1)
                       .find_or_create_by(

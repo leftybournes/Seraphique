@@ -6,8 +6,7 @@
 	<% end %>
   </div>
   <div class="h-full relative group/image">
-	<%= link_to new_shopping_cart_item_for_user_path(
-		user_id: user_signed_in? ? current_user.id : User.new,
+	<%= link_to new_shopping_cart_item_path(
 		product_id: product.id
 	), data: {
 		turbo_method: user_signed_in? ? :post : nil,
