@@ -1,0 +1,112 @@
+<header class="font-poppins w-full fixed z-50">
+  <div class="bg-seraphique py-4">
+	<div class="container mx-auto flex flex-row flex-nowrap items-center">
+	  <h1 class="text-3xl text-white">
+		<a href="/">Seraphique</a>
+	  </h1>
+
+	  <nav aria-label="primary" class="mx-auto">
+		<ul class="flex flex-row flex-nowrap gap-x-20 font-light
+				   text-white items-center text-2xl">
+		  <li><%= link_to "Home", root_path %></li>
+		  <li><%= link_to "About", about_path %></li>
+		  <li><%= link_to "Products", products_path %></li>
+		  <!-- TODO: Add Contacts route -->
+		  <l1><a href="#">Contact</a></l1>
+		</ul>
+	  </nav>
+
+	  <nav aria-label="secondary">
+		<ul class="flex flex-row flex-nowrap text-2xl gap-x-10">
+		  <li>
+			<a href="/">
+			  <%= heroicon "heart",
+						   variant: :outline,
+						   aria: { label: "favorites" },
+						   class: "w-6 text-white" %>
+			</a>
+		  </li>
+		  <li>
+			<%= link_to shopping_cart_items_path,
+						class: "relative inline-block" do %>
+			  <%= heroicon "shopping-cart",
+						   variant: "outline",
+						   aria: { label: "shopping cart" },
+						   class: "w-6 text-white" %>
+			  <%= turbo_frame_tag :shopping_cart_item_count do %>
+				<div class="<%= class_names(
+							hidden: @shopping_cart_item_count == 0
+							) %> text-sm absolute -right-4 -top-2
+							bg-red-400 rounded-full px-2 count">
+				  <% if @shopping_cart_item_count > 9 %>
+					9+
+				  <% else %>
+					<%= @shopping_cart_item_count %>
+				  <% end %>
+				</div>
+			  <% end %>
+			<% end %>
+		  </li>
+		  <li>
+			<input type="checkbox" id="nav-user-menu" class="hidden peer">
+			<label for="nav-user-menu">
+			  <%= heroicon "user",
+						   variant: :outline,
+						   aria: { label: "user options" },
+						   class: "w-6 text-white hover:cursor-pointer" %>
+			</label>
+			<div class="relative hidden peer-checked:block">
+			  <div class="absolute left-0 top-2">
+				<ul class="text-base bg-gray-100 rounded-md
+						   w-fit h-full py-2 px-4 shadow whitespace-nowrap">
+				  <li>
+					<%= link_to "Profile",
+								edit_user_registration_path \
+								if current_user %>
+				  </li>
+				  <li>
+					<%= link_to "Payment Methods",
+								payment_methods_path \
+								if current_user %>
+				  </li>
+				  <li>
+					<%= button_to "Sign out",
+								  destroy_user_session_path,
+								  method: :delete \
+								  if current_user %>
+				  </li>
+				  <li>
+					<%= link_to "Sign in",
+								new_user_session_path \
+								unless current_user %>
+				  </li>
+				  <li>
+					<%= link_to "Register",
+								new_user_registration_path \
+								unless current_user %>
+				  </li>
+				</ul>
+			  </div>
+			</div>
+		  </li>
+		</ul>
+	  </nav>
+	</div>
+  </div>
+  <div class="bg-white shadow">
+	<div class="container mx-auto py-4">
+	  <nav label="tertiary">
+		<ul class="flex flex-row flex-nowrap gap-12
+				   justify-center text-[#4A4A4A]">
+		  <% @categories.each do |category| %>
+			<li>
+			  <%= link_to products_path(category: category.id) do %>
+				<%= category.name %>
+			  <% end %>
+			</li>
+		  <% end %>
+		</ul>
+	  </nav>
+	</div>
+  </div>
+</header>
