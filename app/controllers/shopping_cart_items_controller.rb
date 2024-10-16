@@ -41,9 +41,10 @@ class ShoppingCartItemsController < ApplicationController
     end
 
     def destroy
+        destroyed = @item.destroy
         @count = current_user.shopping_cart_items.sum(:quantity)
 
-        if @item.destroy
+        if destroyed
             respond_to do |format|
                 format.html {
                     redirect_to shopping_cart_items_url,

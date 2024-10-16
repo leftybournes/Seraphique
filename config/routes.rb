@@ -28,5 +28,4 @@ Rails.application.routes.draw do
 
     resources :payment_methods
     resources :shopping_cart_items, path: :shopping_cart
-
 end

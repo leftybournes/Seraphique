@@ -11,115 +11,20 @@
   <div class="container mx-auto pt-24">
 	<%= render partial: "shared/banner" %>
 
-	<div>
-	  <div class="flex flex-row flex-nowrap text-[#4A4A4A] py-4
-				  bg-gradient-to-r from-[#3A503333] to-[#84B674]">
-		<div class="w-1/12"></div>
-		<div class="w-5/12">Shopping Cart</div>
-		<div class="w-1/12 text-center">Quantity</div>
-		<div class="w-2/12 text-center">Price</div>
-		<div class="w-2/12 text-center">Total</div>
-		<div class="w-1/12 text-center">Action</div>
-	  </div>
-	  <div class="bg-white mt-4">
-		<% current_user.shopping_cart_items.each_with_index do |item, index| %>
-		  <%= turbo_frame_tag dom_id(item, :shopping_cart_item) do %>
-			<div class="flex flex-row flex-nowrap items-center py-8 product-row"
-				 data-shopping-cart-target="productRow">
-			  <div class="flex flex-row justify-center w-1/12">
-				<input id="<%= dom_id item, "row-#{index}" %>"
-					   type="checkbox"
-					   class="size-5 checked:bg-seraphique focus:outline-0
-						   focus:ring-seraphique hover:checked:bg-seraphique
-						   checked:focus:bg-seraphique"
-					   data-shopping-cart-target="checkbox"
-					   data-action="input->shopping-cart#calculate">
-			  </div>
-			  <div class="flex flex-row gap-x-4 items-center w-3/12">
-				<div class="border border-[#B0B0B0] py-4 px-8">
-				  <%= image_tag item.product.image, class: "h-12" %>
-				</div>
-				<div class="text-[#00000066] text-xs mb-4">
-				  <label for="<%= dom_id item, "row-#{index}" %>">
-					<span class="font-bold">Seraphique</span>
-					<%= item.product.name %>
-				  </label>
-				</div>
-			  </div>
-			  <div class="w-2/12">
-				<div>
-				  <div class="flex flex-col justify-center">
-					<label class="text-[#4A4A4A]"
-						   for="<%= dom_id item, "variant" %>">
-					  Variation
-					</label>
-					<select class="text-[#B0B0B0] border-none p-0
-								   pe-8 focus:ring-0 w-fit"
-								   id="<%= dom_id item, "variant" %>">
-					  <% item.product.variants.each do |variant| %>
-						<option><%= variant.name %></option>
-					  <% end %>
-					</select>
-				  </div>
-				</div>
-			  </div>
-			  <div class="text-center w-1/12 flex flex-row">
-				<button type="button"
-							  class="bg-none p-0 me-2"
-							  data-action="click->shopping-cart#decrementRow">
-				  <%= heroicon "minus", size: 16 %>
-				</button>
-				<span class="row-quantity"><%= item.quantity %></span>
-				<button type="button"
-							  class="bg-none p-0 ms-2"
-							  data-action="click->shopping-cart#incrementRow">
-				  <%= heroicon "plus", size: 16 %>
-				</button>
-			  </div>
-			  <div class="text-seraphique text-center w-2/12">
-				<%= heroicon "currency-dollar",
-							 size: 24,
-							 class: "inline-block" %>
-				<span class="font-light row-price">
-				  <%= number_with_precision(
-					  item.product.price,
-					  precision: 2
-				  ) %>
-				</span>
-			  </div>
-			  <div class="text-seraphique text-center w-2/12">
-				<%= heroicon "currency-dollar",
-							 size: 24,
-							 class: "inline-block" %>
-				<span class="font-light row-value">
-				  <%= number_with_precision(
-					  item.product.price * item.quantity,
-					  precision: 2
-				  ) %>
-				</span>
-			  </div>
-			  <div class="w-1/12">
-				<%= button_to shopping_cart_item_path(item),
-							  method: :delete,
-							  form: {
-								  data: {
-									  turbo_confirm: "Are you sure you want to remove this item?"
-								  }
-							  },
-							  data: {
-								  action: "click->shopping-cart#deselectAndCalculate",
-								  turbo_frame: dom_id(current_user, :shopping_cart)
-							  } do %>
-				  <%= heroicon "trash",
-							   size: 24,
-							   class: "mx-auto transition-transform
-                                       hover:scale-110" %>
-				<% end %>
-			  </div>
-			</div>
-		  <% end %>
-		<% end %>
-	  </div>
+	<div class="flex flex-row flex-nowrap text-[#4A4A4A] py-4
+				bg-gradient-to-r from-[#3A503333] to-[#84B674]">
+	  <div class="w-1/12"></div>
+	  <div class="w-5/12">Shopping Cart</div>
+	  <div class="w-1/12 text-center">Quantity</div>
+	  <div class="w-2/12 text-center">Price</div>
+	  <div class="w-2/12 text-center">Total</div>
+	  <div class="w-1/12 text-center">Action</div>
+	</div>
+	<div class="bg-white mt-4">
+	  <% current_user.shopping_cart_items.each do |item| %>
+		<%= render partial: "row", locals: { item: item } %>
+	  <% end %>
+	  <input type="hidden" name="_method" value="get" autocomplete="off">
 	</div>
 	<div class="mt-4 bg-white flex flex-row flex-nowrap items-center py-8">
 	  <div class="w-1/12 flex flex-row justify-center">
@@ -149,7 +54,10 @@
 		</div>
 	  </div>
 	  <div class="w-2/12 flex flex-row">
-		<button class="bg-seraphique ms-8 py-2 px-4 text-white">
+		<button type="submit"
+				class="bg-seraphique ms-8 py-2 px-4 text-white"
+				form="payments-form"
+				formmethod="get">
 		  Check Out
 		</button>
 	  </div>

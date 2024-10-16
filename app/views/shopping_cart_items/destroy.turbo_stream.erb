@@ -1,5 +1,5 @@
-<%= turbo_stream.remove dom_id(@item, :shopping_cart_item) %>
-<%= turbo_stream.update dom_id(current_user, :shopping_cart_item_count) do %>
+<%= turbo_stream.remove @item %>
+<%= turbo_stream.update "shopping_cart_item_count" do %>
   <div class="<%= class_names(
 			  hidden: @count == 0
 			  ) %> text-sm absolute -right-4 -top-2
