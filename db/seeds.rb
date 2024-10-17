@@ -8,7 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+
+puts "Seeding categories..."
 require_relative "seeds/category_seed" unless Category.count > 0
+puts "Done!"
+
+puts "Seeding products..."
 require_relative "seeds/product_seed" unless Product.count > 0
+puts "Done!"
+
+puts "Seeding users..."
 require_relative "seeds/user_seed" unless User.count > 0
+puts "Done!"
+
+puts "Seeding reviews..."
 require_relative "seeds/review_seed" unless Review.count > 0
+puts "Done!"

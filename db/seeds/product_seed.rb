@@ -106,8 +106,7 @@ categories = Category.where.not(name: ["Best Seller", "New Product"])
 product_names = products.collect { |product| product[:name] }
 
 categories.each do |category|
-  1.times do
-  # rand(10..20).times do
+  rand(10..20).times do
     date = Faker::Date.between(from: 5.years.ago, to: Date.today)
     fruit = Faker::Food.fruits
     name = "#{fruit} #{category.name}"
