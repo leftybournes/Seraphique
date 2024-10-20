@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.4"
+ruby "~> 3.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -52,6 +52,9 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
 gem "stripe", "~> 13.0"
+
+# Add ostruct in preparation to removal from ruby 3.5
+gem "ostruct", "~> 0.6"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
