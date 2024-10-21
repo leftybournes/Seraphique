@@ -56,6 +56,8 @@ gem "stripe", "~> 13.0"
 # Add ostruct in preparation to removal from ruby 3.5
 gem "ostruct", "~> 0.6"
 
+gem "solargraph", "~> 0.50"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
