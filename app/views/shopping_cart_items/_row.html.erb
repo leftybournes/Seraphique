@@ -4,7 +4,7 @@
 	   data-shopping-cart-target="productRow">
 	<div class="flex flex-row justify-center w-1/12">
 	  <input type="checkbox"
-			 name="checkout[products][]"
+			 name="payments[products][]"
 			 id="shopping_cart_row_<%= item.id %>"
 			 class="size-5 checked:bg-seraphique
 				   focus:outline-0
@@ -45,13 +45,18 @@
 		</div>
 	  </div>
 	</div>
-	<div class="text-center w-1/12 flex flex-row">
+	<div class="w-1/12 flex flex-row">
 	  <button type="button"
 					class="bg-none p-0 me-2"
 					data-action="click->shopping-cart#decrementRow">
 		<%= heroicon "minus", size: 16 %>
 	  </button>
-	  <span class="row-quantity"><%= item.quantity %></span>
+	  <input type="text"
+			 value="<%= item.quantity %>"
+			 name="payments[products][<%= item.id %>]"
+			 class="row-quantity w-[5ch] text-center
+				   focus:ring-seraphique focus:border-seraphique"
+			 data-action="input->shopping-cart#inputQuantity">
 	  <button type="button"
 					class="bg-none p-0 ms-2"
 					data-action="click->shopping-cart#incrementRow">
@@ -81,14 +86,14 @@
 	  </span>
 	</div>
 	<div class="w-1/12">
-	  <input type="hidden" name="_method" value="delete" autocomplete="off">
-	  <%= button_to shopping_cart_item_path(item),
-					method: :delete,
-					data: {
-						action: "click->shopping-cart#deselectAndCalculate",
-						turbo_confirm: "Are you sure you want to remove this item?",
-						turbo_frame: dom_id(item)
-					} do %>
+	  <%= button_tag formaction: shopping_cart_item_path(item),
+					 formmethod: :delete,
+					 data: {
+						 action: "click->shopping-cart#deselectAndCalculate",
+						 turbo_confirm: "Are you sure you want to " \
+						 "remove this item?",
+						 turbo_frame: dom_id(item)
+					 } do %>
 		<%= heroicon "trash",
 					 size: 24,
 					 class: "mx-auto transition-transform hover:scale-110" %>

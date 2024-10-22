@@ -21,7 +21,7 @@ export default class extends Controller {
 			let checkbox = row.querySelector("input[type=\"checkbox\"]");
 			let value = parseFloat(row.querySelector(".row-value").innerText);
 			let rowQuantity =
-				parseFloat(row.querySelector(".row-quantity").innerText);
+				parseFloat(row.querySelector(".row-quantity").value);
 
 			totalValue = ((totalValue * 100) + (value * 100)) / 100;
 			quantity += rowQuantity;
@@ -49,8 +49,10 @@ export default class extends Controller {
 		for (let row of this.productRowTargets) {
 			let checkbox = row.querySelector("input[type=\"checkbox\"]");
 			let value = parseFloat(row.querySelector(".row-value").innerText);
-			let rowQuantity =
-				parseFloat(row.querySelector(".row-quantity").innerText);
+			let rowQuantityString = row.querySelector(".row-quantity").value;
+			let rowQuantity = isNaN(rowQuantityString) || rowQuantityString === ""
+				? 1
+				: parseFloat(rowQuantityString);
 
 			if (checkbox.checked) {
 				totalValue = ((totalValue * 100) + (value * 100)) / 100;
@@ -69,18 +71,33 @@ export default class extends Controller {
 		this.toggleAllTarget.checked = totalChecked === this.productRowTargets.length;
 	}
 
+	inputQuantity(event) {
+		let row = event.target.closest(".product-row");
+		let price = parseFloat(row.querySelector(".row-price").innerText);
+		let rowValue = row.querySelector(".row-value");
+		let quantity = parseFloat(event.currentTarget.value);
+
+		if (quantity <= 0 || isNaN(quantity)) {
+			quantity = 1;
+		}
+
+		rowValue.innerHTML = (quantity * price).toFixed(2);
+
+		this.calculate();
+	}
+
 	decrementRow(event) {
 		let row = event.target.closest(".product-row");
 		let rowQuantity = row.querySelector(".row-quantity");
 		let price = parseFloat(row.querySelector(".row-price").innerText);
 		let rowValue = row.querySelector(".row-value");
-		let quantity = parseFloat(rowQuantity.innerText);
+		let quantity = parseFloat(rowQuantity.value);
 
 		if (quantity > 1) {
 			quantity--;
 		}
 
-		rowQuantity.innerHTML = quantity;
+		rowQuantity.value = quantity;
 		rowValue.innerHTML = (quantity * price).toFixed(2);
 
 		this.calculate();
@@ -91,11 +108,11 @@ export default class extends Controller {
 		let rowQuantity = row.querySelector(".row-quantity");
 		let price = parseFloat(row.querySelector(".row-price").innerText);
 		let rowValue = row.querySelector(".row-value");
-		let quantity = parseFloat(rowQuantity.innerText);
+		let quantity = parseFloat(rowQuantity.value);
 
 		quantity++;
 
-		rowQuantity.innerHTML = quantity;
+		rowQuantity.value = quantity;
 		rowValue.innerHTML = (quantity * price).toFixed(2);
 
 		this.calculate();
