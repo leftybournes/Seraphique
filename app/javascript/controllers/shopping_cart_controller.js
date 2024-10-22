@@ -93,6 +93,10 @@ export default class extends Controller {
 		let rowValue = row.querySelector(".row-value");
 		let quantity = parseFloat(rowQuantity.value);
 
+		if (isNaN(quantity)) {
+			quantity = 1;
+		}
+
 		if (quantity > 1) {
 			quantity--;
 		}
@@ -109,6 +113,10 @@ export default class extends Controller {
 		let price = parseFloat(row.querySelector(".row-price").innerText);
 		let rowValue = row.querySelector(".row-value");
 		let quantity = parseFloat(rowQuantity.value);
+
+		if (isNaN(quantity)) {
+			quantity = 0;
+		}
 
 		quantity++;
 
