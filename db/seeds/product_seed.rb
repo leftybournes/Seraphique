@@ -8,4 +8,3 @@ if api_products.data.length > 0
 else
   products_initialize
 end
-

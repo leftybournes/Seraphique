@@ -69,6 +69,9 @@ def products_synchronize
       filename: image_name
     )
 
-    product.stripe_product = StripeProduct.new(stripe_id: stripe_product.id)
+    product.stripe_product = StripeProduct.new(
+      stripe_id: stripe_product.id,
+      stripe_price_id: stripe_product.default_price
+    )
   end
 end
