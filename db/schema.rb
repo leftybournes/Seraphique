@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_17_075314) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_075314) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "shopping_cart_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["shopping_cart_item_id"], name: "index_order_items_on_shopping_cart_item_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "variant_id"
+    t.integer "status", default: 0
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["variant_id"], name: "index_orders_on_variant_id"
+  end
+
   create_table "payment_cards", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
@@ -129,16 +149,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_075314) do
   create_table "shopping_cart_items", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "variant_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_shopping_cart_items_on_product_id"
     t.index ["user_id"], name: "index_shopping_cart_items_on_user_id"
+    t.index ["variant_id"], name: "index_shopping_cart_items_on_variant_id"
   end
 
   create_table "stripe_products", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.string "stripe_id"
+    t.string "stripe_price_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_stripe_products_on_product_id"
@@ -177,6 +200,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_075314) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "shopping_cart_items"
+  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "variants"
   add_foreign_key "payment_cards", "users"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
@@ -184,6 +211,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_075314) do
   add_foreign_key "reviews", "users"
   add_foreign_key "shopping_cart_items", "products"
   add_foreign_key "shopping_cart_items", "users"
+  add_foreign_key "shopping_cart_items", "variants"
   add_foreign_key "stripe_products", "products"
   add_foreign_key "usage_directions", "products"
   add_foreign_key "variants", "products"
