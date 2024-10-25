@@ -4,7 +4,7 @@
 	   data-shopping-cart-target="productRow">
 	<div class="flex flex-row justify-center w-1/12">
 	  <input type="checkbox"
-			 name="payments[products][]"
+			 name="payments[products][ids][]"
 			 id="shopping_cart_row_<%= item.id %>"
 			 class="size-5 checked:bg-seraphique
 				   focus:outline-0
@@ -37,9 +37,10 @@
 		  </label>
 		  <select class="text-[#B0B0B0] border-none p-0
 						 pe-8 focus:ring-0 w-fit"
-						 id="<%= dom_id item, "variant" %>">
+				  id="<%= dom_id item, "variant" %>"
+				  name="payments[products][<%= item.id %>][variant]">
 			<% item.product.variants.each do |variant| %>
-			  <option><%= variant.name %></option>
+			  <option value="<%= variant.id %>"><%= variant.name %></option>
 			<% end %>
 		  </select>
 		</div>
@@ -53,7 +54,7 @@
 	  </button>
 	  <input type="text"
 			 value="<%= item.quantity %>"
-			 name="payments[products][<%= item.id %>]"
+			 name="payments[products][<%= item.id %>][quantity]"
 			 class="row-quantity w-[5ch] text-center
 				   focus:ring-seraphique focus:border-seraphique"
 			 data-action="input->shopping-cart#inputQuantity">

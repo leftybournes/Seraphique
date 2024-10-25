@@ -1,0 +1,9 @@
+<main class="pt-36">
+  <% content_for :title, @title %>
+
+  <ul>
+	<% @order.order_items.each do |item| %>
+	  <li><%= item.product.name %></li>
+	<% end %>
+  </ul>
+</main>
