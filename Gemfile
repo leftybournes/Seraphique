@@ -58,6 +58,8 @@ gem "ostruct", "~> 0.6"
 
 gem "solargraph", "~> 0.50"
 
+gem "ulid", "~> 1.4"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
