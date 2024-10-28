@@ -32,5 +32,5 @@ Rails.application.routes.draw do
 
   resources :payment_methods
   resources :shopping_cart_items, path: :shopping_cart, only: %i[ index create destroy ]
-  resources :orders, only: [ :show ]
+  resources :orders, only: [ :index, :show ]
 end
