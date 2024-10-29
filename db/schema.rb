@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
     t.string "state", null: false
     t.string "country", null: false
     t.string "postal_code"
+    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
@@ -97,7 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "display_id", default: "01JB8VEDY8RSG3E3W519V1DWZX"
+    t.string "display_id", default: "01JBBFZ7QX1QYXNVBVTHFW8ME0"
     t.bigint "user_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false

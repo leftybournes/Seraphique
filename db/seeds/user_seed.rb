@@ -1,16 +1,16 @@
 users = []
 
 rand(1000..1500).times do
-    date = Faker::Date.between(from: 5.years.ago, to: Date.today)
-    users.push(
-        {
-            full_name: Faker::Name.unique.name,
-            email: Faker::Internet.unique.email,
-            password: "password",
-            created_at: date,
-            updated_at: date
-        }
-    )
+  date = Faker::Date.between(from: 5.years.ago, to: Date.today)
+  users.push(
+    {
+      full_name: Faker::Name.unique.name,
+      email: Faker::Internet.unique.email,
+      password: "password",
+      created_at: date,
+      updated_at: date
+    }
+  )
 end
 
 User.create(users)
@@ -24,7 +24,8 @@ User.all.each do |user|
       city: Faker::Address.city,
       state: Faker::Address.state,
       country: Faker::Address.country,
-      postal_code: Faker::Address.postcode
+      postal_code: Faker::Address.postcode,
+      default: true
     }
   )
 end
