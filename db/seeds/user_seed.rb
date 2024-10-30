@@ -2,9 +2,13 @@ users = []
 
 rand(1000..1500).times do
   date = Faker::Date.between(from: 5.years.ago, to: Date.today)
+  first_name = Faker::Name.first_name
+  middle_name = Faker::Name.middle_name
+
   users.push(
     {
-      full_name: Faker::Name.unique.name,
+      first_name: "#{first_name} #{middle_name}",
+      last_name: Faker::Name.last_name,
       email: Faker::Internet.unique.email,
       password: "password",
       created_at: date,
