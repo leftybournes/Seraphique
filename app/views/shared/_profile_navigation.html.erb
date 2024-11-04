@@ -1,31 +1,56 @@
 <aside class="bg-seraphique/20 p-8 rounded-xl text-[#4A4A4A]">
-  <ul class="space-y-4 text-lg mt-8">
+  <ul class="space-y-3 text-lg mt-8">
 	<li class="hover:underline">
 	  <%= link_to edit_user_registration_path(current_user),
-				  class: "flex flex-row items-center gap-x-2" do %>
-		<%= heroicon "user", size: 24 %>
+				  class: [
+					  "flex flex-row items-center gap-x-2",
+					  "rounded-lg ps-2 py-2",
+					  "bg-[#A0C296]/40" => controller_name == "profiles"
+				  ] do %>
+		<%= heroicon "user",
+					 class: "text-seraphique",
+					 size: 24,
+					 variant: :solid %>
 		Profile
 	  <% end %>
 	</li>
 	<li class="hover:underline">
 	  <%= link_to orders_path,
-				  class: "flex flex-row items-center gap-x-2" do %>
-		<%= heroicon "shopping-bag", size: 24 %>
+				  class: [
+					  "flex flex-row items-center gap-x-2",
+					  "rounded-lg ps-2 py-2",
+					  "bg-[#A0C296]/40" => controller_name == "orders"
+				  ] do %>
+		<%= heroicon "shopping-bag",
+					 class: "text-seraphique",
+					 size: 24,
+					 variant: :solid %>
 		Orders
 	  <% end %>
 	</li>
 	<li class="hover:underline">
-	  <a href="#" class="flex flex-row items-center gap-x-2">
-		<%= heroicon "credit-card", size: 24 %>
+	  <a href="#"
+		 class="flex flex-row items-center gap-x-2 rounded-lg ps-2 py-2">
+		<%= heroicon "credit-card",
+					 class: "text-seraphique",
+					 size: 24,
+					 variant: :solid %>
 		Payment Methods
 	  </a>
 	</li>
 	<li class="hover:underline">
 	  <%= link_to addresses_path,
-				  class: "flex flex-row items-center gap-x-2" do %>
-		<%= heroicon "map-pin", size: 24 %>
+				  class: [
+					  "flex flex-row items-center gap-x-2",
+					  "rounded-lg ps-2 py-2",
+					  "bg-[#A0C296]/40" => controller_name == "addresses"
+				  ] do %>
+		<%= heroicon "map-pin",
+					 class: "text-seraphique",
+					 size: 24,
+					 variant: :solid %>
 		Addresses
-		<% end %>
+	  <% end %>
 	</li>
   </ul>
 </aside>
