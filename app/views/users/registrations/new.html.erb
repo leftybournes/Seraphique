@@ -26,22 +26,22 @@
 				<%= f.text_field :first_name,
 				 autofocus: true,
 				 autocomplete: "name",
-				 class: "rounded-lg",
+				 class: "field-seraphique",
 				 required: true %>
 			  </div>
 			  <div class="flex flex-col gap-y-3 grow">
 				<%= f.label :last_name %>
 				<%= f.text_field :last_name,
 				 autocomplete: "name",
-				 class: "rounded-lg",
-					required: true%>
+				 class: "field-seraphique",
+				 required: true %>
 			  </div>
 			</div>
 			<div class="flex flex-col gap-y-3 my-8">
 			  <%= f.label :email %>
 			  <%= f.email_field :email,
 			  autocomplete: "email",
-			  class: "rounded-lg" %>
+			  class: "field-seraphique" %>
 			</div>
 
 			<div class="flex flex-row gap-x-2">
@@ -49,22 +49,20 @@
 				<%= f.label :password %>
 				<%= f.password_field :password,
 				autocomplete: "new-password",
-				class: "rounded-lg" %>
+				class: "field-seraphique" %>
 			  </div>
 
 			  <div class="flex flex-col gap-y-2 grow">
 				<%= f.label :password_confirmation, "Confirm Password" %>
 				<%= f.password_field :password_confirmation,
 				 autocomplete: "new-password",
-				 class: "rounded-lg" %>
+				 class: "field-seraphique" %>
 			  </div>
 			</div>
 
 			<div class="mt-8">
 			  <input type="checkbox"
-					 class="size-5 appearance-none peer-hover:bg-none
-						   checked:text-seraphique focus:ring-0
-						   checked:ring-0 checked:bg-seraphique"
+					 class="size-5 checkbox-seraphique"
 					 name="remember_me"
 					 id="remember_me">
 			  <label for="remember_me"
@@ -74,9 +72,7 @@
 			</div>
 			<div>
 			  <input type="checkbox"
-					 class="size-5 appearance-none peer-hover:bg-none
-						   checked:text-seraphique focus:ring-0
-						   checked:ring-0 checked:bg-seraphique"
+					 class="size-5 checkbox-seraphique"
 					 name="subscribe"
 					 id="subscribe">
 			  <label for="subscribe"

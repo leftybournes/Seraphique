@@ -25,8 +25,9 @@
 			<div class="flex flex-col gap-y-3">
 			  <%= f.label :email, "Email Address", class: "text-[#4A4A4A]" %>
 			  <%= f.email_field :email,
-				autocomplete: "email",
-				class: "border border-seraphique bg-[#F5F5F5] rounded-md" %>
+				  autofocus: true,
+				  autocomplete: "email",
+				  class: "field-seraphique" %>
 			</div>
 
 			<div class="my-8 flex flex-col">
@@ -37,7 +38,7 @@
 			  </div>
 			  <%= f.password_field :password,
 				  autocomplete: "current-password",
-				  class: "border border-seraphique bg-[#F5F5F5] rounded-md" %>
+				  class: "field-seraphique" %>
 			</div>
 
 			<div class="flex flex-row flex-wrap justify-center
@@ -45,9 +46,7 @@
 			  <% if devise_mapping.rememberable? %>
 				<div>
 				  <%= f.check_box :remember_me,
-					class: "size-5 appearance-none bg-[#F5F5F5] rounded-sm
-                            peer-hover:bg-none focus:ring-0 checked:ring-0
-                            checked:text-seraphique checked:bg-seraphique" %>
+					class: "size-5 checkbox-seraphique" %>
 				  <%= f.label :remember_me, "Remember Me" %>
 				</div>
 			  <% end %>
