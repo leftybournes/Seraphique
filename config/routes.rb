@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   resource :profile, only: [:show]
+  resources :addresses
   resources :payment_methods
   resources :shopping_cart_items, path: :shopping_cart, only: %i[ index create destroy ]
   resources :orders, only: [ :index, :show ]

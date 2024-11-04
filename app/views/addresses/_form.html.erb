@@ -1,0 +1,94 @@
+<%= form_with model: address do |f| %>
+  <% if @address.errors.any? %>
+	<h2>
+	  <%= I18N.t("errors.messages.not_saved",
+				 count: resource.errors.count,
+				 resource: @address.class.model_name.human.downcase) %>
+	</h2>
+	<ul>
+	  <% @address.errors.full_messages.each do |message| %>
+		<li class="text-red-600"><%= message %></li>
+	  <% end %>
+	</ul>
+  <% end %>
+
+  <div class="flex flex-col gap-y-4">
+	<div class="flex flex-row gap-x-4">
+	  <div class="flex flex-col gap-y-2">
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name,
+		   autofocus: true,
+		   required: true,
+		   class: "field-seraphique",
+		   value: current_user.first_name %>
+	  </div>
+	  <div class="flex flex-col gap-y-2">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name,
+			required: true,
+			class: "field-seraphique",
+			value: current_user.last_name %>
+	  </div>
+	</div>
+
+	<div class="flex flex-col gap-y-2">
+	  <%= f.label :phone_number %>
+	  <%= f.text_field :phone_number,
+		  required: true,
+		  class: "field-seraphique",
+		  value: current_user.phone_number %>
+	</div>
+
+	<div class="flex flex-col gap-y-2">
+	  <%= f.label :line_1 %>
+	  <%= f.text_field :line_1,
+		  required: true,
+		  class: "field-seraphique" %>
+	</div>
+	<div class="flex flex-col gap-y-2">
+	  <%= f.label :line_2 %>
+	  <%= f.text_field :line_2, class: "field-seraphique" %>
+	</div>
+
+	<div class="flex flex-row gap-x-4">
+	  <div class="flex flex-col gap-y-2 grow">
+		<%= f.label :city %>
+		<%= f.text_field :city,
+			required: true,
+			class: "field-seraphique" %>
+	  </div>
+	  <div class="flex flex-col gap-y-2 grow">
+		<%= f.label :state %>
+		<%= f.text_field :state,
+			required: true,
+			class: "field-seraphique" %>
+	  </div>
+	</div>
+
+	<div class="flex flex-row gap-x-4 grow">
+	  <div class="flex flex-col gap-y-2 grow">
+		<%= f.label :country %>
+		<%= f.text_field :country,
+			required: true,
+			class: "field-seraphique" %>
+	  </div>
+	  <div class="flex flex-col gap-y-2 grow">
+		<%= f.label :postal_code %>
+		<%= f.text_field :postal_code,
+			required: true,
+			class: "field-seraphique" %>
+	  </div>
+	</div>
+
+	<div class="flex flex-row items-center gap-x-2 grow">
+	  <%= f.check_box :default, class: "size-5 checkbox-seraphique" %>
+	  <%= f.label :default, "Default Address" %>
+	</div>
+
+	<div class="flex flex-row justify-end grow">
+	  <%= f.submit "Save",
+		  class: "bg-seraphique text-white rounded-lg py-2 px-4
+                cursor-pointer hover:bg-seraphique/90" %>
+	</div>
+  </div>
+<% end %>
