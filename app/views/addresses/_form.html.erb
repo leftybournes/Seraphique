@@ -13,8 +13,8 @@
   <% end %>
 
   <div class="flex flex-col gap-y-4">
-	<div class="flex flex-row gap-x-4">
-	  <div class="flex flex-col gap-y-2">
+	<div class="flex flex-row gap-x-4 grow">
+	  <div class="flex flex-col gap-y-2 grow">
 		<%= f.label :first_name %>
 		<%= f.text_field :first_name,
 		   autofocus: true,
@@ -22,7 +22,7 @@
 		   class: "field-seraphique",
 		   value: current_user.first_name %>
 	  </div>
-	  <div class="flex flex-col gap-y-2">
+	  <div class="flex flex-col gap-y-2 grow">
 		<%= f.label :last_name %>
 		<%= f.text_field :last_name,
 			required: true,

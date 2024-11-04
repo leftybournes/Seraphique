@@ -1,0 +1,31 @@
+<aside class="bg-seraphique/20 p-8 rounded-xl text-[#4A4A4A]">
+  <ul class="space-y-4 text-lg mt-8">
+	<li class="hover:underline">
+	  <%= link_to edit_user_registration_path(current_user),
+				  class: "flex flex-row items-center gap-x-2" do %>
+		<%= heroicon "user", size: 24 %>
+		Profile
+	  <% end %>
+	</li>
+	<li class="hover:underline">
+	  <%= link_to orders_path,
+				  class: "flex flex-row items-center gap-x-2" do %>
+		<%= heroicon "shopping-bag", size: 24 %>
+		Orders
+	  <% end %>
+	</li>
+	<li class="hover:underline">
+	  <a href="#" class="flex flex-row items-center gap-x-2">
+		<%= heroicon "credit-card", size: 24 %>
+		Payment Methods
+	  </a>
+	</li>
+	<li class="hover:underline">
+	  <%= link_to addresses_path,
+				  class: "flex flex-row items-center gap-x-2" do %>
+		<%= heroicon "map-pin", size: 24 %>
+		Addresses
+		<% end %>
+	</li>
+  </ul>
+</aside>
