@@ -1,0 +1,59 @@
+<main class="pt-36 pb-24">
+  <div class="container mx-auto flex flex-row gap-x-8">
+	<%= render "shared/profile_navigation" %>
+	<div class="flex flex-col grow">
+	  <div class="bg-gradient-to-r from-[#3A503333] to-[#84B674] w-full
+				  flex flex-row justify-between px-8 py-4 items-center">
+		<h2 class="text-[#4A4A4A] font-semibold text-base">
+		  Delivery Addresses
+		</h2>
+		<button class="text-[#4A4A4A] font-semibold flex flex-row gap-x-2">
+		  <%= heroicon "plus" %>
+		  Add New Address
+		</button>
+	  </div>
+	  <div class="bg-white px-8 py-6 mt-2">
+		<ul class="divide-y divide-solid">
+		  <% current_user.addresses.each do |address| %>
+			<li>
+			  <div class="text-[#4A4A4A] py-6 flex
+						  flex-row items-center gap-x-4">
+				<div class="flex flex-col w-3/4">
+				  <div class="flex flex-row gap-x-8 items-center">
+					<div class="font-semibold">
+					  <%= address.full_name %>
+					</div>
+					<% if address.default %>
+					  <div class="bg-[#98D1E9] rounded-lg font-semibold
+								  py-1 px-2 text-xs">
+						Default
+					  </div>
+					<% end %>
+				  </div>
+				  <div><%= address.phone_number %></div>
+				  <div>
+					<%= address.line_1 %>,
+					<% if address.line_2 %>
+					  <%= address.line_2 %>,
+					<% end %>
+					<%= address.city %>, <%= address.state %>,
+					<%= address.country %> <%= address.postal_code %>
+				  </div>
+				</div>
+				<div class="w-1/4 flex flex-row gap-x-6">
+				  <button class="underline">Edit</button>
+				  <button class="underline">Delete</button>
+				  <% if not address.default %>
+					<button class="border border-[#D9D9D9] px-2 py-1 text-xs">
+					  Set As Default
+					</button>
+				  <% end %>
+				</div>
+			  </div>
+			</li>
+		  <% end %>
+		</ul>
+	  </div>
+	</div>
+  </div>
+</main>
