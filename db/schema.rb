@@ -54,6 +54,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
 
   create_table "addresses", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "phone_number", null: false
     t.string "line_1", null: false
     t.string "line_2"
     t.string "city", null: false
@@ -98,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "display_id", default: "01JBE7AFVHTM5F5DPT00KC79RN"
+    t.string "display_id", default: "01JBV1J8KXEMY1JKHK1VC065J6"
     t.bigint "user_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
