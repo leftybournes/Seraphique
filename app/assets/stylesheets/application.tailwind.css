@@ -152,4 +152,18 @@
 }
 
 */
+
+@layer components {
+	.field-seraphique {
+		@apply border-[#B0B0B0] rounded-lg
+		focus:ring-seraphique focus:border-seraphique;
+	}
+
+	.checkbox-seraphique {
+		@apply border-[#B0B0B0] rounded checked:bg-seraphique
+		focus:checked:bg-seraphique focus:ring-seraphique
+		focus:border-seraphique;
+	}
+}
+
 @import 'actiontext.css';
