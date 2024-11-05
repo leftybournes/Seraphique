@@ -58,6 +58,8 @@ gem "ostruct", "~> 0.6"
 
 gem "solargraph", "~> 0.50"
 
+gem "rubocop", "~> 1.68"
+
 gem "ulid", "~> 1.4"
 
 group :development, :test do
