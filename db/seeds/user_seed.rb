@@ -10,6 +10,7 @@ rand(1000..1500).times do
       first_name: "#{first_name} #{middle_name}",
       last_name: Faker::Name.last_name,
       email: Faker::Internet.unique.email,
+      phone_number: Faker::PhoneNumber.unique.phone_number,
       password: "password",
       created_at: date,
       updated_at: date
@@ -23,6 +24,9 @@ User.all.each do |user|
   user.addresses.create(
     {
       user_id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      phone_number: user.phone_number,
       line_1: Faker::Address.street_address,
       line_2: Faker::Address.secondary_address,
       city: Faker::Address.city,
