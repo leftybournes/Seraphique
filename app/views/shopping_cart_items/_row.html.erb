@@ -1,8 +1,8 @@
 <%= turbo_frame_tag item do %>
-  <div class="flex flex-row flex-nowrap
+  <div class="grid grid-cols-12 flex-nowrap
 			  items-center py-8 product-row"
 	   data-shopping-cart-target="productRow">
-	<div class="flex flex-row justify-center w-1/12">
+	<div class="flex flex-row justify-center col-span-1">
 	  <input type="checkbox"
 			 name="payments[products][ids][]"
 			 id="shopping_cart_row_<%= item.id %>"
@@ -15,7 +15,7 @@
 			 data-shopping-cart-target="checkbox"
 			 data-action="input->shopping-cart#calculate">
 	</div>
-	<div class="w-3/12">
+	<div class="col-span-3">
 	  <label for="shopping_cart_row_<%= item.id %>">
 		<div class="flex flex-row gap-x-4 items-center">
 		  <div class="border border-[#B0B0B0] py-4 px-8">
@@ -28,7 +28,7 @@
 		</div>
 	  </label>
 	</div>
-	<div class="w-2/12">
+	<div class="col-span-2">
 	  <div>
 		<div class="flex flex-col justify-center">
 		  <label class="text-[#4A4A4A]"
@@ -46,7 +46,7 @@
 		</div>
 	  </div>
 	</div>
-	<div class="w-1/12 flex flex-row">
+	<div class="col-span-1 flex flex-row">
 	  <button type="button"
 					class="bg-none p-0 me-2"
 					data-action="click->shopping-cart#decrementRow">
@@ -64,7 +64,7 @@
 		<%= heroicon "plus", size: 16 %>
 	  </button>
 	</div>
-	<div class="text-seraphique text-center w-2/12">
+	<div class="text-seraphique text-center col-span-2">
 	  <%= heroicon "currency-dollar",
 				   size: 24,
 				   class: "inline-block" %>
@@ -75,7 +75,7 @@
 		) %>
 	  </span>
 	</div>
-	<div class="text-seraphique text-center w-2/12">
+	<div class="text-seraphique text-center col-span-2">
 	  <%= heroicon "currency-dollar",
 				   size: 24,
 				   class: "inline-block" %>
@@ -86,7 +86,7 @@
 		) %>
 	  </span>
 	</div>
-	<div class="w-1/12">
+	<div class="col-span-1 flex flex-row justify-center">
 	  <%= button_tag formaction: shopping_cart_item_path(item),
 					 formmethod: :delete,
 					 data: {

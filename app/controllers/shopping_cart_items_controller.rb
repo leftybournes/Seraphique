@@ -3,6 +3,10 @@ class ShoppingCartItemsController < ApplicationController
   before_action :set_item, only: [ :destroy ]
 
   def index
+    user_has_default_address = current_user.addresses.where(default: true).size > 0
+
+    @address = current_user.addresses.where(default: true).first if user_has_default_address
+    @address = current_user.addresses.first unless user_has_default_address
   end
 
   def create

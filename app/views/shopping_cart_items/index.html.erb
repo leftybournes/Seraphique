@@ -11,27 +11,55 @@
   <div class="container mx-auto pt-24">
 	<%= render partial: "shared/banner" %>
 
-	<div class="flex flex-row flex-nowrap text-[#4A4A4A] py-4
+	<div class="flex flex-row flex-nowrap justify-between
+				text-[#4A4A4A] items-center py-4 px-12
 				bg-gradient-to-r from-[#3A503333] to-[#84B674]">
-	  <div class="w-1/12"></div>
-	  <div class="w-5/12">Shopping Cart</div>
-	  <div class="w-1/12 text-center">Quantity</div>
-	  <div class="w-2/12 text-center">Price</div>
-	  <div class="w-2/12 text-center">Total</div>
-	  <div class="w-1/12 text-center">Action</div>
+	  <div class="flex flex-row gap-x-2 items-center
+				  font-semibold text-[#4A4A4A]">
+		<%= heroicon "map-pin", size: 18 %>
+		Delivery Address
+	  </div>
+	  <div>
+		<span class="me-4">
+		  <%= current_user.first_name %>
+		  <%= current_user.last_name %>
+		  <%= current_user.phone_number %>
+		</span>
+		<%= @address.line_1 %>,
+		<% if @address.line_2 %>
+		  <%= @address.line_2 %>,
+		<% end %>
+		<%= @address.city %>,
+		<%= @address.country %>
+		<%= @address.postal_code %>
+	  </div>
+	  <button class="text-[#4A4A4A] border border-[#4A4A4A] px-8 py-1 rounded-lg">
+		Change
+	  </button>
 	</div>
 	<div class="bg-white mt-4">
+	  <div class="grid grid-cols-12 border-b border-[#B0B0B0] py-6">
+		<div class="col-span-1"></div>
+		<div class="col-span-5">Products</div>
+		<div class="col-span-1 text-center">Quantity</div>
+		<div class="col-span-2 text-center">Price</div>
+		<div class="col-span-2 text-center">Subtotal</div>
+		<div class="col-span-1 text-center">Action</div>
+	  </div>
+
 	  <%= form_with url: payments_path,
 					method: :post,
 					id: :payments_form do |f| %>
-		<% current_user.shopping_cart_items.each do |item| %>
-		  <%= render partial: "row", locals: { item: item } %>
-		<% end %>
+		<div class="flex flex-col divide-y divide-[#B0B0B0]">
+		  <% current_user.shopping_cart_items.each do |item| %>
+			<%= render "shopping_cart_items/row", item: item %>
+		  <% end %>
+		</div>
 		<input type="hidden" name="_method" value="post" autocomplete="off">
 	  <% end %>
 	</div>
-	<div class="mt-4 bg-white flex flex-row flex-nowrap items-center py-8">
-	  <div class="w-1/12 flex flex-row justify-center">
+	<div class="mt-4 bg-white grid grid-cols-12 items-center py-8">
+	  <div class="col-span-1 flex flex-row justify-center">
 		<input type="checkbox"
 			   id="toggle-all-cart-items"
 			   class="size-5 checked:bg-seraphique focus:outline-0
@@ -42,12 +70,12 @@
 			   data-action="input->shopping-cart#toggleAll"
 			   data-shopping-cart-target="toggleAll">
 	  </div>
-	  <div class="w-7/12">
+	  <div class="col-span-7">
 		<label for="toggle-all-cart-items" class="font-bold text-[#4A4A4A]">
 		  Select All
 		</label>
 	  </div>
-	  <div class="w-2/12 flex flex-row gap-x-4 justify-end items-center">
+	  <div class="col-span-2 flex flex-row gap-x-4 justify-end items-center">
 		<div class="text-[#4A4A4A] font-bold"
 			 data-shopping-cart-target="count">
 		  Total (0 items)
@@ -57,7 +85,7 @@
 		  $0.00
 		</div>
 	  </div>
-	  <div class="w-2/12 flex flex-row">
+	  <div class="col-span-2 flex flex-row justify-center">
 		<%= button_tag "Check Out",
 					   type: :submit,
 					   class: "bg-seraphique ms-8 py-2 px-4 text-white",
