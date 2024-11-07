@@ -1,4 +1,4 @@
-<header class="font-poppins w-full fixed z-50">
+<header class="font-poppins w-full fixed z-50" data-controller="header">
   <div class="bg-seraphique py-4">
 	<div class="container mx-auto flex flex-row flex-nowrap items-center">
 	  <h1 class="text-3xl text-white">
@@ -48,17 +48,19 @@
 			<% end %>
 		  </li>
 		  <li>
-			<input type="checkbox" id="nav-user-menu" class="hidden peer">
-			<label for="nav-user-menu">
-			  <%= heroicon "user",
-						   variant: :outline,
-						   aria: { label: "user options" },
-						   class: "w-6 text-white hover:cursor-pointer" %>
-			</label>
-			<div class="relative hidden peer-checked:block">
-			  <div class="absolute left-0 top-2">
-				<ul class="text-base bg-gray-100 rounded-md
-						   w-fit h-full py-2 px-4 shadow whitespace-nowrap">
+			<div class="relative">
+			  <button class="cursor-pointer"
+							 data-action="click->header#toggleMenu">
+				<%= heroicon "user",
+							 variant: :outline,
+							 aria: { label: "user options" },
+							 size: 24,
+							 class: "text-white cursor-pointer" %>
+			  </button>
+			  <div class="absolute hidden user-menu"
+					data-header-target="userMenu">
+				<ul class="text-base bg-gray-100 rounded-md w-fit
+						   h-full py-2 px-4 shadow whitespace-nowrap">
 				  <li>
 					<%= link_to "Profile",
 								profile_path \
