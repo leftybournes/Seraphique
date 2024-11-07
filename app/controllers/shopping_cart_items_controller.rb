@@ -7,6 +7,28 @@ class ShoppingCartItemsController < ApplicationController
 
     @address = current_user.addresses.where(default: true).first if user_has_default_address
     @address = current_user.addresses.first unless user_has_default_address
+
+    earliest_shipping = 5.days.from_now
+    latest_shipping = 7.days.from_now
+
+    earliest_year = earliest_shipping.strftime("%Y")
+    latest_year = latest_shipping.strftime("%Y")
+
+    earliest_month = earliest_shipping.strftime("%m")
+    latest_month = latest_shipping.strftime("%m")
+
+    earliest_text =
+      if earliest_year != latest_year
+        earliest_shipping.strftime("%d %B, %Y")
+      elsif earliest_month == latest_month
+        earliest_shipping.strftime("%d")
+      else
+        earliest_shipping.strftime("%d %B")
+      end
+
+    latest_text = latest_shipping.strftime("%d %B, %Y")
+
+    @shipping_range = "#{earliest_text} - #{latest_text}"
   end
 
   def create

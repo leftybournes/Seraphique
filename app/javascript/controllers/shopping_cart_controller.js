@@ -31,12 +31,12 @@ export default class extends Controller {
 
 		if (event.target.checked) {
 			this.countTarget.innerHTML = quantity > 1
-				? `Total (${quantity} items)`
-				: `Total (${quantity} item)`;
+				? `Order Total ( ${quantity} items ) :`
+				: `Order Total ( ${quantity} item ) :`;
 
 			this.valueTarget.innerHTML = `$${totalValue.toFixed(2)}`;
 		} else {
-			this.countTarget.innerHTML = "Total (0 items)";
+			this.countTarget.innerHTML = "Order Total ( 0 items ) :";
 			this.valueTarget.innerHTML = "$0.00";
 		}
 	}
@@ -62,8 +62,8 @@ export default class extends Controller {
 		}
 
 		this.countTarget.innerHTML = quantity > 1
-			? `Total (${quantity} items)`
-			: `Total (${quantity} item)`;
+			? `Order Total ( ${quantity} items ) :`
+			: `Order Total ( ${quantity} item ) :`;
 
 		this.valueTarget.innerHTML = `$${totalValue.toFixed(2)}`;
 		this.toggleAllTarget.indeterminate = totalChecked > 0
