@@ -111,11 +111,11 @@
 				flex-col font-semibold text-[#4A4A4A]">
 	  <div class="ms-auto flex flex-row justify-between w-2/5">
 		<div>Merchandise Subtotal:</div>
-		<div>$ 0.00</div>
+		<div data-shopping-cart-target="merchandiseTotal">$ 0.00</div>
 	  </div>
 	  <div class="ms-auto flex flex-row justify-between w-2/5">
 		<div>Shipping Subtotal:</div>
-		<div>$ 0.00</div>
+		<div>$ 10.00</div>
 	  </div>
 	  <div class="ms-auto flex flex-row justify-between w-2/5">
 		<div>Voucher Discount:</div>
@@ -123,7 +123,10 @@
 	  </div>
 	  <div class="ms-auto flex flex-row justify-between items-center w-2/5">
 		<div>Total Payment:</div>
-		<div class="text-2xl text-[#A0C296]">$ 0.00</div>
+		<div class="text-2xl text-[#A0C296]"
+			 data-shopping-cart-target="totalPayment">
+		  $ 0.00
+		</div>
 	  </div>
 	  <div class="flex flex-row justify-end mt-4">
 		<%= button_tag "Place Order",

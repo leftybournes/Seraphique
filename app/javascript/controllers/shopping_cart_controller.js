@@ -3,13 +3,15 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="shopping-cart"
 export default class extends Controller {
 	static targets = [
-		"toggleAll",
 		"checkbox",
-		"productRow",
-		"rowQuantityDecrement",
-		"rowQuantity",
-		"rowQuantityIncrement",
 		"count",
+		"merchandiseTotal",
+		"totalPayment",
+		"productRow",
+		"rowQuantity",
+		"rowQuantityDecrement",
+		"rowQuantityIncrement",
+		"toggleAll",
 		"value"
 	];
 
@@ -69,6 +71,11 @@ export default class extends Controller {
 		this.toggleAllTarget.indeterminate = totalChecked > 0
 			&& totalChecked < this.productRowTargets.length;
 		this.toggleAllTarget.checked = totalChecked === this.productRowTargets.length;
+		this.merchandiseTotalTarget.innerText = `$ ${totalValue.toFixed(2)}`;
+
+		let shipping = 10;
+		let totalPayment = totalValue + shipping;
+		this.totalPaymentTarget.innerText = `$ ${totalPayment.toFixed(2)}`;
 	}
 
 	inputQuantity(event) {
