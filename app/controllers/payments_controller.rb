@@ -13,19 +13,40 @@ class PaymentsController < ApplicationController
     end
 
     line_items = items.collect do |item|
-      stripe_product = Stripe::Product
-                         .retrieve(item.product.stripe_product.stripe_id)
-
       {
         price: item.product.stripe_product.stripe_price_id,
         quantity: payments_params[:products][item.id.to_s][:quantity]
       }
     end
 
+    shipping_fee = 1000
+
     session = Stripe::Checkout::Session.create(
       success_url: URI.decode_uri_component(
         success_payments_url(session_id: "{CHECKOUT_SESSION_ID}")
       ),
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: :fixed_amount,
+            fixed_amount: {
+              amount: shipping_fee,
+              currency: :usd
+            },
+            display_name: 'Standard shipping',
+            delivery_estimate: {
+              minimum: {
+                unit: 'business_day',
+                value: 5,
+              },
+              maximum: {
+                unit: 'business_day',
+                value: 7,
+              },
+            },
+          }
+        }
+      ],
       cancel_url: shopping_cart_items_url,
       line_items: line_items,
       mode: "payment"
