@@ -58,7 +58,7 @@
 		<input type="hidden" name="_method" value="post" autocomplete="off">
 	  <% end %>
 	</div>
-	<div class="mt-4 bg-white py-8 grid grid-cols-12 items-start">
+	<div class="mt-4 bg-white py-8 flex flex-row ps-14 pe-12 justify-between items-start">
 	  <div class="flex flex-row justify-center">
 		<input type="checkbox"
 			   id="toggle-all-cart-items"
@@ -69,13 +69,12 @@
 					 indeterminate:focus:bg-seraphique"
 			   data-action="input->shopping-cart#toggleAll"
 			   data-shopping-cart-target="toggleAll">
-	  </div>
-	  <div class="col-span-2">
-		<label for="toggle-all-cart-items" class="font-bold text-[#4A4A4A]">
+		<label for="toggle-all-cart-items"
+			   class="font-bold text-[#4A4A4A] ms-4">
 		  Select All
 		</label>
 	  </div>
-	  <div class="flex flex-col gap-y-4 col-span-3">
+	  <div class="flex flex-col gap-y-4">
 		<label class="flex flex-row gap-x-4 items-center
 					  text-[#4A4A4A] font-semibold"
 			   for="promotion">
@@ -84,8 +83,7 @@
 		</label>
 		<input class="border-[#D9D9D9]" id="promotion" name="promotion">
 	  </div>
-	  <div></div>
-	  <div class="flex flex-col divide-[#D9D9D9] divide-y col-span-5 pe-12">
+	  <div class="flex flex-col divide-[#D9D9D9] divide-y w-2/5">
 		<div class="text-[#4A4A4A] flex flex-row
 					justify-between items-start pb-8">
 		  <div class="flex flex-col gap-y-1">
