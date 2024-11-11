@@ -22,7 +22,7 @@
 			<% current_user.addresses.each do |address| %>
 			  <div class="py-4 flex flex-row items-center gap-x-2">
 				<input type="radio"
-					   name="user-address"
+					   name="payments[address]"
 					   id="address-<%= address.id %>"
 					   value="<%= address.id %>"
 					   data-action="input->shopping-cart#changeAddress"
@@ -45,7 +45,7 @@
 				  <%= address.country %> <%= address.postal_code %>
 				</label>
 			  </div>
-			<% end %>
+			<% end if current_user.addresses %>
 		  </div>
 		  <div class="flex flex-row justify-end mt-4">
 			<button type="button"
@@ -70,29 +70,42 @@
 					 font-semibold text-[#4A4A4A]">
 		  Delivery Address
 		</span>
-		<span class="cursor-pointer flex flex-row items-center"
-			  data-action="click->shopping-cart#toggleAddressSelector">
+		<span class="<%= class_names('cursor-pointer' => @address) %>
+			         flex flex-row items-center"
+		      <% if @address %>
+				data-action="click->shopping-cart#toggleAddressSelector"
+			  <% end %>>
 		  <span>
 			<%= heroicon "map-pin", size: 18, class: "me-2", variant: :solid %>
 		  </span>
 		  <span data-shopping-cart-target="address">
-			<input type="hidden"
-				   name="address"
-				   value="<%= @address.id %>">
+			<% if @address %>
+			  <input type="hidden"
+					 name="payments[address]"
+					 value="<%= @address.id %>">
 
-			<%= @address.first_name %>
-			<%= @address.last_name %>
-			
-			<span class="mx-4">
-			  <%= @address.phone_number %>
-			</span>
-			<%= @address.line_1 %>,
-			<% if @address.line_2 %>
-			  <%= @address.line_2 %>,
+			  <%= @address.first_name %>
+			  <%= @address.last_name %>
+			  
+			  <span class="mx-4">
+				<%= @address.phone_number %>
+			  </span>
+			  <%= @address.line_1 %>,
+			  <% if @address.line_2 %>
+				<%= @address.line_2 %>,
+			  <% end %>
+			  <%= @address.city %>,
+			  <%= @address.country %>
+			  <%= @address.postal_code %>
+			<% else %>
+			  <span>
+				You have not yet set an address.
+				Set one
+				<%= link_to "here",
+							new_address_path,
+							class: "text-seraphique font-semibold underline" %>
+			  </span>
 			<% end %>
-			<%= @address.city %>,
-			<%= @address.country %>
-			<%= @address.postal_code %>
 		  </span>
 		</span>
 		<button type="button"
