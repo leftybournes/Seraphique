@@ -11,53 +11,115 @@
   <div class="container mx-auto pt-24">
 	<%= render partial: "shared/banner" %>
 
-	<div class="flex flex-row flex-nowrap justify-between
-				text-[#4A4A4A] items-center py-4 px-12
-				bg-gradient-to-r from-[#3A503333] to-[#84B674]">
-	  <div class="flex flex-row gap-x-2 items-center
-				  font-semibold text-[#4A4A4A]">
-		<%= heroicon "map-pin", size: 18 %>
-		Delivery Address
+	<div class="fixed w-full inset-0 h-screen bg-black/60
+				z-50 flex flex-col justify-center hidden
+				transition-opacity opacity-0"
+		 data-shopping-cart-target="addressSelector">
+	  <div class="bg-gray-100 shadow rounded-lg max-w-4/5 m-auto py-4 px-8">
+		<fieldset>
+		  <legend class="font-semibold text-lg">Addresses</legend>
+		  <div class="mt-4 flex flex-col divide-[#B0B0B0] divide-y">
+			<% current_user.addresses.each do |address| %>
+			  <div class="py-4 flex flex-row items-center gap-x-2">
+				<input type="radio"
+					   name="user-address"
+					   id="address-<%= address.id %>"
+					   value="<%= address.id %>"
+					   data-action="input->shopping-cart#changeAddress"
+				       <%= "checked" if address.id == @address.id %>>
+				<label for="address-<%= address.id %>">
+				  <input type="hidden"
+						 name="address"
+						 value="<%= address.id %>">
+				  <%= address.first_name %>
+				  <%= address.last_name %>
+				  <span class="mx-4">
+					<%= address.phone_number %>
+				  </span>
+				  <%= address.line_1 %>,
+				  <% if address.line_2 %>
+					<%= address.line_2 %>,
+				  <% end %>
+				  <%= address.city %>,
+				  <%= address.state %>,
+				  <%= address.country %> <%= address.postal_code %>
+				</label>
+			  </div>
+			<% end %>
+		  </div>
+		  <div class="flex flex-row justify-end mt-4">
+			<button type="button"
+						  class="bg-seraphique px-2 py-1 text-gray-100
+						  hover:bg-seraphique/90"
+						  data-action="click->shopping-cart#toggleAddressSelector"
+						  data-turbo="false">
+			  Done
+			</button>
+		  </div>
+		</fieldset>
 	  </div>
-	  <div>
-		<span class="me-4">
-		  <%= current_user.first_name %>
-		  <%= current_user.last_name %>
-		  <%= current_user.phone_number %>
-		</span>
-		<%= @address.line_1 %>,
-		<% if @address.line_2 %>
-		  <%= @address.line_2 %>,
-		<% end %>
-		<%= @address.city %>,
-		<%= @address.country %>
-		<%= @address.postal_code %>
-	  </div>
-	  <button class="text-[#4A4A4A] border border-[#4A4A4A] px-8 py-1 rounded-lg">
-		Change
-	  </button>
 	</div>
-	<div class="bg-white mt-4">
-	  <div class="grid grid-cols-12 border-b border-[#B0B0B0] py-6">
-		<div class="col-span-1"></div>
-		<div class="col-span-5">Products</div>
-		<div class="col-span-1 text-center">Quantity</div>
-		<div class="col-span-2 text-center">Price</div>
-		<div class="col-span-2 text-center">Subtotal</div>
-		<div class="col-span-1 text-center">Action</div>
-	  </div>
 
-	  <%= form_with url: payments_path,
-					method: :post,
-					id: :payments_form do |f| %>
+	<%= form_with url: payments_path,
+				  method: :post,
+				  id: :payments_form do |f| %>
+	  <div class="flex flex-row flex-nowrap justify-between
+				  text-[#4A4A4A] items-center py-4 px-12
+				  bg-gradient-to-r from-[#3A503333] to-[#84B674]">
+		<span class="flex flex-row gap-x-2 items-center
+					 font-semibold text-[#4A4A4A]">
+		  Delivery Address
+		</span>
+		<span class="cursor-pointer flex flex-row items-center"
+			  data-action="click->shopping-cart#toggleAddressSelector">
+		  <span>
+			<%= heroicon "map-pin", size: 18, class: "me-2", variant: :solid %>
+		  </span>
+		  <span data-shopping-cart-target="address">
+			<input type="hidden"
+				   name="address"
+				   value="<%= @address.id %>">
+
+			<%= @address.first_name %>
+			<%= @address.last_name %>
+			
+			<span class="mx-4">
+			  <%= @address.phone_number %>
+			</span>
+			<%= @address.line_1 %>,
+			<% if @address.line_2 %>
+			  <%= @address.line_2 %>,
+			<% end %>
+			<%= @address.city %>,
+			<%= @address.country %>
+			<%= @address.postal_code %>
+		  </span>
+		</span>
+		<button type="button"
+				class="text-[#4A4A4A] border border-[#4A4A4A] px-8 py-1
+					   rounded-lg hover:border-white hover:text-white"
+				data-action="click->shopping-cart#toggleAddressSelector">
+		  Change
+		</button>
+	  </div>
+	  <div class="bg-white mt-4">
+		<div class="grid grid-cols-12 border-b border-[#B0B0B0] py-6">
+		  <div class="col-span-1"></div>
+		  <div class="col-span-5">Products</div>
+		  <div class="col-span-1 text-center">Quantity</div>
+		  <div class="col-span-2 text-center">Price</div>
+		  <div class="col-span-2 text-center">Subtotal</div>
+		  <div class="col-span-1 text-center">Action</div>
+		</div>
+
 		<div class="flex flex-col divide-y divide-[#B0B0B0]">
 		  <% current_user.shopping_cart_items.each do |item| %>
 			<%= render "shopping_cart_items/row", item: item %>
 		  <% end %>
 		</div>
 		<input type="hidden" name="_method" value="post" autocomplete="off">
-	  <% end %>
-	</div>
+	  </div>
+	<% end %>
 	<div class="mt-4 bg-white py-8 flex flex-row ps-14 pe-12 justify-between items-start">
 	  <div class="flex flex-row justify-center">
 		<input type="checkbox"

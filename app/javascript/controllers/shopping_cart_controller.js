@@ -3,6 +3,8 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="shopping-cart"
 export default class extends Controller {
 	static targets = [
+		"address",
+		"addressSelector",
 		"checkbox",
 		"count",
 		"merchandiseTotal",
@@ -140,5 +142,21 @@ export default class extends Controller {
 		checkbox.checked = false;
 
 		this.calculate();
+	}
+
+	toggleAddressSelector() {
+		if (this.addressSelectorTarget.classList.contains("hidden")) {
+			this.addressSelectorTarget.classList.remove("hidden");
+			setTimeout(() => this.addressSelectorTarget.classList.remove("opacity-0"), 1);
+		} else {
+			this.addressSelectorTarget.classList.add("opacity-0");
+			setTimeout(() => this.addressSelectorTarget.classList.add("hidden"), 100);
+		}
+	}
+
+	changeAddress(event) {
+		let label = event.target.nextElementSibling;
+
+		this.addressTarget.innerHTML = label.innerHTML;
 	}
 }
