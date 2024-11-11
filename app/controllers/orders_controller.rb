@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order
+  before_action :set_order, only: :show
+
+  def index; end
 
   def show
     @title = "Your Order (#{@order.order_items.count} items)"
