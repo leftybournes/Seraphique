@@ -101,11 +101,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "display_id", default: "01JBV1J8KXEMY1JKHK1VC065J6"
+    t.string "display_id", default: "01JCCFQ7SZA568JENJATN6R410"
     t.bigint "user_id"
+    t.bigint "address_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["display_id"], name: "index_orders_on_display_id", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -211,6 +213,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_083958) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "variants"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_cards", "users"
   add_foreign_key "product_categories", "categories"
