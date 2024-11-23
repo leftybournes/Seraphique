@@ -1,0 +1,2 @@
+class DeliveryLog < ApplicationRecord
+end
