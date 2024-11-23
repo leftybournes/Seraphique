@@ -1,141 +1,193 @@
-<main class="pt-36">
+<main class="pt-36 pb-8">
   <% content_for :title, @title %>
 
-  <div class="container mx-auto">
-	<div class="flex flex-row gap-x-6">
-	  <aside class="bg-[#3A503333] rounded-lg w-64">
+  <div class="container mx-auto flex flex-row gap-x-4">
+	<%= render "shared/profile_navigation" %>
 
-	  </aside>
-	  <div class="grow">
-		<div class="flex flex-row justify-between bg-gradient-to-r from-[#3A503333]
-					to-[#84B674] px-6 py-2 text-[#4A4A4A] rounded-tr-lg rounded-tl-lg">
-		  <%= link_to orders_path,
-					  class: "font-semibold flex
+	<div class="flex flex-col grow">
+	  <div class="flex flex-row justify-between bg-gradient-to-r from-[#3A503333]
+				  to-[#84B674] px-6 py-2 text-[#4A4A4A] rounded-tr-lg rounded-tl-lg">
+		<%= link_to orders_path,
+					class: "font-semibold flex
                               flex-row gap-x-1 items-center" do %>
-			<%= heroicon "arrow-left", size: 20 %>
-			Back
-		  <% end %>
-
-		  <div class="flex flex-row divide-x divide-[#4A4A4A] divide-solid">
-			<div class="pe-4">
-			  <span class="font-semibold">Order ID</span>
-			  <%= @order.display_id %>
-			</div>
-			<div class="font-semibold ps-4">
-			  <span>Status:</span>
-			  <span class="text-white">
-				<% if @order.received? || @order.rated? %>
-				  Completed
-				<% else %>
-				  In Progress
-				<% end %>
-			  </span>
-			</div>
+		  <%= heroicon "arrow-left", size: 20 %>
+		  Back
+		<% end %>
+		<div class="flex flex-row divide-x divide-[#4A4A4A] divide-solid">
+		  <div class="pe-4">
+			<span class="font-semibold">Order ID</span>
+			<%= @order.display_id %>
+		  </div>
+		  <div class="font-semibold ps-4">
+			<span>Status:</span>
+			<span class="text-white">
+			  <% if @order.received? || @order.rated? %>
+				Completed
+			  <% else %>
+				In Progress
+			  <% end %>
+			</span>
 		  </div>
 		</div>
-		<div class="bg-white mt-1 px-24 py-9 flex shadow
-					flex-row justify-center items-center">
-		  <div class="flex flex-col gap-y-2 items-center -me-2">
-			<div class="<%= class_names([
-						'border-[#A0C296]' => order_is_or_past_status(@order, :placed),
-						'border-[#B0B0B0]' => !order_is_or_past_status(@order, :placed)
-						]) %> border-8 rounded-full p-6">
-			  <%= heroicon "clipboard-document-list",
-						   size: 24,
-						   class: "text-seraphique" %>
-			</div>
-			<div class="font-semibold text-[#4A4A4A]">Order Placed</div>
-		  </div>
+	  </div>
+	  <div class="bg-white mt-1 px-24 py-9 flex shadow
+				  flex-row justify-center items-center">
+		<div class="flex flex-col gap-y-2 items-center -me-2">
 		  <div class="<%= class_names([
-					  'bg-[#A0C296]' => order_is_or_past_status(@order, :paid),
-					  'bg-[#B0B0B0]' => !order_is_or_past_status(@order, :paid)
-					  ]) %> h-2 w-full max-w-32 -translate-y-4"></div>
-		  <div class="flex flex-col gap-y-2 items-center">
-			<div class="<%= class_names([
-						'border-[#A0C296]' =>
-						order_is_or_past_status(@order, :paid),
-						'border-[#B0B0B0]' =>
-						!order_is_or_past_status(@order, :paid)
-						]) %> border-8 rounded-full p-6">
-			  <%= heroicon "credit-card",
-						   size: 24,
-						   class: "text-seraphique" %>
-			</div>
-			<div class="font-semibold text-[#4A4A4A]">Order Paid</div>
+					  'border-[#A0C296]' => order_is_or_past_status(@order, :placed),
+					  'border-[#B0B0B0]' => !order_is_or_past_status(@order, :placed)
+					  ]) %> border-8 rounded-full p-6">
+			<%= heroicon "clipboard-document-list",
+						 size: 24,
+						 class: "text-seraphique" %>
 		  </div>
+		  <div class="font-semibold text-[#4A4A4A]">Order Placed</div>
+		</div>
+		<div class="<%= class_names([
+					'bg-[#A0C296]' => order_is_or_past_status(@order, :paid),
+					'bg-[#B0B0B0]' => !order_is_or_past_status(@order, :paid)
+					]) %> h-2 w-full max-w-32 -translate-y-4"></div>
+		<div class="flex flex-col gap-y-2 items-center">
 		  <div class="<%= class_names([
-					  'bg-[#A0C296]' =>
+					  'border-[#A0C296]' =>
+					  order_is_or_past_status(@order, :paid),
+					  'border-[#B0B0B0]' =>
+					  !order_is_or_past_status(@order, :paid)
+					  ]) %> border-8 rounded-full p-6">
+			<%= heroicon "credit-card",
+						 size: 24,
+						 class: "text-seraphique" %>
+		  </div>
+		  <div class="font-semibold text-[#4A4A4A]">Order Paid</div>
+		</div>
+		<div class="<%= class_names([
+					'bg-[#A0C296]' =>
+					order_is_or_past_status(@order, :shipped_out),
+					'bg-[#B0B0B0]' =>
+					!order_is_or_past_status(@order, :shipped_out)
+					]) %> h-2 w-full max-w-32 -translate-y-4"></div>
+		<div class="flex flex-col gap-y-2 items-center -mx-2">
+		  <div class="<%= class_names([
+					  'border-[#A0C296]' =>
 					  order_is_or_past_status(@order, :shipped_out),
-					  'bg-[#B0B0B0]' =>
+					  'border-[#B0B0B0]' =>
 					  !order_is_or_past_status(@order, :shipped_out)
-					  ]) %> h-2 w-full max-w-32 -translate-y-4"></div>
-		  <div class="flex flex-col gap-y-2 items-center -mx-2">
-			<div class="<%= class_names([
-						'border-[#A0C296]' =>
-						order_is_or_past_status(@order, :shipped_out),
-						'border-[#B0B0B0]' =>
-						!order_is_or_past_status(@order, :shipped_out)
-						]) %> border-8 rounded-full p-6">
-			  <%= heroicon "truck",
-						   size: 24,
-						   class: "text-seraphique" %>
-			</div>
-			<div class="font-semibold text-[#4A4A4A]">Shipped Out</div>
+					  ]) %> border-8 rounded-full p-6">
+			<%= heroicon "truck",
+						 size: 24,
+						 class: "text-seraphique" %>
 		  </div>
-		  <div class="<%= class_names([
-					  'bg-[#A0C296]' =>
-					  order_is_or_past_status(@order, :received),
-					  'bg-[#B0B0B0]' =>
-					  !order_is_or_past_status(@order, :received)
-					  ]) %> h-2 w-full max-w-32 -translate-y-4"></div>
-		  <div class="flex flex-col gap-y-2 items-center -mx-4">
-			<div class="<%= class_names([
-						'border-[#A0C296]' =>
-						order_is_or_past_status(@order, :received),
-						'border-[#B0B0B0]' =>
-						!order_is_or_past_status(@order, :received)
-						]) %> border-8 rounded-full p-6">
-			  <%= heroicon "inbox-arrow-down",
-						   size: 24,
-						   class: "text-seraphique" %>
-			</div>
-			<div class="font-semibold text-[#4A4A4A]">Order Received</div>
-		  </div>
-		  <div class="<%= class_names([
-					  'bg-[#A0C296]' => order_is_or_past_status(@order, :rated),
-					  'bg-[#B0B0B0]' => !order_is_or_past_status(@order, :rated)
-					  ]) %> h-2 w-full max-w-32 -translate-y-4"></div>
-		  <div class="flex flex-col gap-y-2 items-center -ms-2">
-			<div class="<%= class_names([
-						'border-[#A0C296]' =>
-						order_is_or_past_status(@order, :rated),
-						'border-[#B0B0B0]' =>
-						!order_is_or_past_status(@order, :rated)
-						]) %> border-8 rounded-full p-6">
-			  <%= heroicon "star",
-						   size: 24,
-						   class: "text-seraphique" %>
-			</div>
-			<div class="font-semibold text-[#4A4A4A]">Order Rated</div>
-		  </div>
+		  <div class="font-semibold text-[#4A4A4A]">Shipped Out</div>
 		</div>
-		<div class="flex flex-row gap-x-2 mt-1">
-		  <button class="bg-seraphique text-white font-semibold
-						 grow shadow rounded-md py-2">
-			Rate
-		  </button>
-		  <button class="bg-white text-[#4A4A4A] font-semibold
-						 grow shadow rounded-md py-2">
-			Buy Again
-		  </button>
-		  <button class="bg-white text-[#4A4A4A] font-semibold
-						 grow shadow rounded-md py-2">
-			Request for Return/Refund
-		  </button>
-		  <button class="bg-white text-[#4A4A4A] font-semibold
-						 grow shadow rounded-md py-2">
-			Invoice
-		  </button>
+		<div class="<%= class_names([
+					'bg-[#A0C296]' =>
+					order_is_or_past_status(@order, :received),
+					'bg-[#B0B0B0]' =>
+					!order_is_or_past_status(@order, :received)
+					]) %> h-2 w-full max-w-32 -translate-y-4"></div>
+		<div class="flex flex-col gap-y-2 items-center -mx-4">
+		  <div class="<%= class_names([
+					  'border-[#A0C296]' =>
+					  order_is_or_past_status(@order, :received),
+					  'border-[#B0B0B0]' =>
+					  !order_is_or_past_status(@order, :received)
+					  ]) %> border-8 rounded-full p-6">
+			<%= heroicon "inbox-arrow-down",
+						 size: 24,
+						 class: "text-seraphique" %>
+		  </div>
+		  <div class="font-semibold text-[#4A4A4A]">Order Received</div>
+		</div>
+		<div class="<%= class_names([
+					'bg-[#A0C296]' => order_is_or_past_status(@order, :rated),
+					'bg-[#B0B0B0]' => !order_is_or_past_status(@order, :rated)
+					]) %> h-2 w-full max-w-32 -translate-y-4"></div>
+		<div class="flex flex-col gap-y-2 items-center -ms-2">
+		  <div class="<%= class_names([
+					  'border-[#A0C296]' =>
+					  order_is_or_past_status(@order, :rated),
+					  'border-[#B0B0B0]' =>
+					  !order_is_or_past_status(@order, :rated)
+					  ]) %> border-8 rounded-full p-6">
+			<%= heroicon "star",
+						 size: 24,
+						 class: "text-seraphique" %>
+		  </div>
+		  <div class="font-semibold text-[#4A4A4A]">Order Rated</div>
+		</div>
+	  </div>
+	  <div class="flex flex-row gap-x-2 mt-1">
+		<%= button_tag disabled: !@order.received?,
+					   class: [
+						   "font-semibold",
+						   "grow",
+						   "shadow",
+						   "rounded-md",
+						   "py-2",
+						   "bg-seraphique text-white" => @order.received?,
+						   "bg-gray-50 text-gray-500" => !@order.received?
+					   ] do %>
+		  Rate
+		<% end %>
+		<%= button_tag disabled: !@order.received?,
+					   class: [
+						   "font-semibold",
+						   "grow",
+						   "shadow",
+						   "rounded-md",
+						   "py-2",
+						   "bg-white text-[#4A4A4A]" => @order.received?,
+						   "bg-gray-50 text-gray-500" => !@order.received?
+					   ] do %>
+		  Buy Again
+		<% end %>
+		<%= button_tag disabled: !@order.received?,
+					   class: [
+						   "font-semibold",
+						   "grow",
+						   "shadow",
+						   "rounded-md",
+						   "py-2",
+						   "bg-white text-[#4A4A4A]" => @order.received?,
+						   "bg-gray-50 text-gray-500" => !@order.received?
+					   ] do %>
+		  Request for Return/Refund
+		<% end %>
+		<%= button_tag disabled: !@order.received?,
+					   class: [
+						   "font-semibold",
+						   "grow",
+						   "shadow",
+						   "rounded-md",
+						   "py-2",
+						   "bg-white text-[#4A4A4A]" => @order.received?,
+						   "bg-gray-50 text-gray-500" => !@order.received?
+					   ] do %>
+		  Invoice
+		<% end %>
+	  </div>
+	  <div class="flex flex-row gap-x-4 mt-4">
+		<div class="bg-white py-8 px-12 grow basis-0">
+		  <div class="font-semibold text-[#4A4A4A]">Delivery Timeline</div>
+		  <div class="bg-[#6B686659] h-px mt-3"></div>
+		</div>
+		<div class="bg-white py-8 px-12 grow basis-0">
+		  <div class="font-semibold text-[#4A4A4A]">Delivery Address</div>
+		  <div class="bg-[#6B686659] h-px mt-3"></div>
+		  <div class="mt-8 text-[#4A4A4A]">
+			<div>
+			  <%= @order.address.first_name %>
+			  <%= @order.address.last_name %>
+			</div>
+			<div class="mt-4"><%= @order.address.phone_number %></div>
+			<div class="mt-2">
+			  <%= @order.address.line_1 %>,
+			  <%= @order.address.line_2 %>,
+			  <%= @order.address.city %>,
+			  <%= @order.address.state %>,
+			  <%= @order.address.country %>
+			  <%= @order.address.postal_code %>
+		  </div>
 		</div>
 	  </div>
 	</div>
