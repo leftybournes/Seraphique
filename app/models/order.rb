@@ -9,6 +9,6 @@ class Order < ApplicationRecord
   belongs_to :address
 
   def set_defaults
-    self.display_id = ULID.generate
+    self.reference_id = ULID.generate
   end
 end
