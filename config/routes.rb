@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   get "/about", to: "about#index"
 
+  resource :administrator do
+    resources :orders, controller: "administrator/orders"
+  end
+
   resources :products do
     resources :reviews, only: [ :index ], controller: :product_reviews
   end

@@ -1,0 +1,29 @@
+<% links = [
+    { icon: "chart-bar", name: "Overview" },
+    { icon: "tag", name: "Products" },
+    { icon: "funnel", name: "Funnels" },
+    { icon: "shopping-bag", name: "Orders" },
+    { icon: "cog-6-tooth", name: "Settings" }
+] %>
+
+<aside class="bg-white rounded-xl py-4 ps-8 pe-16">
+  <nav>
+    <ul class="flex flex-col gap-y-4 text-lg text-semibold">
+      <% links.each do |link| %>
+        <li>
+          <%= link_to root_path, class: [
+              "flex",
+              "flex-row",
+              "items-center",
+              "gap-x-2",
+              "underline" => controller_name == link[:name].downcase,
+              "underline-offset-8" => controller_name == link[:name].downcase,
+              "decoration-[#B0B0B0]" => controller_name == link[:name].downcase
+          ] do %>
+            <%= heroicon link[:icon] %> <%= link[:name] %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</aside>

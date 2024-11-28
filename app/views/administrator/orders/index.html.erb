@@ -1,0 +1,131 @@
+<main class="pt-40 pb-12">
+  <div class="container mx-auto flex flex-row gap-x-16">
+    <%= render "shared/administrator_navigation" %>
+    <section class="w-full">
+      <div>
+        <% now = Time.now %>
+        <div class="font-semibold text-[#4A4A4A]">
+          Good
+          <% case now.strftime("%H").to_i %>
+          <% when 0..12 %>
+            Morning,
+          <% when 12..18 %>
+            Afternoon,
+          <% when 19..23 %>
+            Evening,
+          <% end %>
+          <%= current_administrator.full_name %>!
+        </div>
+        <div class="text-[#4A4A4A]/70">
+          <%= now.strftime("%A, %B %d, %Y") %>
+        </div>
+      </div>
+
+      <div class="mt-9 flex flex-row justify-between items-center">
+        <h2 class="font-semibold text-lg text-[#4A4A4A]">
+          <%= @orders.length %>
+          <% if @orders.length > 1 %>
+            Orders
+          <% else %>
+            Order
+          <% end %>
+          Found</h2>
+
+        <div class="flex flex-row items-center gap-x-8">
+          <input type="date">
+          To
+          <input type="date">
+        </div>
+      </div>
+
+      <div class="mt-8 py-2 flex flex-row justify-around bg-gradient bg-gradient-to-r from-[#3A5033]/20 to-[#84B674]">
+        <div class="flex gap-x-10 font-semibold">
+          <label>
+            <input type="radio" name="order_type" value="0" class="hidden">
+            All Orders
+          </label>
+          <label>
+            <input type="radio" name="order_type" value="1" class="hidden">
+            New Orders
+          </label>
+          <label>
+            <input type="radio" name="order_type" value="2" class="hidden">
+            Confirmed Orders
+          </label>
+        </div>
+        <div class="flex gap-x-10 text-black/40">
+          <label>
+            <input type="radio" name="order_status" value="0" class="hidden">
+            Dispatched
+          </label>
+          <label>
+            <input type="radio" name="order_status" value="1" class="hidden">
+            In Transit
+          </label>
+          <label>
+            <input type="radio" name="order_status" value="2" class="hidden">
+            Delivered
+          </label>
+          <label>
+            <input type="radio" name="order_status" value="2" class="hidden">
+            Completed
+          </label>
+        </div>
+        <div>
+          <label class="text-black/40">
+            <input type="checkbox" name="order_rma" value="true" class="hidden">
+            Return/Refund
+          </label>
+        </div>
+      </div>
+      <table class="w-full mt-2">
+        <thead>
+          <tr class="bg-white">
+            <th class="text-start" scope="col">Order ID</th>
+            <th class="text-start" scope="col">Name</th>
+            <th class="text-start" scope="col">Address</th>
+            <th class="text-start" scope="col">Date</th>
+            <th scope="col">Price</th>
+            <th class="text-start" scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr class="bg-white">
+              <td>
+                <%= link_to administrator_order_path(order) do %>
+                  <%= order.reference_id %>
+                <% end %>
+              </td>
+              <td><%= order.user.full_name %></td>
+              <td class="max-w-[30ch]">
+                <%= order.address.line_1 %>,
+                <% if order.address.line_2 %>
+                  <%= order.address.line_2 %>,
+                <% end %>
+                <%= order.address.city %>,
+                <%= order.address.state %>,
+                <%= order.address.country %> <%= order.address.postal_code %>
+              </td>
+              <td><%= order.created_at.strftime("%d %B %Y") %></td>
+              <td>
+                $<%= order.order_items.inject(0) do |sum, item|
+                    sum + item.product.price
+                 end %>
+              </td>
+              <td><%= order.status.to_s.titleize %></td>
+              <td>
+                <div class="flex flex-row justify-center">
+                  <%= heroicon "ellipsis-horizontal", size: 20 %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <ul>
+      </ul>
+    </section>
+  </div>
+</main>
