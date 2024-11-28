@@ -109,14 +109,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_110756) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "reference_id"
     t.bigint "user_id"
     t.bigint "address_id"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_orders_on_address_id"
-    t.index ["reference_id"], name: "index_orders_on_reference_id", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

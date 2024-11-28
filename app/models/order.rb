@@ -1,6 +1,4 @@
 class Order < ApplicationRecord
-  before_save :set_defaults
-
   enum :status, [ :placed, :paid, :shipped_out, :received, :rated ]
 
   has_many :order_items
@@ -8,7 +6,10 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :address
 
-  def set_defaults
-    self.reference_id = ULID.generate
+  def reference_id
+    created = self.created_at.strftime("%y%m%d")
+    padded_id = self.id.to_s.rjust(6, "0")
+
+    "#{created}#{padded_id}"
   end
 end
