@@ -20,7 +20,10 @@
               "underline-offset-8" => controller_name == link[:name].downcase,
               "decoration-[#B0B0B0]" => controller_name == link[:name].downcase
           ] do %>
-            <%= heroicon link[:icon] %> <%= link[:name] %>
+            <%= heroicon link[:icon],
+                         variant: :solid,
+                         class: "text-[#4A4A4A]" %>
+            <%= link[:name] %>
           <% end %>
         </li>
       <% end %>
