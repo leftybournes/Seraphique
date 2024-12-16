@@ -52,14 +52,13 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
 gem "stripe", "~> 13.0"
+gem "solargraph", "~> 0.50"
+gem "rubocop", "~> 1.68"
+gem "view_component", "~> 3.20"
 
 # Gems removed in ruby 3.5
 gem "ostruct", "~> 0.6"
 gem "fiddle", "~> 1.1"
-
-gem "solargraph", "~> 0.50"
-
-gem "rubocop", "~> 1.68"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
