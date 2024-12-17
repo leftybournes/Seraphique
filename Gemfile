@@ -54,7 +54,6 @@ gem "image_processing", "~> 1.2"
 gem "stripe", "~> 13.0"
 gem "solargraph", "~> 0.50"
 gem "rubocop", "~> 1.68"
-gem "view_component", "~> 3.20"
 
 # Gems removed in ruby 3.5
 gem "ostruct", "~> 0.6"
@@ -83,4 +82,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
