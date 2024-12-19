@@ -164,6 +164,10 @@
 		focus:checked:bg-seraphique focus:ring-seraphique
 		focus:border-seraphique;
 	}
+
+    dialog::backdrop {
+        @apply bg-white/20 backdrop-blur-sm;
+    }
 }
 
 @import 'actiontext.css';

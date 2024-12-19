@@ -2,10 +2,14 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="orders"
 export default class extends Controller {
-    static targets = [ "modal" ];
+    static targets = [ "dialog" ];
 
-    toggleModal() {
-        this.modalTarget.classList.toggle("hidden");
+    showDialog() {
+        this.dialogTarget.showModal();
+    }
+
+    hideDialog() {
+        this.dialogTarget.close();
     }
 
     toggleMenu(event) {
