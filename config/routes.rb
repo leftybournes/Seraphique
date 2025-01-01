@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   get "/about", to: "about#index"
 
-  resource :administrator do
-    resources :orders, controller: "administrator/orders"
+  namespace :administrator do
+    resources :orders
   end
 
   resources :products do
