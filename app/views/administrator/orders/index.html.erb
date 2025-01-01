@@ -1,22 +1,4 @@
-<main class="pt-40 pb-12" data-controller="orders">
-  <dialog data-orders-target="dialog">
-    <div class="flex flex-col">
-      <div class="px-4 py-2 drop-shadow text-[#4A4A4A] bg-gradient-to-r from-[#84B674]
-                  to-[#3A503333] flex flex-row justify-between gap-x-4">
-        <div>
-          <%= turbo_frame_tag "modal_title" %>
-          Something
-        </div>
-
-        <button data-action="click->orders#hideDialog">
-          <%= heroicon "x-mark", size: 20 %>
-        </button>
-      </div>
-      <div class="bg-white px-12 py-4">
-        <%= turbo_frame_tag "modal_content" %>
-      </div>
-    </div>
-  </dialog>
+<main class="pt-40 pb-12">
   <div class="container mx-auto flex flex-row gap-x-16">
     <%= render "shared/administrator_navigation" %>
     <section class="w-full">
@@ -102,63 +84,61 @@
       </div>
       <table class="w-full mt-2">
         <thead>
-          <tr class="bg-white">
-            <th class="text-start" scope="col">Order ID</th>
-            <th class="text-start" scope="col">Name</th>
-            <th class="text-start" scope="col">Address</th>
-            <th class="text-start" scope="col">Date</th>
-            <th scope="col">Price</th>
-            <th class="text-start" scope="col">Status</th>
-            <th scope="col">Action</th>
+          <tr>
+            <th class="text-start p-2" scope="col">Order ID</th>
+            <th class="text-start p-2" scope="col">Name</th>
+            <th class="text-start p-2" scope="col">Address</th>
+            <th class="text-start p-2" scope="col">Date</th>
+            <th scope="col p-2">Price</th>
+            <th class="text-start p-2" scope="col">Status</th>
+            <th scope="col p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           <% @orders.each do |order| %>
-            <tr class="bg-white">
-              <td>
+            <tr>
+              <td class="bg-white px-2">
                 <%= link_to administrator_order_path(order) do %>
                   <%= order.reference_id %>
                 <% end %>
               </td>
-              <td><%= order.user.full_name %></td>
-              <td class="max-w-[30ch]">
-                <%= order.address.line_1 %>,
-                <% if order.address.line_2 %>
-                  <%= order.address.line_2 %>,
+              <td class="bg-white px-2">
+                <%= link_to administrator_order_path(order) do %>
+                  <%= order.user.full_name %>
                 <% end %>
-                <%= order.address.city %>,
-                <%= order.address.state %>,
-                <%= order.address.country %> <%= order.address.postal_code %>
               </td>
-              <td><%= order.created_at.strftime("%d %B %Y") %></td>
-              <td>
-                $<%= order.order_items.inject(0) do |sum, item|
-                    sum + item.product.price
-                 end %>
+              <td class="bg-white px-2 max-w-[30ch]">
+                <%= link_to administrator_order_path(order) do %>
+                  <%= order.address.line_1 %>,
+                  <%= order.address.line_2 if order.address.line_2%>,
+                  <%= order.address.city %>,
+                  <%= order.address.state %>,
+                  <%= order.address.country %> <%= order.address.postal_code %>
+                <% end %>
               </td>
-              <td><%= order.status.to_s.titleize %></td>
-              <td>
-                <div class="row-container relative flex
-                            flex-row justify-center group"
-                     data-action="mouseover->orders#toggleMenu">
-                  <div class="cursor-pointer">
-                    <%= heroicon "ellipsis-horizontal",
-                                 size: 20 %>
-                  </div>
-                  <div class="row-menu hidden absolute top-6 right-6
-                              bg-white rounded-md px-1 py-2 shadow-lg
-                              group-hover:block hover:block">
-                    <ul class="whitespace-nowrap">
-                      <li>
-                        <button class="px-4 py-2 cursor-pointer
-                                       rounded-sm hover:bg-black/20"
-                                data-action="click->orders#showDialog"
-                                data-action="mouseout->orders#toggleMenu">
-                          Update Status
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+              <td class="bg-white px-2">
+                <%= link_to administrator_order_path(order) do %>
+                  <%= order.created_at.strftime("%d %B %Y") %>
+                <% end %>
+              </td>
+              <td class="bg-white px-2 text-center">
+                <%= link_to administrator_order_path(order) do %>
+                  $<%= order.order_items.inject(0) do |sum, item|
+                      sum + item.product.price
+                   end %>
+                <% end %>
+              </td>
+              <td class="bg-white px-2">
+                <%= link_to administrator_order_path(order) do %>
+                  <%= order.status.to_s.titleize %>
+                <% end %>
+              </td>
+              <td class="bg-white px-2">
+                <div class="row-container cursor-pointer flex
+                            flex-row justify-center group">
+                  <button>
+                    <%= heroicon "trash", size: 20 %>
+                  </button>
                 </div>
               </td>
             </tr>
