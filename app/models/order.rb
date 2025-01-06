@@ -12,4 +12,12 @@ class Order < ApplicationRecord
 
     "#{created}#{padded_id}"
   end
+
+  def total_price
+    total = self.order_items.inject(0) do |sum, order_item|
+      sum + (order_item.product.price * order_item.quantity)
+    end
+
+    total
+  end
 end

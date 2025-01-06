@@ -1,0 +1,86 @@
+<main class="pt-48 pb-16">
+  <div class="container mx-auto">
+    <%= link_to "<- Back to Orders",
+                administrator_orders_path,
+                class: "text-seraphique hover:brightness-50" %>
+
+    <dl class="mt-8">
+      <div class="flex flex-row flex-nowrap justify-between">
+        <div>
+          <div class="flex flex-row flex-nowrap gap-x-7">
+            <dt class="font-semibold">Order ID</dt>
+            <dd><%= @order.reference_id %></dd>
+          </div>
+
+          <div class="flex flex-row flex-nowrap gap-x-7">
+            <dt class="font-semibold">Name</dt>
+            <dd><%= @order.user.full_name %></dd>
+          </div>
+
+          <div class="flex flex-row flex-nowrap gap-x-7">
+            <dt class="font-semibold">Delivery Address</dt>
+            <dd><%= @order.address.to_s %></dd>
+          </div>
+        </div>
+        <div>
+          <div class="flex flex-row flex-nowrap gap-x-7">
+            <dt class="font-semibold">Total Items</dt>
+            <dd>
+              <%= @order.order_items.inject(0) do |sum, order_item|
+                  sum + order_item.quantity
+              end %>
+            </dd>
+          </div>
+          <div class="flex flex-row flex-nowrap gap-x-7">
+            <dt class="font-semibold">Total Price</dt>
+            <dd>
+              <%= number_with_precision(@order.total_price, precision: 2) %>
+            </dd>
+          </div>
+        </div>
+      </div>
+    </dl>
+
+    <table class="mt-11 w-full">
+      <thead class="border-b border-b-[#B0B0B0]/50">
+        <tr class="bg-white">
+          <th class="p-2 ps-12 text-start">Product Ordered</th>
+          <th class="p-2 text-start">SKU Number</th>
+          <th class="p-2">Quantity</th>
+          <th class="p-2">Unit Price</th>
+          <th class="p-2 pe-12 text-center">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-[#B0B0B0]/50">
+        <% @order.order_items.each do %>
+          <tr class="bg-white text-[#4A4A4A] ">
+            <td class="p-12">
+              <span class="font-bold">Seraphique </span>
+              <%= it.product.name %>
+              <span class="font-bold ms-8">Variation:</span>
+              <span class="text-[#B0B0B0]/50"><%= it.variant.name %></span>
+            </td>
+            <td class="p-2 py-12 text-start">SPBW123456789</td>
+            <td class="p-2 py-12 text-center"><%= it.quantity %></td>
+            <td class="p-2 py-12">
+              <div class="flex flex-row flex-nowrap items-center gap-x-2 justify-center">
+                <%= heroicon "currency-dollar",
+                             size: 20,
+                             class: "text-seraphique" %>
+                <%= it.product.price %>
+              </div>
+            </td>
+            <td class="p-2 py-12 pe-12">
+              <div class="flex flex-row flex-nowrap items-center gap-x-2 justify-center">
+                <%= heroicon "currency-dollar",
+                             size: 20,
+                             class: "text-seraphique" %>
+                <%= it.product.price * it.quantity %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>
