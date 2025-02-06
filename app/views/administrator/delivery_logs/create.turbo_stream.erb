@@ -1,0 +1,16 @@
+<%= turbo_stream.prepend "delivery_logs" do %>
+  <li class="relative group">
+    <div class="flex flex-row nowrap items-center gap-x-4">
+      <div class="size-7 rounded-full bg-seraphique text-white
+                  group-first:size-fit group-first:p-1">
+        <%= heroicon "check", size: 18, class: "mx-auto" %>
+      </div>
+      <div class="text-[#4A4A4A]">
+        <%= @delivery_log.description %>
+        <div class="text-[#B0B0B0] ms-auto">
+          <%= @delivery_log.created_at.strftime("%d %b %Y %H:%M") %>
+        </div>
+      </div>
+    </div>
+  </li>
+<% end %>

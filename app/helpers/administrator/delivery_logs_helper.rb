@@ -1,0 +1,2 @@
+module Administrator::DeliveryLogsHelper
+end

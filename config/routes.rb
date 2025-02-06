@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   namespace :administrator do
     resources :orders
+    resources :delivery_logs
   end
 
   resources :products do

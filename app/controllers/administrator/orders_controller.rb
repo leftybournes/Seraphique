@@ -7,5 +7,6 @@ class Administrator::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @delivery_log = DeliveryLog.new
   end
 end
