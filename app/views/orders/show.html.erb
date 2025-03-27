@@ -182,7 +182,9 @@
 			<div class="mt-4"><%= @order.address.phone_number %></div>
 			<div class="mt-2">
 			  <%= @order.address.line_1 %>,
-			  <%= @order.address.line_2 %>,
+              <% if not @order.address.line_2.empty? %>
+			    <%= @order.address.line_2 %>,
+              <% end %>
 			  <%= @order.address.city %>,
 			  <%= @order.address.state %>,
 			  <%= @order.address.country %>
